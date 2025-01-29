@@ -1,20 +1,72 @@
----
-layout: compress
-swcache: true
----
-
 [
-  {% for post in site.posts %}
+  
   {
-    "title": {{ post.title | jsonify }},
-    "url": {{ post.url | relative_url | jsonify }},
-    "categories": {{ post.categories | join: ', ' | jsonify }},
-    "tags": {{ post.tags | join: ', ' | jsonify }},
-    "date": "{{ post.date }}",
-    {% include no-linenos.html content=post.content %}
-    {% assign _content = content | strip_html | strip_newlines %}
-    "snippet": {{ _content | truncate: 200 | jsonify }},
-    "content": {{ _content | jsonify }}
-  }{% unless forloop.last %},{% endunless %}
-  {% endfor %}
+    "title": "편집 거리",
+    "url": "/posts/Edit_distance/",
+    "categories": "Study, Algorithm, DP",
+    "tags": "Study, DP",
+    "date": "2025-01-30 01:02:24 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "편집 거리문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1]A[i] != B[j]라면 편집이 필요하다.추가하는 경우는 A[i]...",
+    "content": "편집 거리문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1]A[i] != B[j]라면 편집이 필요하다.추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다.변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1삭제는 DP[i - 1][j] + 1이 된다.(A[..i - 1]로 B[j]를 만들었으므로 A[i]를 삭제)"
+  },
+  
+  {
+    "title": "위상 정렬",
+    "url": "/posts/Topology_Sort/",
+    "categories": "Study, Algorithm",
+    "tags": "Study, Sort",
+    "date": "2025-01-30 00:01:14 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "위상정렬비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것각 노드에 선행 조건이 존재할 때 사용 가능정렬 방법  각 노드의 진입 차수 기록  진입 차수가 0인 정점을 큐에 삽입  큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소  2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복구현graph ...",
+    "content": "위상정렬비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것각 노드에 선행 조건이 존재할 때 사용 가능정렬 방법  각 노드의 진입 차수 기록  진입 차수가 0인 정점을 큐에 삽입  큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소  2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복구현graph = defaultdict(list)indegree = [0] * (n + 1)# 인접 리스트 및 진입 차수 초기화# for _ in range(k):#     a, b = map(int, input().split())#     graph[a].append(b)#     indegree[b] += 1# 진입 차수 0인 정점 큐에 추가q = deque(filter(lambda x: indegree[x] == 0, range(1, n + 1)))while q:    cur = st.popleft()    print(q)    if cur in graph:        for nxt in graph[cur]:            indegree[nxt] -= 1            if indegree[nxt] == 0:                st.append(nxt)"
+  },
+  
+  {
+    "title": "OOP 정리",
+    "url": "/posts/OOP/",
+    "categories": "Study, OOP",
+    "tags": "Study",
+    "date": "2025-01-29 23:56:56 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "OOP특징      추상화    대상의 공통적인 특성들을 묶어 표현하는 것 (abstract, interface class)        상속          기존 클래스의 속성과 메서드를 물려받는 것      코드 재사용성과 확장성을 높임      부모 클래스의 public, protected 멤버를 상속받는다.            캡슐화      ...",
+    "content": "OOP특징      추상화    대상의 공통적인 특성들을 묶어 표현하는 것 (abstract, interface class)        상속          기존 클래스의 속성과 메서드를 물려받는 것      코드 재사용성과 확장성을 높임      부모 클래스의 public, protected 멤버를 상속받는다.            캡슐화          데이터와 메서드를 묶고, 데이터에 대한 직접 접근을 막는 것            다형성          같은 이름의 메서드나 연산자가 다른 동작을 하는 것      오버로딩과 오버라이딩을 통해 구현                  오버로딩: 이름은 같지만 시그니쳐가 다른 것          오버라이딩: 상위 클래스의 메소드를 재정의 하는 것                    SOLID 원칙      단일 책임 원칙 (SRP)    클래스는 단 하나의 책임을 가지고 하나의 이유로만 변경되어야 한다.        개방 폐쇄 원칙 (OCP)    확장에는 열려 있고 수정에는 닫혀 있어야 한다. 기존 코드를 수정하지 않고 기능을 추가할 수 있어야 한다.        리스코프 치환 원칙 (LSP)    상위 타입의 객체를 하위 타입으로 대체해도 정상적으로 동작해야 한다.        인터페이스 분리 원칙 (ISP)    클라이언트는 자신이 사용하지 않는 메서드에 의존하지 않아야 한다. 인터페이스를 세분화하여 클라이언트가 필요한 기능만 사용할 수 있도록 제한한다.        의존성 역전 원칙 (DIP)    고수준 모듈(비즈니스 로직 등)은 저수준 모듈(구현 세부 사항)에 의존해서는 안 된다. 고수준, 저수준 모두 둘 다 추상화(인터페이스나 추상 클래스)에 의존해야 한다.    DIP 위반     class EmailService {     public:         void SendEmail(const string&amp; message) {             cout &lt;&lt; \"Sending Email: \" &lt;&lt; message &lt;&lt; endl;         } }; // 고수준 모듈: Notification은 EmailService에 직접 의존 class Notification {     private:         EmailService emailService; // 저수준 모듈에 직접 의존     public:         void Notify(const string&amp; message) {             emailService.SendEmail(message); // EmailService에 직접 접근         } };        DIP 적용     class IMessageService {     public:         virtual void SendMessage(const std::string&amp; message) = 0; }; // 고수준 모듈 class Notification {     private:         IMessageService* messageService;     public:         Notification(IMessageService* service) : messageService(service) {}         void Notify(const std::string&amp; message) {             messageService-&gt;SendMessage(message);         } }; // 저수준 모듈 class EmailService : public IMessageService {     public:         void SendMessage(const std::string&amp; message) override {             // 이메일 전송 로직         } };      "
+  },
+  
+  {
+    "title": "블로그 소개",
+    "url": "/posts/Introduce/",
+    "categories": "Blogging",
+    "tags": "Blog",
+    "date": "2025-01-29 10:28:00 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "알고리즘, 자료구조 및 다양한 프로그래밍 관련 내용을 정리한 개인 학습 저장소입니다.",
+    "content": "알고리즘, 자료구조 및 다양한 프로그래밍 관련 내용을 정리한 개인 학습 저장소입니다."
+  }
+  
 ]
+

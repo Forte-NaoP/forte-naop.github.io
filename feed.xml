@@ -1,0 +1,202 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://forte-naop.github.io/</id>
+  <title>Forte's Notes</title>
+  <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
+  <updated>2025-01-30T01:45:33+09:00</updated>
+  <author>
+    <name>Forte</name>
+    <uri>https://forte-naop.github.io/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="https://forte-naop.github.io/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="https://forte-naop.github.io/"/>
+  <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
+  <rights> © 2025 Forte </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>편집 거리</title>
+    <link href="https://forte-naop.github.io/posts/Edit_distance/" rel="alternate" type="text/html" title="편집 거리" />
+    <published>2025-01-30T01:02:24+09:00</published>
+  
+    <updated>2025-01-30T01:02:24+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/Edit_distance/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/Edit_distance/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Study" />
+    
+    <category term="Algorithm" />
+    
+    <category term="DP" />
+    
+  
+
+  <summary>편집 거리
+
+문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수
+
+DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수
+
+A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1]
+
+A[i] != B[j]라면 편집이 필요하다.
+
+추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다.
+
+변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1
+
+삭제는 DP[i - 1][j] + 1이 된다.
+(A[..i - 1]로 B[j]를 만들었으므로 ...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>위상 정렬</title>
+    <link href="https://forte-naop.github.io/posts/Topology_Sort/" rel="alternate" type="text/html" title="위상 정렬" />
+    <published>2025-01-30T00:01:14+09:00</published>
+  
+    <updated>2025-01-30T00:01:14+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/Topology_Sort/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/Topology_Sort/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Study" />
+    
+    <category term="Algorithm" />
+    
+  
+
+  <summary>위상정렬
+
+비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것
+
+각 노드에 선행 조건이 존재할 때 사용 가능
+
+정렬 방법
+
+
+  각 노드의 진입 차수 기록
+  진입 차수가 0인 정점을 큐에 삽입
+  큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소
+  2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복
+
+
+구현
+
+graph = defaultdict(list)
+indegree = [0] * (n + 1)
+
+# 인접 리스트 및 진입 차수 초기화
+# for _ in range(k):
+#     a, b = map(int, input().split())
+#     graph[a].append(b)
+#     indegree[b] += 1
+
+# 진입 차수...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>OOP 정리</title>
+    <link href="https://forte-naop.github.io/posts/OOP/" rel="alternate" type="text/html" title="OOP 정리" />
+    <published>2025-01-29T23:56:56+09:00</published>
+  
+    <updated>2025-01-29T23:56:56+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/OOP/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/OOP/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Study" />
+    
+    <category term="OOP" />
+    
+  
+
+  <summary>OOP
+
+특징
+
+
+  
+    추상화
+
+    대상의 공통적인 특성들을 묶어 표현하는 것 (abstract, interface class)
+  
+  
+    상속
+
+    
+      기존 클래스의 속성과 메서드를 물려받는 것
+      코드 재사용성과 확장성을 높임
+      부모 클래스의 public, protected 멤버를 상속받는다.
+    
+  
+  
+    캡슐화
+
+    
+      데이터와 메서드를 묶고, 데이터에 대한 직접 접근을 막는 것
+    
+  
+  
+    다형성
+
+    
+      같은 이름의 메서드나 연산자가 다른 동작을 하는 것
+      오버로딩과 오버라이딩을 통해 구현
+        
+          오버로딩: 이름은 같지만 시그니쳐가 다른 것
+          ...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>블로그 소개</title>
+    <link href="https://forte-naop.github.io/posts/Introduce/" rel="alternate" type="text/html" title="블로그 소개" />
+    <published>2025-01-29T10:28:00+09:00</published>
+  
+    <updated>2025-01-29T10:28:00+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/Introduce/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/Introduce/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+  
+
+  <summary>알고리즘, 자료구조 및 다양한 프로그래밍 관련 내용을 정리한 개인 학습 저장소입니다.</summary>
+
+  </entry>
+
+</feed>
+
+

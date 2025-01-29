@@ -21,6 +21,12 @@
       },
       "problemMatcher": [],
       "detail": "Build the Jekyll site for production."
+    },
+    {
+      "label": "New Jekyll Post",
+      "type": "shell",
+      "command": "bash -c 'echo \"---\ntitle: \\\"New Post\\\"\ndate: \\\"$(date +%Y-%m-%d) $(date +%H:%M:%S) +0900\\\"\ncategories: []\ntags: []\n---\n\n{% remote_include {} %}\" > _posts/$(date +%Y-%m-%d)-new-post.md'",
+      "problemMatcher": []
     }
   ]
 }

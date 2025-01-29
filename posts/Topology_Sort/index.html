@@ -781,11 +781,6 @@
         <i class="fa fa-tags fa-fw me-1"></i>
         
           <a
-            href="/tags/study/"
-            class="post-tag no-text-decoration"
-          >Study</a>
-        
-          <a
             href="/tags/sort/"
             class="post-tag no-text-decoration"
           >Sort</a>
@@ -893,6 +888,20 @@
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/LCS/">최장 공통 부분 수열</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Sort/">정렬 알고리즘</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/Edit_distance/">편집 거리</a>
         </li>
       
@@ -908,13 +917,6 @@
         
         <li class="text-truncate lh-lg">
           <a href="/posts/OOP/">OOP 정리</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Introduce/">블로그 소개</a>
         </li>
       
     </ul>
@@ -948,6 +950,27 @@
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
   
     
     
@@ -983,6 +1006,11 @@
     
     
     
+  
+    
+    
+    
+    
       
         
         
@@ -993,6 +1021,11 @@
     
     
       
+    
+  
+    
+    
+    
     
   
     
@@ -1017,16 +1050,19 @@
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/study/">Study</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dp/">DP</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/sort/">Sort</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/blog/">Blog</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/dp/">DP</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/lcs/">LCS</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/sort/">Sort</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/oop/">OOP</a>
       
     </div>
   </section>
@@ -1111,6 +1147,30 @@
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -1124,6 +1184,62 @@
   <aside id="related-posts" aria-labelledby="related-label">
     <h3 class="mb-4" id="related-label">Further Reading</h3>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/Sort/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1738167321"
+  data-df="ll"
+  
+>
+  Jan 30, 2025
+</time>
+
+              <h4 class="pt-0 my-2">정렬 알고리즘</h4>
+              <div class="text-muted">
+                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/sort.md %}</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/LCS/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1738167584"
+  data-df="ll"
+  
+>
+  Jan 30, 2025
+</time>
+
+              <h4 class="pt-0 my-2">최장 공통 부분 수열</h4>
+              <div class="text-muted">
+                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/LCS.md %}</p>
+              </div>
+            </div>
+          </a>
+        </article>
       
         <article class="col">
           <a href="/posts/Edit_distance/" class="post-preview card h-100">
@@ -1148,51 +1264,6 @@
               <h4 class="pt-0 my-2">편집 거리</h4>
               <div class="text-muted">
                 <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/edit_distance.md %}</p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
-          <a href="/posts/OOP/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1738162616"
-  data-df="ll"
-  
->
-  Jan 29, 2025
-</time>
-
-              <h4 class="pt-0 my-2">OOP 정리</h4>
-              <div class="text-muted">
-                <p>OOP
-
-특징
-
-
-  
-    추상화
-
-    대상의 공통적인 특성들을 묶어 표현하는 것 (abstract, interface class)
-  
-  
-    상속
-
-    
-      기존 클래스의 속성과 메서드를 물려받는 것
-      코드 재사용성과 확장성을 높임
-      부모 클래스의 public, protected 멤버를 상속받는다.
-    ...</p>
               </div>
             </div>
           </a>
@@ -1304,6 +1375,27 @@
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
   
     
     
@@ -1339,6 +1431,11 @@
     
     
     
+  
+    
+    
+    
+    
       
         
         
@@ -1349,6 +1446,11 @@
     
     
       
+    
+  
+    
+    
+    
     
   
     
@@ -1373,16 +1475,19 @@
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/study/">Study</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dp/">DP</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/sort/">Sort</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/blog/">Blog</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/dp/">DP</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/lcs/">LCS</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/sort/">Sort</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/oop/">OOP</a>
       
     </div>
   </section>

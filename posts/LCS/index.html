@@ -30,24 +30,24 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="편집 거리" />
+<meta property="og:title" content="최장 공통 부분 수열" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="편집 거리 문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수 DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수 A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1] A[i] != B[j]라면 편집이 필요하다. 추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다. 변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1 삭제는 DP[i - 1][j] + 1이 된다. (A[..i - 1]로 B[j]를 만들었으므로 A[i]를 삭제)" />
-<meta property="og:description" content="편집 거리 문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수 DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수 A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1] A[i] != B[j]라면 편집이 필요하다. 추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다. 변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1 삭제는 DP[i - 1][j] + 1이 된다. (A[..i - 1]로 B[j]를 만들었으므로 A[i]를 삭제)" />
-<link rel="canonical" href="https://forte-naop.github.io/posts/Edit_distance/" />
-<meta property="og:url" content="https://forte-naop.github.io/posts/Edit_distance/" />
+<meta name="description" content="최장 공통 부분 수열(LCS: Longest Common Subsequence) LCS 길이 구하기 DP[i][j]: A[..i], B[..j]까지의 LCS길이 A[i] == B[j]: DP[i][j] = DP[i - 1][j - 1] + 1 A[i] != B[j]: DP[i][j] = max(DP[i - 1][j], DP[i][j - 1]) LCS 문자열 구하기 역추적 (Backtracking) 방식 DP 테이블을 이용해 (N, M)에서 (0, 0)까지 역추적하여 LCS를 복원. A[i] == B[j]이면 LCS에 포함됨 → i-1, j-1로 이동 DP[i-1][j], DP[i][j-1]를 비교해 큰 쪽으로 이동 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 def LCS(A: str, B: str) -&gt; str: N, M = len(A), len(B) DP = [[0] * (M + 1) for _ in range(N + 1)] # DP 테이블 채우기 for i in range(1, N + 1): for j in range(1, M + 1): if A[i - 1] == B[j - 1]: # 문자가 같으면 DP[i][j] = DP[i - 1][j - 1] + 1 else: DP[i][j] = max(DP[i - 1][j], DP[i][j - 1]) # LCS 역추적 (Backtracking) i, j = N, M lcs = [] while i &gt; 0 and j &gt; 0: if A[i - 1] == B[j - 1]: # 같은 문자는 LCS에 포함 lcs.append(A[i - 1]) i -= 1 j -= 1 elif DP[i - 1][j] &gt; DP[i][j - 1]: # 위쪽이 크다면 위로 이동 i -= 1 else: # 왼쪽이 크다면 왼쪽으로 이동 j -= 1 return &#39;&#39;.join(reversed(lcs)) # 역순으로 정렬하여 반환 시간 복잡도 DP 테이블을 채우는 과정: O(N × M) LCS 역추적 과정: O(N + M) 전체 시간 복잡도: O(N × M)" />
+<meta property="og:description" content="최장 공통 부분 수열(LCS: Longest Common Subsequence) LCS 길이 구하기 DP[i][j]: A[..i], B[..j]까지의 LCS길이 A[i] == B[j]: DP[i][j] = DP[i - 1][j - 1] + 1 A[i] != B[j]: DP[i][j] = max(DP[i - 1][j], DP[i][j - 1]) LCS 문자열 구하기 역추적 (Backtracking) 방식 DP 테이블을 이용해 (N, M)에서 (0, 0)까지 역추적하여 LCS를 복원. A[i] == B[j]이면 LCS에 포함됨 → i-1, j-1로 이동 DP[i-1][j], DP[i][j-1]를 비교해 큰 쪽으로 이동 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 def LCS(A: str, B: str) -&gt; str: N, M = len(A), len(B) DP = [[0] * (M + 1) for _ in range(N + 1)] # DP 테이블 채우기 for i in range(1, N + 1): for j in range(1, M + 1): if A[i - 1] == B[j - 1]: # 문자가 같으면 DP[i][j] = DP[i - 1][j - 1] + 1 else: DP[i][j] = max(DP[i - 1][j], DP[i][j - 1]) # LCS 역추적 (Backtracking) i, j = N, M lcs = [] while i &gt; 0 and j &gt; 0: if A[i - 1] == B[j - 1]: # 같은 문자는 LCS에 포함 lcs.append(A[i - 1]) i -= 1 j -= 1 elif DP[i - 1][j] &gt; DP[i][j - 1]: # 위쪽이 크다면 위로 이동 i -= 1 else: # 왼쪽이 크다면 왼쪽으로 이동 j -= 1 return &#39;&#39;.join(reversed(lcs)) # 역순으로 정렬하여 반환 시간 복잡도 DP 테이블을 채우는 과정: O(N × M) LCS 역추적 과정: O(N + M) 전체 시간 복잡도: O(N × M)" />
+<link rel="canonical" href="https://forte-naop.github.io/posts/LCS/" />
+<meta property="og:url" content="https://forte-naop.github.io/posts/LCS/" />
 <meta property="og:site_name" content="Forte’s Notes" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-01-30T01:02:24+09:00" />
+<meta property="article:published_time" content="2025-01-30T01:19:44+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="편집 거리" />
+<meta property="twitter:title" content="최장 공통 부분 수열" />
 <meta name="twitter:site" content="@kirameki_ing" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-01-30T01:02:24+09:00","datePublished":"2025-01-30T01:02:24+09:00","description":"편집 거리 문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수 DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수 A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1] A[i] != B[j]라면 편집이 필요하다. 추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다. 변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1 삭제는 DP[i - 1][j] + 1이 된다. (A[..i - 1]로 B[j]를 만들었으므로 A[i]를 삭제)","headline":"편집 거리","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Edit_distance/"},"url":"https://forte-naop.github.io/posts/Edit_distance/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-01-30T01:19:44+09:00","datePublished":"2025-01-30T01:19:44+09:00","description":"최장 공통 부분 수열(LCS: Longest Common Subsequence) LCS 길이 구하기 DP[i][j]: A[..i], B[..j]까지의 LCS길이 A[i] == B[j]: DP[i][j] = DP[i - 1][j - 1] + 1 A[i] != B[j]: DP[i][j] = max(DP[i - 1][j], DP[i][j - 1]) LCS 문자열 구하기 역추적 (Backtracking) 방식 DP 테이블을 이용해 (N, M)에서 (0, 0)까지 역추적하여 LCS를 복원. A[i] == B[j]이면 LCS에 포함됨 → i-1, j-1로 이동 DP[i-1][j], DP[i][j-1]를 비교해 큰 쪽으로 이동 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 def LCS(A: str, B: str) -&gt; str: N, M = len(A), len(B) DP = [[0] * (M + 1) for _ in range(N + 1)] # DP 테이블 채우기 for i in range(1, N + 1): for j in range(1, M + 1): if A[i - 1] == B[j - 1]: # 문자가 같으면 DP[i][j] = DP[i - 1][j - 1] + 1 else: DP[i][j] = max(DP[i - 1][j], DP[i][j - 1]) # LCS 역추적 (Backtracking) i, j = N, M lcs = [] while i &gt; 0 and j &gt; 0: if A[i - 1] == B[j - 1]: # 같은 문자는 LCS에 포함 lcs.append(A[i - 1]) i -= 1 j -= 1 elif DP[i - 1][j] &gt; DP[i][j - 1]: # 위쪽이 크다면 위로 이동 i -= 1 else: # 왼쪽이 크다면 왼쪽으로 이동 j -= 1 return &#39;&#39;.join(reversed(lcs)) # 역순으로 정렬하여 반환 시간 복잡도 DP 테이블을 채우는 과정: O(N × M) LCS 역추적 과정: O(N + M) 전체 시간 복잡도: O(N × M)","headline":"최장 공통 부분 수열","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/LCS/"},"url":"https://forte-naop.github.io/posts/LCS/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>편집 거리 | Forte's Notes
+  <title>최장 공통 부분 수열 | Forte's Notes
   </title>
 
   <!--
@@ -213,9 +213,16 @@
 
   
 
+  
+    
+
+    
+
+  
 
 
-  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js,npm/tocbot@4.32.2/dist/tocbot.min.js"></script>
 
 
 
@@ -438,7 +445,7 @@
         
           
             
-              <span>편집 거리</span>
+              <span>최장 공통 부분 수열</span>
             
 
           
@@ -521,10 +528,63 @@
   
 
   
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
 
   
   
 
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
   
 
   
@@ -551,9 +611,9 @@
 
 
 
-<article class="px-1" data-toc="false">
+<article class="px-1" data-toc="true">
   <header>
-    <h1 data-toc-skip>편집 거리</h1>
+    <h1 data-toc-skip>최장 공통 부분 수열</h1>
     
 
     <div class="post-meta text-muted">
@@ -570,7 +630,7 @@
 
 <time
   
-  data-ts="1738166544"
+  data-ts="1738167584"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -625,9 +685,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="205 words"
+  title="364 words"
 >
-  <em>1 min</em> read</span>
+  <em>2 min</em> read</span>
 
         </div>
       </div>
@@ -635,24 +695,126 @@
   </header>
 
   
+    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
+      <span class="label text-truncate">최장 공통 부분 수열</span>
+      <button type="button" class="toc-trigger btn me-1">
+        <i class="fa-solid fa-list-ul fa-fw"></i>
+      </button>
+    </div>
+
+    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+      <span class="label ps-2 pe-1">Contents</span>
+      <i class="fa-solid fa-angle-right fa-fw"></i>
+    </button>
+
+    <dialog id="toc-popup" class="p-0">
+      <div class="header d-flex flex-row align-items-center justify-content-between">
+        <div class="label text-truncate py-2 ms-4">최장 공통 부분 수열</div>
+        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+          <i class="fas fa-close"></i>
+        </button>
+      </div>
+      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
+    </dialog>
+  
 
   <div class="content">
-    <h1 id="편집-거리">편집 거리</h1>
+    <h1 id="최장-공통-부분-수열lcs-longest-common-subsequence">최장 공통 부분 수열(LCS: Longest Common Subsequence)</h1>
 
-<p>문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수</p>
+<hr />
 
-<p><code class="language-plaintext highlighter-rouge">DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수</code></p>
+<h2 id="lcs-길이-구하기"><span class="me-2">LCS 길이 구하기</span><a href="#lcs-길이-구하기" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p><code class="language-plaintext highlighter-rouge">A[i] == B[j]</code>라면 해당 위치에 대해서는 편집할 필요가 없으므로 <code class="language-plaintext highlighter-rouge">DP[i][j] == DP[i - 1][j - 1]</code></p>
+<p><code class="language-plaintext highlighter-rouge">DP[i][j]: A[..i], B[..j]까지의 LCS길이</code></p>
 
-<p><code class="language-plaintext highlighter-rouge">A[i] != B[j]</code>라면 편집이 필요하다.</p>
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">A[i] == B[j]</code>: <code class="language-plaintext highlighter-rouge">DP[i][j] = DP[i - 1][j - 1] + 1</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">A[i] != B[j]</code>: <code class="language-plaintext highlighter-rouge">DP[i][j] = max(DP[i - 1][j], DP[i][j - 1])</code></p>
+  </li>
+</ul>
 
-<p>추가하는 경우는 <code class="language-plaintext highlighter-rouge">A[i]</code>에 문자열을 하나 추가해서 <code class="language-plaintext highlighter-rouge">B[j]</code>가 되어야 하므로 <code class="language-plaintext highlighter-rouge">DP[i][j - 1] + 1</code>, 즉 <code class="language-plaintext highlighter-rouge">A[..i]를 B[..j - 1]로 변경하는 최소 횟수</code>에 1을 더해준다.</p>
+<hr />
 
-<p>변경은 <code class="language-plaintext highlighter-rouge">A[i]</code>를 <code class="language-plaintext highlighter-rouge">B[j]</code>로 바꾸는 것이므로 <code class="language-plaintext highlighter-rouge">DP[i - 1][j - 1] + 1</code></p>
+<h2 id="lcs-문자열-구하기"><span class="me-2">LCS 문자열 구하기</span><a href="#lcs-문자열-구하기" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>삭제는 <code class="language-plaintext highlighter-rouge">DP[i - 1][j] + 1</code>이 된다.
-(<code class="language-plaintext highlighter-rouge">A[..i - 1]</code>로 <code class="language-plaintext highlighter-rouge">B[j]</code>를 만들었으므로 <code class="language-plaintext highlighter-rouge">A[i]</code>를 삭제)</p>
+<ol>
+  <li><strong>역추적 (Backtracking) 방식</strong><br />
+<code class="language-plaintext highlighter-rouge">DP</code> 테이블을 이용해 <code class="language-plaintext highlighter-rouge">(N, M)</code>에서 <code class="language-plaintext highlighter-rouge">(0, 0)</code>까지 역추적하여 LCS를 복원.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">A[i] == B[j]</code>이면 LCS에 포함됨 → <code class="language-plaintext highlighter-rouge">i-1, j-1</code>로 이동</li>
+      <li><code class="language-plaintext highlighter-rouge">DP[i-1][j]</code>, <code class="language-plaintext highlighter-rouge">DP[i][j-1]</code>를 비교해 큰 쪽으로 이동</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="code-header">
+        <span data-label-text="Python"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">LCS</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">N</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="nf">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+    <span class="n">DP</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+
+    <span class="c1"># DP 테이블 채우기
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">B</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>  <span class="c1"># 문자가 같으면
+</span>                <span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">DP</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">DP</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># LCS 역추적 (Backtracking)
+</span>    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">N</span><span class="p">,</span> <span class="n">M</span>
+    <span class="n">lcs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">B</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>  <span class="c1"># 같은 문자는 LCS에 포함
+</span>            <span class="n">lcs</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">DP</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">DP</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>  <span class="c1"># 위쪽이 크다면 위로 이동
+</span>            <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># 왼쪽이 크다면 왼쪽으로 이동
+</span>            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">reversed</span><span class="p">(</span><span class="n">lcs</span><span class="p">))</span>  <span class="c1"># 역순으로 정렬하여 반환
+</span></pre></td></tr></tbody></table></code></div></div>
+
+<hr />
+
+<h3 id="시간-복잡도"><span class="me-2"><strong>시간 복잡도</strong></span><a href="#시간-복잡도" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">DP</code> 테이블을 채우는 과정: <strong>O(N × M)</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">LCS</code> 역추적 과정: <strong>O(N + M)</strong></li>
+  <li>전체 시간 복잡도: <strong>O(N × M)</strong></li>
+</ul>
 
   </div>
 
@@ -676,6 +838,11 @@
             href="/tags/dp/"
             class="post-tag no-text-decoration"
           >DP</a>
+        
+          <a
+            href="/tags/lcs/"
+            class="post-tag no-text-decoration"
+          >LCS</a>
         
       </div>
     
@@ -711,21 +878,21 @@
 
       
 
-      <a href="https://twitter.com/intent/tweet?text=%ED%8E%B8%EC%A7%91%20%EA%B1%B0%EB%A6%AC%20-%20Forte's%20Notes&url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FEdit_distance%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+      <a href="https://twitter.com/intent/tweet?text=%EC%B5%9C%EC%9E%A5%20%EA%B3%B5%ED%86%B5%20%EB%B6%80%EB%B6%84%20%EC%88%98%EC%97%B4%20-%20Forte's%20Notes&url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FLCS%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
         <i class="fa-fw fa-brands fa-square-x-twitter"></i>
       </a>
     
 
       
 
-      <a href="https://www.facebook.com/sharer/sharer.php?title=%ED%8E%B8%EC%A7%91%20%EA%B1%B0%EB%A6%AC%20-%20Forte's%20Notes&u=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FEdit_distance%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+      <a href="https://www.facebook.com/sharer/sharer.php?title=%EC%B5%9C%EC%9E%A5%20%EA%B3%B5%ED%86%B5%20%EB%B6%80%EB%B6%84%20%EC%88%98%EC%97%B4%20-%20Forte's%20Notes&u=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FLCS%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
         <i class="fa-fw fab fa-facebook-square"></i>
       </a>
     
 
       
 
-      <a href="https://t.me/share/url?url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FEdit_distance%2F&text=%ED%8E%B8%EC%A7%91%20%EA%B1%B0%EB%A6%AC%20-%20Forte's%20Notes" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FLCS%2F&text=%EC%B5%9C%EC%9E%A5%20%EA%B3%B5%ED%86%B5%20%EB%B6%80%EB%B6%84%20%EC%88%98%EC%97%B4%20-%20Forte's%20Notes" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
         <i class="fa-fw fab fa-telegram"></i>
       </a>
     
@@ -971,6 +1138,12 @@
 
 
 
+  <div class="toc-border-cover z-3"></div>
+  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
+    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
+    <nav id="toc"></nav>
+  </section>
+
 
             
           </aside>
@@ -1032,31 +1205,31 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
 
@@ -1072,7 +1245,7 @@
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
       
         <article class="col">
-          <a href="/posts/LCS/" class="post-preview card h-100">
+          <a href="/posts/Edit_distance/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
@@ -1084,16 +1257,26 @@
 
 <time
   
-  data-ts="1738167584"
+  data-ts="1738166544"
   data-df="ll"
   
 >
   Jan 30, 2025
 </time>
 
-              <h4 class="pt-0 my-2">최장 공통 부분 수열</h4>
+              <h4 class="pt-0 my-2">편집 거리</h4>
               <div class="text-muted">
-                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/LCS.md %}</p>
+                <p>편집 거리
+
+문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수
+
+DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수
+
+A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1]
+
+A[i] != B[j]라면 편집이 필요하다.
+
+추가하...</p>
               </div>
             </div>
           </a>
@@ -1121,7 +1304,19 @@
 
               <h4 class="pt-0 my-2">정렬 알고리즘</h4>
               <div class="text-muted">
-                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/sort.md %}</p>
+                <p>정렬
+
+Bubble Sort
+
+인접한 두 원소를 비교하여 역순이면 교환한다.
+
+# seq = []
+# 총 n번 반복
+for i in range(n - 1, -1, -1):
+    is_swapped = False
+    # 매 반복 후에 seq[i + 1:]은 정렬된 상태이므로 
+    # seq[:i] 까지만 확인
+    for j in range(...</p>
               </div>
             </div>
           </a>
@@ -1182,22 +1377,18 @@
 
   
     <a
-      href="/posts/Topology_Sort/"
+      href="/posts/Sort/"
       class="btn btn-outline-primary"
       aria-label="Older"
     >
-      <p>위상 정렬</p>
+      <p>정렬 알고리즘</p>
     </a>
   
 
   
-    <a
-      href="/posts/Sort/"
-      class="btn btn-outline-primary"
-      aria-label="Newer"
-    >
-      <p>정렬 알고리즘</p>
-    </a>
+    <div class="btn btn-outline-primary disabled" aria-label="Newer">
+      <p>-</p>
+    </div>
   
 </nav>
 

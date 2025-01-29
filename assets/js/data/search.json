@@ -1,10 +1,44 @@
 [
   
   {
+    "title": "최장 공통 부분 수열",
+    "url": "/posts/LCS/",
+    "categories": "Study, Algorithm",
+    "tags": "DP, LCS",
+    "date": "2025-01-30 01:19:44 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "최장 공통 부분 수열(LCS: Longest Common Subsequence)LCS 길이 구하기DP[i][j]: A[..i], B[..j]까지의 LCS길이      A[i] == B[j]: DP[i][j] = DP[i - 1][j - 1] + 1        A[i] != B[j]: DP[i][j] = max(DP[i - 1][j], DP[i][j ...",
+    "content": "최장 공통 부분 수열(LCS: Longest Common Subsequence)LCS 길이 구하기DP[i][j]: A[..i], B[..j]까지의 LCS길이      A[i] == B[j]: DP[i][j] = DP[i - 1][j - 1] + 1        A[i] != B[j]: DP[i][j] = max(DP[i - 1][j], DP[i][j - 1])  LCS 문자열 구하기  역추적 (Backtracking) 방식DP 테이블을 이용해 (N, M)에서 (0, 0)까지 역추적하여 LCS를 복원.          A[i] == B[j]이면 LCS에 포함됨 → i-1, j-1로 이동      DP[i-1][j], DP[i][j-1]를 비교해 큰 쪽으로 이동      def LCS(A: str, B: str) -&gt; str:    N, M = len(A), len(B)    DP = [[0] * (M + 1) for _ in range(N + 1)]    # DP 테이블 채우기    for i in range(1, N + 1):        for j in range(1, M + 1):            if A[i - 1] == B[j - 1]:  # 문자가 같으면                DP[i][j] = DP[i - 1][j - 1] + 1            else:                DP[i][j] = max(DP[i - 1][j], DP[i][j - 1])    # LCS 역추적 (Backtracking)    i, j = N, M    lcs = []    while i &gt; 0 and j &gt; 0:        if A[i - 1] == B[j - 1]:  # 같은 문자는 LCS에 포함            lcs.append(A[i - 1])            i -= 1            j -= 1        elif DP[i - 1][j] &gt; DP[i][j - 1]:  # 위쪽이 크다면 위로 이동            i -= 1        else:  # 왼쪽이 크다면 왼쪽으로 이동            j -= 1    return ''.join(reversed(lcs))  # 역순으로 정렬하여 반환시간 복잡도  DP 테이블을 채우는 과정: O(N × M)  LCS 역추적 과정: O(N + M)  전체 시간 복잡도: O(N × M)"
+  },
+  
+  {
+    "title": "정렬 알고리즘",
+    "url": "/posts/Sort/",
+    "categories": "Study, Algorithm",
+    "tags": "Sort",
+    "date": "2025-01-30 01:15:21 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "정렬Bubble Sort인접한 두 원소를 비교하여 역순이면 교환한다.# seq = []# 총 n번 반복for i in range(n - 1, -1, -1):    is_swapped = False    # 매 반복 후에 seq[i + 1:]은 정렬된 상태이므로     # seq[:i] 까지만 확인    for j in range(i):        i...",
+    "content": "정렬Bubble Sort인접한 두 원소를 비교하여 역순이면 교환한다.# seq = []# 총 n번 반복for i in range(n - 1, -1, -1):    is_swapped = False    # 매 반복 후에 seq[i + 1:]은 정렬된 상태이므로     # seq[:i] 까지만 확인    for j in range(i):        if seq[j] &gt; seq[j + 1]:            seq[j], seq[j + 1] = seq[j + 1] &gt; seq[j]            is_swapped = True    if not is_swapped:        breakSelection Sort현재 i = [0, n)일 때 seq[i:]에서 가장 작은 원소와 seq[i]를 교환한다.# seq = []for cur in range(n):    min_index = cur    for i in range(cur, n):        if seq[min_index] &gt; seq[i]:            min_index = i    seq[min_index], seq[cur] = seq[cur], seq[min_index]Insertion Sort현재 i = [1, n)일 때 seq[:i]에서 seq[i]를 삽입할 위치를 찾아 삽입한다.# seq = []for cur in range(1, n):    while cur &gt; 0 and seq[cur] &lt; seq[cur - 1]:        seq[cur], seq[cur - 1] = seq[cur - 1], seq[cur]        cur -= 1Quick Sortpivot을 기준으로 배열을 양쪽으로 나누어 정렬한다.# seq = []def partition(left, right):    # [left, right] 범위를 재배치    pivot = seq[(left + right) // 2]    while left &lt;= right:        # left를 pivot보다 큰 원소가 나타나는 지점까지 이동        while seq[left] &lt; pivot:            left += 1        # right를 pivot보다 작은 원소가 나타나느 지점까지 이동        while seq[right] &gt; pivot:            right -= 1                # 재배치가 안끝났으면        if left &lt;= right:            # seq[left]는 pivot보다 크고             # seq[right]는 pivot보다 작으므로             # 서로 교환            seq[left], seq[right] = seq[right], seq[left]            # 한 칸씩 이동            left, right = left + 1, right - 1    return leftdef quick_sort(left, right):    print(seq, left, right)    if left &gt;= right:        return        mid = partition(left, right)    quick_sort(left, mid - 1)    quick_sort(mid, right)Merge Sort배열을 두 부분으로 나누고 각 배열을 정렬한 뒤 하나로 합친다.# seq = []def merge(left, mid, right):    # seq[left:mid + 1]과 seq[mid + 1:right]를 합침    tmp = []    i, j = left, mid + 1    # 두 부분 배열에서 작은 값을 채워 넣음    while i &lt;= mid and j &lt;= right:        if seq[i] &lt; seq[j]:            tmp.append(seq[i])            i += 1        else:            tmp.append(seq[j])            j += 1    # 부분 배열에서 남은 것을 뒤에 추가함    while i &lt;= mid:         tmp.append(seq[i])        i += 1    while j &lt;= right:        tmp.append(seq[j])        j += 1    # 정렬된 배열을 원본 배열에 옮김    seq[left:left+len(tmp)] = tmp[:]def merge_sort(left, right):    # 길이 2 이상의 배열에 대해 분할    if left &gt;= right:        return    mid = (left + right) // 2    # 두 부분으로 나눔    merge_sort(left, mid)    merge_sort(mid + 1, right)    # 나눈 배열을 합침    merge(left, mid, right)"
+  },
+  
+  {
     "title": "편집 거리",
     "url": "/posts/Edit_distance/",
-    "categories": "Study, Algorithm, DP",
-    "tags": "Study, DP",
+    "categories": "Study, Algorithm",
+    "tags": "DP",
     "date": "2025-01-30 01:02:24 +0900",
     
 
@@ -21,7 +55,7 @@
     "title": "위상 정렬",
     "url": "/posts/Topology_Sort/",
     "categories": "Study, Algorithm",
-    "tags": "Study, Sort",
+    "tags": "Sort",
     "date": "2025-01-30 00:01:14 +0900",
     
 
@@ -38,7 +72,7 @@
     "title": "OOP 정리",
     "url": "/posts/OOP/",
     "categories": "Study, OOP",
-    "tags": "Study",
+    "tags": "OOP",
     "date": "2025-01-29 23:56:56 +0900",
     
 

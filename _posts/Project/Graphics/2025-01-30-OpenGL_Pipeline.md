@@ -18,4 +18,3 @@ use_math: true
 }}
 
 <p>🔗 <a href="https://github.com/Forte-NaoP/Univ-Project/blob/main/Computer-Graphics/OpenGL-Pipeline.md" target="_blank">원본 파일 보기</a></p>
-<p>$$E = mc^2$$</p>

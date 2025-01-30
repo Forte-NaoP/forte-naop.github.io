@@ -1,6 +1,40 @@
 [
   
   {
+    "title": "Jekyll 시행 착오들 정리",
+    "url": "/posts/Trial_Error/",
+    "categories": "Blogging",
+    "tags": "Blog",
+    "date": "2025-01-30 14:57:40 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "Github Pages 시행착오들  링크는 https:// 로 시작해야 htmlproofer 검사에서 오류가 나지 않음      markdown 문서에서 상대경로로 포함된 리소스는 절대 경로로 변환해줘야 함.     {% assign remote_url = \"https://raw.githubusercontent.com/Forte-NaoP/Note/ma...",
+    "content": "Github Pages 시행착오들  링크는 https:// 로 시작해야 htmlproofer 검사에서 오류가 나지 않음      markdown 문서에서 상대경로로 포함된 리소스는 절대 경로로 변환해줘야 함.     {% assign remote_url = \"https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/lecture.md\" %} {% assign img_url = remote_url | remove: \"lecture.md\" | append: \"capture/\" %} {% capture remote_content %} &lt;!--remote_content 변수에 remote resource 저장 --&gt;     {% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/lecture.md %} {% endcapture %} {{ remote_content  &lt;!--remote_content에서 상대경로로 포함된 리소스를 절대 경로로 변환 --&gt; | replace: './capture/', img_url  }}      🔗 원본 파일 보기"
+  },
+  
+  {
+    "title": "Udemy Unreal 메모",
+    "url": "/posts/Unreal/",
+    "categories": "Study, Unreal",
+    "tags": "Unreal",
+    "date": "2025-01-01 13:50:56 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "# Lecture NoteUdemy 강의 (https://www.udemy.com/course/unrealcourse-korean/)Object  데이터와 기능의 집합  액터: 레벨에 들어가는 오브젝트  컴포넌트: 액터에 들어가는 오브젝트  블루프린트에서 참조 방법          화면 안의 액터 선택 후 BP의 이벤트 그래프에서 우클릭 후 Creat...",
+    "content": "# Lecture NoteUdemy 강의 (https://www.udemy.com/course/unrealcourse-korean/)Object  데이터와 기능의 집합  액터: 레벨에 들어가는 오브젝트  컴포넌트: 액터에 들어가는 오브젝트  블루프린트에서 참조 방법          화면 안의 액터 선택 후 BP의 이벤트 그래프에서 우클릭 후 Create a Reference 선택        Data Pin: BP 노드의 In/Out  Execution Pin: 노드의 실행 흐름BP &amp; Instance액터 선택 후 오른쪽의 디테일 혹은 툴바에서 BP 클래스로 변환 가능하다.BP 편집 화면에서 해당 클래스의 여러 속성들을 편집할 수 있으며컨텐츠 드로어에서 씬에 드래그하는 식으로 해당 BP클래스의 인스턴스를 생성할 수 있다.Spawn BPclass : 스폰할 액터의 클래스transform : location, rotation, scalecollision : 스폰 지점 충돌 처리instigator : 이벤트 리스너여러 데이터 타입이 결합된 핀의 경우, 우클릭해서 핀 분할을 통해 세부 타입으로 분리할 수 있다.SpawnActor는 스폰한 인스턴스의 참조를 반환한다. 해당 참조를 이용해 추가적인 작업이 가능하다.Control Rotation  Get Control Rotation : 컨트롤러의 회전 벡터를 반환한다.  Get Forward Vector : 회전 벡터를 정면 벡터로 변환환다.          Forward Vector: 객체의 정면 방향을 월드 좌표계에서 나타낸 단위 벡터      Rotator : 객체의 회전을 표한하는 벡터        물체를 기준으로 바라봤을 때 좌우 회전(Z축 중심)을 Yaw, 상하 회전(Y축 중심)을 Pitch, 물체의 수평 기울기(X축 중심)을 Roll이라고 한다.      Pure Function  side effect가 없는 함수  BP 상에서 실행 핀이 없는 함수🔗 원본 파일 보기"
+  },
+  
+  {
     "title": "SQL 메모",
     "url": "/posts/SQL/",
     "categories": "Study, Database",
@@ -49,6 +83,23 @@
     
     "snippet": "OOP특징      추상화    대상의 공통적인 특성들을 묶어 표현하는 것 (abstract, interface class)        상속          기존 클래스의 속성과 메서드를 물려받는 것      코드 재사용성과 확장성을 높임      부모 클래스의 public, protected 멤버를 상속받는다.            캡슐화      ...",
     "content": "OOP특징      추상화    대상의 공통적인 특성들을 묶어 표현하는 것 (abstract, interface class)        상속          기존 클래스의 속성과 메서드를 물려받는 것      코드 재사용성과 확장성을 높임      부모 클래스의 public, protected 멤버를 상속받는다.            캡슐화          데이터와 메서드를 묶고, 데이터에 대한 직접 접근을 막는 것            다형성          같은 이름의 메서드나 연산자가 다른 동작을 하는 것      오버로딩과 오버라이딩을 통해 구현                  오버로딩: 이름은 같지만 시그니쳐가 다른 것          오버라이딩: 상위 클래스의 메소드를 재정의 하는 것                    SOLID 원칙      단일 책임 원칙 (SRP)    클래스는 단 하나의 책임을 가지고 하나의 이유로만 변경되어야 한다.        개방 폐쇄 원칙 (OCP)    확장에는 열려 있고 수정에는 닫혀 있어야 한다. 기존 코드를 수정하지 않고 기능을 추가할 수 있어야 한다.        리스코프 치환 원칙 (LSP)    상위 타입의 객체를 하위 타입으로 대체해도 정상적으로 동작해야 한다.        인터페이스 분리 원칙 (ISP)    클라이언트는 자신이 사용하지 않는 메서드에 의존하지 않아야 한다. 인터페이스를 세분화하여 클라이언트가 필요한 기능만 사용할 수 있도록 제한한다.        의존성 역전 원칙 (DIP)    고수준 모듈(비즈니스 로직 등)은 저수준 모듈(구현 세부 사항)에 의존해서는 안 된다. 고수준, 저수준 모두 둘 다 추상화(인터페이스나 추상 클래스)에 의존해야 한다.    DIP 위반     class EmailService {     public:         void SendEmail(const string&amp; message) {             cout &lt;&lt; \"Sending Email: \" &lt;&lt; message &lt;&lt; endl;         } }; // 고수준 모듈: Notification은 EmailService에 직접 의존 class Notification {     private:         EmailService emailService; // 저수준 모듈에 직접 의존     public:         void Notify(const string&amp; message) {             emailService.SendEmail(message); // EmailService에 직접 접근         } };        DIP 적용     class IMessageService {     public:         virtual void SendMessage(const std::string&amp; message) = 0; }; // 고수준 모듈 class Notification {     private:         IMessageService* messageService;     public:         Notification(IMessageService* service) : messageService(service) {}         void Notify(const std::string&amp; message) {             messageService-&gt;SendMessage(message);         } }; // 저수준 모듈 class EmailService : public IMessageService {     public:         void SendMessage(const std::string&amp; message) override {             // 이메일 전송 로직         } };      🔗 원본 파일 보기"
+  },
+  
+  {
+    "title": "OS Scheduling",
+    "url": "/posts/OS_Scheduling/",
+    "categories": "Study, OS",
+    "tags": "Scheduling",
+    "date": "2024-12-19 13:50:56 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "# OSScheduling  자원을 할당받을 프로세스를 결정하는 과정  Process 5-state model  다음 경우에 발생          Running -&gt; Blocked (Waiting)      Running -&gt; Ready      Blocked (Waiting) -&gt; Ready      Exit(Terminated)  ...",
+    "content": "# OSScheduling  자원을 할당받을 프로세스를 결정하는 과정  Process 5-state model  다음 경우에 발생          Running -&gt; Blocked (Waiting)      Running -&gt; Ready      Blocked (Waiting) -&gt; Ready      Exit(Terminated)        이 중 1, 4번에서만 발생할 경우 비선점 (non-preemptive), 네 가지 전부에서 발생할 경우 선점 (preemptive) 스케줄링이라 한다.  알고리즘First Come First Served (FCFS, FIFO)  가장 간단한 비선점 스케줄링 방법  작업 큐에 도착한 순서대로 실행한다.  작업 순서에 따라 콘보이 효과가 발생 할 수 있다.          콘보이 효과: 하나의 긴 작업이 CPU를 오래 점유하여 뒤에 대기하는 짧은 작업들이 오래 기다리게 되는 현상      Shortest Job First (SJB)  비선점  실행 시간(burst time)이 짧은 프로세스부터 실행  어떤 프로세스가 계속 자원 할당을 받지 못하는 Starvation 발생 가능Shortest Remaining Time First (SRTF)  선점형  남은 시간이 가장 짧은 프로세스부터 실행  Starvation 발생 가능Priority Scheduling  선점형, 비선점형  선점형의 경우 Starvation 발생 가능          오래 대기한 프로세스의 우선순위를 높여서 해결 가능 (aging)      Round Robin (RR)  선점형  일정한 시간 간격동안만 프로세스를 처리하고 남은 작업은 큐의 맨 뒤로 보냄Multilevel Feedback Queue  선점형  우선순위가 다른 여러개의 큐를 사용  프로세스는 다른 큐로 이동 가능🔗 원본 파일 보기"
   },
   
   {

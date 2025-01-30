@@ -4,7 +4,7 @@
   <id>https://forte-naop.github.io/</id>
   <title>Forte's Notes</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-30T13:49:38+09:00</updated>
+  <updated>2025-01-30T15:00:59+09:00</updated>
   <author>
     <name>Forte</name>
     <uri>https://forte-naop.github.io/</uri>
@@ -17,6 +17,99 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Jekyll 시행 착오들 정리</title>
+    <link href="https://forte-naop.github.io/posts/Trial_Error/" rel="alternate" type="text/html" title="Jekyll 시행 착오들 정리" />
+    <published>2025-01-30T14:57:40+09:00</published>
+  
+    <updated>2025-01-30T14:57:40+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/Trial_Error/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/Trial_Error/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+  
+
+  <summary>Github Pages 시행착오들
+
+
+  링크는 https:// 로 시작해야 htmlproofer 검사에서 오류가 나지 않음
+  
+    markdown 문서에서 상대경로로 포함된 리소스는 절대 경로로 변환해줘야 함.
+
+     {% assign remote_url = &amp;quot;https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/lecture.md&amp;quot; %}
+ {% assign img_url = remote_url | remove: &amp;quot;lecture.md&amp;quot; | append: &amp;quot;capture/&amp;quot; %}
+
+ {% capture remote_content %} &amp;amp;lt;!--remote_content 변수에 remote resource 저장 --&amp;amp;gt;
+...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Udemy Unreal 메모</title>
+    <link href="https://forte-naop.github.io/posts/Unreal/" rel="alternate" type="text/html" title="Udemy Unreal 메모" />
+    <published>2025-01-01T13:50:56+09:00</published>
+  
+    <updated>2025-01-01T13:50:56+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/Unreal/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/Unreal/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Study" />
+    
+    <category term="Unreal" />
+    
+  
+
+  <summary># Lecture Note
+
+
+Udemy 강의 (https://www.udemy.com/course/unrealcourse-korean/)
+
+Object
+
+
+  데이터와 기능의 집합
+  액터: 레벨에 들어가는 오브젝트
+  컴포넌트: 액터에 들어가는 오브젝트
+  블루프린트에서 참조 방법
+    
+      화면 안의 액터 선택 후 BP의 이벤트 그래프에서 우클릭 후 Create a Reference 선택
+    
+  
+  Data Pin: BP 노드의 In/Out
+  Execution Pin: 노드의 실행 흐름
+
+
+BP &amp;amp;amp; Instance
+
+
+
+액터 선택 후 오른쪽의 디테일 혹은 툴바에서 BP 클래스로 변환 가능하다.
+
+
+
+BP 편집 화면에서 해당 클래스의 여러 속성들을 편집할 수 있으며
+
+
+
+컨...</summary>
+
+  </entry>
 
   
   <entry>
@@ -190,106 +283,6 @@ const int * const *val = ...;
         
           오버로딩: 이름은 같지만 시그니쳐가 다른 것
           ...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>최장 공통 부분 수열</title>
-    <link href="https://forte-naop.github.io/posts/LCS/" rel="alternate" type="text/html" title="최장 공통 부분 수열" />
-    <published>2024-11-30T01:19:44+09:00</published>
-  
-    <updated>2024-11-30T01:19:44+09:00</updated>
-  
-    <id>https://forte-naop.github.io/posts/LCS/</id>
-    <content type="text/html" src="https://forte-naop.github.io/posts/LCS/" />
-    <author>
-      <name>Forte</name>
-    </author>
-
-  
-    
-    <category term="Study" />
-    
-    <category term="Algorithm" />
-    
-  
-
-  <summary>최장 공통 부분 수열(LCS: Longest Common Subsequence)
-
-
-
-LCS 길이 구하기
-
-DP[i][j]: A[..i], B[..j]까지의 LCS길이
-
-
-  
-    A[i] == B[j]: DP[i][j] = DP[i - 1][j - 1] + 1
-  
-  
-    A[i] != B[j]: DP[i][j] = max(DP[i - 1][j], DP[i][j - 1])
-  
-
-
-
-
-LCS 문자열 구하기
-
-
-  역추적 (Backtracking) 방식
-DP 테이블을 이용해 (N, M)에서 (0, 0)까지 역추적하여 LCS를 복원.
-    
-      A[i] == B[j]이면 LCS에 포함됨 → i-1, j-1로 이동
-      DP[i-1][j], DP[i][j-1]를 비교해 큰 쪽으로 이...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>정렬 알고리즘</title>
-    <link href="https://forte-naop.github.io/posts/Sort/" rel="alternate" type="text/html" title="정렬 알고리즘" />
-    <published>2024-11-30T01:15:21+09:00</published>
-  
-    <updated>2024-11-30T01:15:21+09:00</updated>
-  
-    <id>https://forte-naop.github.io/posts/Sort/</id>
-    <content type="text/html" src="https://forte-naop.github.io/posts/Sort/" />
-    <author>
-      <name>Forte</name>
-    </author>
-
-  
-    
-    <category term="Study" />
-    
-    <category term="Algorithm" />
-    
-  
-
-  <summary>정렬
-
-Bubble Sort
-
-인접한 두 원소를 비교하여 역순이면 교환한다.
-
-# seq = []
-# 총 n번 반복
-for i in range(n - 1, -1, -1):
-    is_swapped = False
-    # 매 반복 후에 seq[i + 1:]은 정렬된 상태이므로 
-    # seq[:i] 까지만 확인
-    for j in range(i):
-        if seq[j] &amp;amp;gt; seq[j + 1]:
-            seq[j], seq[j + 1] = seq[j + 1] &amp;amp;gt; seq[j]
-            is_swapped = True
-    if not is_swapped:
-        break
-
-
-Selection Sort
-
-현재 i = [0, n)일 때 seq...</summary>
 
   </entry>
 

@@ -30,24 +30,24 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="편집 거리" />
+<meta property="og:title" content="Udemy Unreal 메모" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="편집 거리 문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수 DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수 A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1] A[i] != B[j]라면 편집이 필요하다. 추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다. 변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1 삭제는 DP[i - 1][j] + 1이 된다. (A[..i - 1]로 B[j]를 만들었으므로 A[i]를 삭제) 🔗 원본 파일 보기" />
-<meta property="og:description" content="편집 거리 문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수 DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수 A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1] A[i] != B[j]라면 편집이 필요하다. 추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다. 변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1 삭제는 DP[i - 1][j] + 1이 된다. (A[..i - 1]로 B[j]를 만들었으므로 A[i]를 삭제) 🔗 원본 파일 보기" />
-<link rel="canonical" href="https://forte-naop.github.io/posts/Edit_distance/" />
-<meta property="og:url" content="https://forte-naop.github.io/posts/Edit_distance/" />
+<meta name="description" content="A minimal, responsive and feature-rich Jekyll theme for technical writing." />
+<meta property="og:description" content="A minimal, responsive and feature-rich Jekyll theme for technical writing." />
+<link rel="canonical" href="https://forte-naop.github.io/posts/Unreal/" />
+<meta property="og:url" content="https://forte-naop.github.io/posts/Unreal/" />
 <meta property="og:site_name" content="Forte’s Notes" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-11-30T01:02:24+09:00" />
+<meta property="article:published_time" content="2025-01-01T13:50:56+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="편집 거리" />
+<meta property="twitter:title" content="Udemy Unreal 메모" />
 <meta name="twitter:site" content="@kirameki_ing" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-11-30T01:02:24+09:00","datePublished":"2024-11-30T01:02:24+09:00","description":"편집 거리 문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수 DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수 A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1] A[i] != B[j]라면 편집이 필요하다. 추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다. 변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1 삭제는 DP[i - 1][j] + 1이 된다. (A[..i - 1]로 B[j]를 만들었으므로 A[i]를 삭제) 🔗 원본 파일 보기","headline":"편집 거리","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Edit_distance/"},"url":"https://forte-naop.github.io/posts/Edit_distance/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-01-01T13:50:56+09:00","datePublished":"2025-01-01T13:50:56+09:00","description":"A minimal, responsive and feature-rich Jekyll theme for technical writing.","headline":"Udemy Unreal 메모","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Unreal/"},"url":"https://forte-naop.github.io/posts/Unreal/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>편집 거리 | Forte's Notes
+  <title>Udemy Unreal 메모 | Forte's Notes
   </title>
 
   <!--
@@ -213,9 +213,16 @@
 
   
 
+  
+    
+
+    
+
+  
 
 
-  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js,npm/tocbot@4.32.2/dist/tocbot.min.js"></script>
 
 
 
@@ -438,7 +445,7 @@
         
           
             
-              <span>편집 거리</span>
+              <span>Udemy Unreal 메모</span>
             
 
           
@@ -506,6 +513,457 @@
 
 
 
+  
+  
+
+  
+    
+      
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+
+  
+
 
 <!-- Add header for code snippets -->
 
@@ -520,6 +978,71 @@
   
   
 
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
   
 
   
@@ -551,9 +1074,9 @@
 
 
 
-<article class="px-1" data-toc="false">
+<article class="px-1" data-toc="true">
   <header>
-    <h1 data-toc-skip>편집 거리</h1>
+    <h1 data-toc-skip>Udemy Unreal 메모</h1>
     
 
     <div class="post-meta text-muted">
@@ -570,13 +1093,13 @@
 
 <time
   
-  data-ts="1732896144"
+  data-ts="1735707056"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Nov 30, 2024
+  Jan  1, 2025
 </time>
 
       </span>
@@ -625,9 +1148,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="212 words"
+  title="474 words"
 >
-  <em>1 min</em> read</span>
+  <em>2 min</em> read</span>
 
         </div>
       </div>
@@ -635,26 +1158,109 @@
   </header>
 
   
+    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
+      <span class="label text-truncate">Udemy Unreal 메모</span>
+      <button type="button" class="toc-trigger btn me-1">
+        <i class="fa-solid fa-list-ul fa-fw"></i>
+      </button>
+    </div>
+
+    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+      <span class="label ps-2 pe-1">Contents</span>
+      <i class="fa-solid fa-angle-right fa-fw"></i>
+    </button>
+
+    <dialog id="toc-popup" class="p-0">
+      <div class="header d-flex flex-row align-items-center justify-content-between">
+        <div class="label text-truncate py-2 ms-4">Udemy Unreal 메모</div>
+        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+          <i class="fas fa-close"></i>
+        </button>
+      </div>
+      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
+    </dialog>
+  
 
   <div class="content">
-    <h1 id="편집-거리">편집 거리</h1>
+    
+<div class="language-plaintext highlighter-rouge"><div class="code-header">
+        <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre># Lecture Note
+</pre></td></tr></tbody></table></code></div></div>
 
-<p>문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수</p>
+<p>Udemy 강의 (<a href="https://www.udemy.com/course/unrealcourse-korean/">https://www.udemy.com/course/unrealcourse-korean/</a>)</p>
 
-<p><code class="language-plaintext highlighter-rouge">DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수</code></p>
+<h2 id="object"><span class="me-2">Object</span><a href="#object" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p><code class="language-plaintext highlighter-rouge">A[i] == B[j]</code>라면 해당 위치에 대해서는 편집할 필요가 없으므로 <code class="language-plaintext highlighter-rouge">DP[i][j] == DP[i - 1][j - 1]</code></p>
+<ul>
+  <li>데이터와 기능의 집합</li>
+  <li>액터: 레벨에 들어가는 오브젝트</li>
+  <li>컴포넌트: 액터에 들어가는 오브젝트</li>
+  <li>블루프린트에서 참조 방법
+    <ul>
+      <li>화면 안의 액터 선택 후 BP의 이벤트 그래프에서 우클릭 후 <code class="language-plaintext highlighter-rouge">Create a Reference</code> 선택</li>
+    </ul>
+  </li>
+  <li>Data Pin: BP 노드의 In/Out</li>
+  <li>Execution Pin: 노드의 실행 흐름</li>
+</ul>
 
-<p><code class="language-plaintext highlighter-rouge">A[i] != B[j]</code>라면 편집이 필요하다.</p>
+<h2 id="bp--instance"><span class="me-2">BP &amp; Instance</span><a href="#bp--instance" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>추가하는 경우는 <code class="language-plaintext highlighter-rouge">A[i]</code>에 문자열을 하나 추가해서 <code class="language-plaintext highlighter-rouge">B[j]</code>가 되어야 하므로 <code class="language-plaintext highlighter-rouge">DP[i][j - 1] + 1</code>, 즉 <code class="language-plaintext highlighter-rouge">A[..i]를 B[..j - 1]로 변경하는 최소 횟수</code>에 1을 더해준다.</p>
+<p><a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/image.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/image.png" alt="alt text" loading="lazy"></a></p>
 
-<p>변경은 <code class="language-plaintext highlighter-rouge">A[i]</code>를 <code class="language-plaintext highlighter-rouge">B[j]</code>로 바꾸는 것이므로 <code class="language-plaintext highlighter-rouge">DP[i - 1][j - 1] + 1</code></p>
+<p>액터 선택 후 오른쪽의 디테일 혹은 툴바에서 BP 클래스로 변환 가능하다.</p>
 
-<p>삭제는 <code class="language-plaintext highlighter-rouge">DP[i - 1][j] + 1</code>이 된다.
-(<code class="language-plaintext highlighter-rouge">A[..i - 1]</code>로 <code class="language-plaintext highlighter-rouge">B[j]</code>를 만들었으므로 <code class="language-plaintext highlighter-rouge">A[i]</code>를 삭제)</p>
+<p><a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/image-1.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/image-1.png" alt="alt text" loading="lazy"></a></p>
 
-<p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/study/edit_distance.md" target="_blank">원본 파일 보기</a></p>
+<p>BP 편집 화면에서 해당 클래스의 여러 속성들을 편집할 수 있으며</p>
+
+<p><a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/image-2.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/image-2.png" alt="alt text" loading="lazy"></a></p>
+
+<p>컨텐츠 드로어에서 씬에 드래그하는 식으로 해당 BP클래스의 인스턴스를 생성할 수 있다.</p>
+
+<h2 id="spawn-bp"><span class="me-2">Spawn BP</span><a href="#spawn-bp" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p><a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/spawn_bp.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/spawn_bp.png" alt="alt text" loading="lazy"></a></p>
+
+<p>class : 스폰할 액터의 클래스</p>
+
+<p>transform : location, rotation, scale</p>
+
+<p>collision : 스폰 지점 충돌 처리</p>
+
+<p>instigator : 이벤트 리스너</p>
+
+<p><a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/pin_decouple.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/pin_decouple.png" alt="alt text" loading="lazy"></a></p>
+
+<p>여러 데이터 타입이 결합된 핀의 경우, 우클릭해서 핀 분할을 통해 세부 타입으로 분리할 수 있다.</p>
+
+<p><a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/spawn_impulse.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/spawn_impulse.png" alt="alt text" loading="lazy"></a></p>
+
+<p>SpawnActor는 스폰한 인스턴스의 참조를 반환한다. 해당 참조를 이용해 추가적인 작업이 가능하다.</p>
+
+<h2 id="control-rotation"><span class="me-2">Control Rotation</span><a href="#control-rotation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<ul>
+  <li>Get Control Rotation : 컨트롤러의 회전 벡터를 반환한다.</li>
+  <li>Get Forward Vector : 회전 벡터를 정면 벡터로 변환환다.
+    <ul>
+      <li>Forward Vector: 객체의 정면 방향을 월드 좌표계에서 나타낸 <strong>단위 벡터</strong></li>
+      <li>Rotator : 객체의 회전을 표한하는 벡터  <a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/rotator.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/rotator.png" alt="alt text" loading="lazy"></a></li>
+      <li>물체를 기준으로 바라봤을 때 좌우 회전(Z축 중심)을 Yaw, 상하 회전(Y축 중심)을 Pitch, 물체의 수평 기울기(X축 중심)을 Roll이라고 한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="pure-function"><span class="me-2">Pure Function</span><a href="#pure-function" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<ul>
+  <li>side effect가 없는 함수</li>
+  <li>BP 상에서 실행 핀이 없는 함수</li>
+</ul>
+
+<p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/study/Unreal/lecture.md" target="_blank">원본 파일 보기</a></p>
 
   </div>
 
@@ -665,7 +1271,7 @@
         <i class="far fa-folder-open fa-fw me-1"></i>
         
           <a href="/categories/study/">Study</a>,
-          <a href="/categories/algorithm/">Algorithm</a>
+          <a href="/categories/unreal/">Unreal</a>
       </div>
     
 
@@ -675,9 +1281,9 @@
         <i class="fa fa-tags fa-fw me-1"></i>
         
           <a
-            href="/tags/dp/"
+            href="/tags/unreal/"
             class="post-tag no-text-decoration"
-          >DP</a>
+          >Unreal</a>
         
       </div>
     
@@ -713,21 +1319,21 @@
 
       
 
-      <a href="https://twitter.com/intent/tweet?text=%ED%8E%B8%EC%A7%91%20%EA%B1%B0%EB%A6%AC%20-%20Forte's%20Notes&url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FEdit_distance%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+      <a href="https://twitter.com/intent/tweet?text=Udemy%20Unreal%20%EB%A9%94%EB%AA%A8%20-%20Forte's%20Notes&url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FUnreal%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
         <i class="fa-fw fa-brands fa-square-x-twitter"></i>
       </a>
     
 
       
 
-      <a href="https://www.facebook.com/sharer/sharer.php?title=%ED%8E%B8%EC%A7%91%20%EA%B1%B0%EB%A6%AC%20-%20Forte's%20Notes&u=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FEdit_distance%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+      <a href="https://www.facebook.com/sharer/sharer.php?title=Udemy%20Unreal%20%EB%A9%94%EB%AA%A8%20-%20Forte's%20Notes&u=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FUnreal%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
         <i class="fa-fw fab fa-facebook-square"></i>
       </a>
     
 
       
 
-      <a href="https://t.me/share/url?url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FEdit_distance%2F&text=%ED%8E%B8%EC%A7%91%20%EA%B1%B0%EB%A6%AC%20-%20Forte's%20Notes" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FUnreal%2F&text=Udemy%20Unreal%20%EB%A9%94%EB%AA%A8%20-%20Forte's%20Notes" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
         <i class="fa-fw fab fa-telegram"></i>
       </a>
     
@@ -1179,6 +1785,12 @@
 
 
 
+  <div class="toc-border-cover z-3"></div>
+  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
+    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
+    <nav id="toc"></nav>
+  </section>
+
 
             
           </aside>
@@ -1228,91 +1840,91 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
 
@@ -1328,7 +1940,7 @@
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
       
         <article class="col">
-          <a href="/posts/LCS/" class="post-preview card h-100">
+          <a href="/posts/SQL/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
@@ -1340,24 +1952,36 @@
 
 <time
   
-  data-ts="1732897184"
+  data-ts="1735491541"
   data-df="ll"
   
 >
-  Nov 30, 2024
+  Dec 30, 2024
 </time>
 
-              <h4 class="pt-0 my-2">최장 공통 부분 수열</h4>
+              <h4 class="pt-0 my-2">SQL 메모</h4>
               <div class="text-muted">
-                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/LCS.md %}
-🔗 원본 파일 보기</p>
+                <p>Database MEMO
+
+SQL 구문 해석 순서
+
+
+  FROM: 데이터 소스를 지정
+  ON: 조인 조건을 설정
+  JOIN: 필요한 테이블 결합
+  WHERE: 행을 필터링
+  GROUP BY: 데이터를 그룹화
+  HAVING: 그룹화된 데이터에 추가 조건 적용
+  SELECT: 선택한 컬럼을 가져옴
+  DISTINCT: 중복된 행 제거
+  OR...</p>
               </div>
             </div>
           </a>
         </article>
       
         <article class="col">
-          <a href="/posts/Sort/" class="post-preview card h-100">
+          <a href="/posts/CPP/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
@@ -1369,24 +1993,40 @@
 
 <time
   
-  data-ts="1732896921"
+  data-ts="1735491308"
   data-df="ll"
   
 >
-  Nov 30, 2024
+  Dec 30, 2024
 </time>
 
-              <h4 class="pt-0 my-2">정렬 알고리즘</h4>
+              <h4 class="pt-0 my-2">C++ 정리</h4>
               <div class="text-muted">
-                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/sort.md %}
-🔗 원본 파일 보기</p>
+                <p>C++ 정리
+
+Const
+
+
+  상수에 관한 키워드
+
+
+일반 변수에서의 const
+
+
+  변수 선언시 이후 해당 변수에 대한 변경을 막는다.
+  
+    const 키워드 이후의 구문에 대한 변경을 막는다고 간주할 수 있다.
+
+    // 기본 자료형(int, float 등)은 무시하고 생각
+const int val = 10;
+int const val...</p>
               </div>
             </div>
           </a>
         </article>
       
         <article class="col">
-          <a href="/posts/Topology_Sort/" class="post-preview card h-100">
+          <a href="/posts/OOP/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
@@ -1398,28 +2038,33 @@
 
 <time
   
-  data-ts="1732892474"
+  data-ts="1734620216"
   data-df="ll"
   
 >
-  Nov 30, 2024
+  Dec 19, 2024
 </time>
 
-              <h4 class="pt-0 my-2">위상 정렬</h4>
+              <h4 class="pt-0 my-2">OOP 정리</h4>
               <div class="text-muted">
-                <p>위상정렬
+                <p>OOP
 
-비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것
-
-각 노드에 선행 조건이 존재할 때 사용 가능
-
-정렬 방법
+특징
 
 
-  각 노드의 진입 차수 기록
-  진입 차수가 0인 정점을 큐에 삽입
-  큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소
-  2-3과정을 큐가 비거나 모든 정점을 탐색할 때까...</p>
+  
+    추상화
+
+    대상의 공통적인 특성들을 묶어 표현하는 것 (abstract, interface class)
+  
+  
+    상속
+
+    
+      기존 클래스의 속성과 메서드를 물려받는 것
+      코드 재사용성과 확장성을 높임
+      부모 클래스의 public, protected 멤버를 상속받는다.
+    ...</p>
               </div>
             </div>
           </a>
@@ -1440,21 +2085,21 @@
 
   
     <a
-      href="/posts/Topology_Sort/"
+      href="/posts/SQL/"
       class="btn btn-outline-primary"
       aria-label="Older"
     >
-      <p>위상 정렬</p>
+      <p>SQL 메모</p>
     </a>
   
 
   
     <a
-      href="/posts/Sort/"
+      href="/posts/Trial_Error/"
       class="btn btn-outline-primary"
       aria-label="Newer"
     >
-      <p>정렬 알고리즘</p>
+      <p>Jekyll 시행 착오들 정리</p>
     </a>
   
 </nav>

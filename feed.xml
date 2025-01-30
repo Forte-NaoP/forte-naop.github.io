@@ -4,7 +4,7 @@
   <id>https://forte-naop.github.io/</id>
   <title>Forte's Notes</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-30T20:12:25+09:00</updated>
+  <updated>2025-01-30T20:16:17+09:00</updated>
   <author>
     <name>Forte</name>
     <uri>https://forte-naop.github.io/</uri>
@@ -98,6 +98,62 @@
     
       parse_process: 입력 파일을 파싱하여 프로세스를 생성하고 대기 큐에 삽입.
       add_process: 프로세스를...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>태양계 시뮬레이션</title>
+    <link href="https://forte-naop.github.io/posts/Solar_System/" rel="alternate" type="text/html" title="태양계 시뮬레이션" />
+    <published>2025-01-19T20:12:54+09:00</published>
+  
+    <updated>2025-01-19T20:12:54+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/Solar_System/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/Solar_System/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Project" />
+    
+    <category term="Graphics" />
+    
+  
+
+  <summary>구현
+
+
+
+데이터 초기화
+
+행성과 링의 데이터를 초기화하는 작업은 user_init() 함수에서 이루어집니다. 이 함수는 프로그램이 시작될 때 호출되어 필요한 데이터와 그래픽 리소스를 준비합니다.
+
+1. 초기 위치 설정
+
+
+  
+    init_pos 초기화:
+
+    for (int i = 0; i &amp;amp;lt; NUM_SPHERE; i++) {
+    init_pos[i] = (float)rand() / (float)RAND_MAX * 2 * PI;
+}
+    
+
+    
+      각 행성의 초기 공전 위치를 랜덤 값으로 설정.
+      초기 위치는 [0, 2π] 사이의 값으로, 행성이 시뮬레이션 시작 시 서로 다른 위치에 배치되도록 보장.
+    
+  
+
+
+2. OpenGL 초기화
+
+
+  
+    ...</summary>
 
   </entry>
 
@@ -204,67 +260,6 @@ typedef struct Task {
     char filename[16];
     bool final; // 스레드 종료를 위한 작업 종료 지시자
     struct Task *...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>string.h 직접 구현하기</title>
-    <link href="https://forte-naop.github.io/posts/Stringh/" rel="alternate" type="text/html" title="string.h 직접 구현하기" />
-    <published>2025-01-03T16:40:20+09:00</published>
-  
-    <updated>2025-01-03T16:40:20+09:00</updated>
-  
-    <id>https://forte-naop.github.io/posts/Stringh/</id>
-    <content type="text/html" src="https://forte-naop.github.io/posts/Stringh/" />
-    <author>
-      <name>Forte</name>
-    </author>
-
-  
-    
-    <category term="Project" />
-    
-    <category term="C_CPP" />
-    
-  
-
-  <summary>문자열 라이브러리 구현
-
-1. 개요
-
-
-  C 표준 라이브러리의 &amp;amp;lt;string.h&amp;amp;gt; 및 기타 문자열 관련 함수들을 직접 구현.
-  앞으로의 과제를 위해 문자열 처리와 변환 함수들을 준비.
-
-
-
-
-2. 구현 함수
-
-2.1 숫자 변환 (Conversions)
-
-문자열 → 숫자
-
-
-  int atoi2(const char *str):
-    
-      문자열 str을 int로 변환.
-      int는 32비트 정수로 간주.
-    
-  
-  long atol2(const char *str):
-    
-      문자열 str을 long으로 변환.
-      long은 64비트 정수로 간주.
-    
-  
-
-
-숫자 → 문자열
-
-
-  char *int2str(char *dest, int num):...</summary>
 
   </entry>
 

@@ -1101,6 +1101,13 @@ Average Waiting Time: 10.6667
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/Solar_System/">태양계 시뮬레이션</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/Swsh/">미니 쉘 만들기</a>
         </li>
       
@@ -1109,13 +1116,6 @@ Average Waiting Time: 10.6667
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Title_Collector/">웹페이지 제목 수집기</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Stringh/">string.h 직접 구현하기</a>
         </li>
       
     </ul>
@@ -1143,6 +1143,60 @@ Average Waiting Time: 10.6667
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
       
         
         
@@ -1294,69 +1348,10 @@ Average Waiting Time: 10.6667
     
     
     
-      
-        
-        
-
   
     
     
     
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -1522,6 +1517,9 @@ Average Waiting Time: 10.6667
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/opengl/">OpenGL</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/blog/">Blog</a>
       
         
@@ -1532,9 +1530,6 @@ Average Waiting Time: 10.6667
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/math/">Math</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/opengl/">OpenGL</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/sort/">Sort</a>
@@ -1700,6 +1695,18 @@ Average Waiting Time: 10.6667
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
 
 
@@ -1714,6 +1721,49 @@ Average Waiting Time: 10.6667
   <aside id="related-posts" aria-labelledby="related-label">
     <h3 class="mb-4" id="related-label">Further Reading</h3>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/Solar_System/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1737285174"
+  data-df="ll"
+  
+>
+  Jan 19, 2025
+</time>
+
+              <h4 class="pt-0 my-2">태양계 시뮬레이션</h4>
+              <div class="text-muted">
+                <p>구현
+
+
+
+데이터 초기화
+
+행성과 링의 데이터를 초기화하는 작업은 user_init() 함수에서 이루어집니다. 이 함수는 프로그램이 시작될 때 호출되어 필요한 데이터와 그래픽 리소스를 준비합니다.
+
+1. 초기 위치 설정
+
+
+  
+    init_pos 초기화:
+
+    for (int i = 0; i &amp;lt; NUM_SPHERE; i++) {
+    ...</p>
+              </div>
+            </div>
+          </a>
+        </article>
       
         <article class="col">
           <a href="/posts/Swsh/" class="post-preview card h-100">
@@ -1805,54 +1855,6 @@ wget 작업을 다루는 Task Queue
           </a>
         </article>
       
-        <article class="col">
-          <a href="/posts/Stringh/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1735890020"
-  data-df="ll"
-  
->
-  Jan  3, 2025
-</time>
-
-              <h4 class="pt-0 my-2">string.h 직접 구현하기</h4>
-              <div class="text-muted">
-                <p>문자열 라이브러리 구현
-
-1. 개요
-
-
-  C 표준 라이브러리의 &amp;lt;string.h&amp;gt; 및 기타 문자열 관련 함수들을 직접 구현.
-  앞으로의 과제를 위해 문자열 처리와 변환 함수들을 준비.
-
-
-
-
-2. 구현 함수
-
-2.1 숫자 변환 (Conversions)
-
-문자열 → 숫자
-
-
-  int atoi2(const char *str):
-    
- ...</p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
     </nav>
   </aside>
   <!-- #related-posts -->
@@ -1865,11 +1867,11 @@ wget 작업을 다루는 Task Queue
 
   
     <a
-      href="/posts/Swsh/"
+      href="/posts/Solar_System/"
       class="btn btn-outline-primary"
       aria-label="Older"
     >
-      <p>미니 쉘 만들기</p>
+      <p>태양계 시뮬레이션</p>
     </a>
   
 
@@ -1948,6 +1950,60 @@ wget 작업을 다루는 Task Queue
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
       
         
         
@@ -2099,69 +2155,10 @@ wget 작업을 다루는 Task Queue
     
     
     
-      
-        
-        
-
   
     
     
     
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2327,6 +2324,9 @@ wget 작업을 다루는 Task Queue
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/opengl/">OpenGL</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/blog/">Blog</a>
       
         
@@ -2337,9 +2337,6 @@ wget 작업을 다루는 Task Queue
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/math/">Math</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/opengl/">OpenGL</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/sort/">Sort</a>

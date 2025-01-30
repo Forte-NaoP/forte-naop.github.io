@@ -1,6 +1,6 @@
 ---
 title: 블로그 소개
-date: 2025-01-29 10:28:00 +0900
+date: 2024-11-15 10:28:00 +0900
 categories: [Blogging]
 tags: [Blog]
 ---

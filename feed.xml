@@ -4,7 +4,7 @@
   <id>https://forte-naop.github.io/</id>
   <title>Forte's Notes</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-30T17:17:08+09:00</updated>
+  <updated>2025-01-30T17:48:47+09:00</updated>
   <author>
     <name>Forte</name>
     <uri>https://forte-naop.github.io/</uri>
@@ -55,6 +55,54 @@
 
   
   <entry>
+    <title>Multi-level Feedack Queue 구현하기</title>
+    <link href="https://forte-naop.github.io/posts/MFQ/" rel="alternate" type="text/html" title="Multi-level Feedack Queue 구현하기" />
+    <published>2025-01-22T17:30:53+09:00</published>
+  
+    <updated>2025-01-22T17:30:53+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/MFQ/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/MFQ/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Project" />
+    
+    <category term="OS" />
+    
+  
+
+  <summary>멀티 레벨 피드백 큐(MFQ) 스케줄링
+
+
+
+코드 구조
+
+
+  데이터 구조
+    
+      Process 구조체: 각 프로세스를 표현하는 구조체.
+      waitq, finishedq, global_io_q: 대기 큐, 완료 큐, 글로벌 I/O 큐.
+    
+  
+  스케줄러 클래스
+    
+      SchedulerBase (추상 클래스): 스케줄러의 기본 인터페이스 정의.
+      Scheduler&amp;amp;lt;Container&amp;amp;gt; (템플릿 클래스): 특정 컨테이너(RR, SRTN, FCFS)를 기반으로 스케줄링을 수행.
+    
+  
+  함수
+    
+      parse_process: 입력 파일을 파싱하여 프로세스를 생성하고 대기 큐에 삽입.
+      add_process: 프로세스를...</summary>
+
+  </entry>
+
+  
+  <entry>
     <title>미니 쉘 만들기</title>
     <link href="https://forte-naop.github.io/posts/Swsh/" rel="alternate" type="text/html" title="미니 쉘 만들기" />
     <published>2025-01-10T17:01:45+09:00</published>
@@ -69,9 +117,9 @@
 
   
     
-    <category term="Univ" />
-    
     <category term="Project" />
+    
+    <category term="C_CPP" />
     
   
 
@@ -119,9 +167,9 @@
 
   
     
-    <category term="Univ" />
-    
     <category term="Project" />
+    
+    <category term="C_CPP" />
     
   
 
@@ -175,9 +223,9 @@ typedef struct Task {
 
   
     
-    <category term="Univ" />
-    
     <category term="Project" />
+    
+    <category term="C_CPP" />
     
   
 
@@ -217,64 +265,6 @@ typedef struct Task {
 
 
   char *int2str(char *dest, int num):...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Udemy Unreal 메모</title>
-    <link href="https://forte-naop.github.io/posts/Unreal/" rel="alternate" type="text/html" title="Udemy Unreal 메모" />
-    <published>2025-01-01T13:50:56+09:00</published>
-  
-    <updated>2025-01-01T13:50:56+09:00</updated>
-  
-    <id>https://forte-naop.github.io/posts/Unreal/</id>
-    <content type="text/html" src="https://forte-naop.github.io/posts/Unreal/" />
-    <author>
-      <name>Forte</name>
-    </author>
-
-  
-    
-    <category term="Study" />
-    
-    <category term="Unreal" />
-    
-  
-
-  <summary># Lecture Note
-
-
-Udemy 강의 (https://www.udemy.com/course/unrealcourse-korean/)
-
-Object
-
-
-  데이터와 기능의 집합
-  액터: 레벨에 들어가는 오브젝트
-  컴포넌트: 액터에 들어가는 오브젝트
-  블루프린트에서 참조 방법
-    
-      화면 안의 액터 선택 후 BP의 이벤트 그래프에서 우클릭 후 Create a Reference 선택
-    
-  
-  Data Pin: BP 노드의 In/Out
-  Execution Pin: 노드의 실행 흐름
-
-
-BP &amp;amp;amp; Instance
-
-
-
-액터 선택 후 오른쪽의 디테일 혹은 툴바에서 BP 클래스로 변환 가능하다.
-
-
-
-BP 편집 화면에서 해당 클래스의 여러 속성들을 편집할 수 있으며
-
-
-
-컨...</summary>
 
   </entry>
 

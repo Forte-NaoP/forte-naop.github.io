@@ -30,24 +30,24 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="Udemy Unreal 메모" />
+<meta property="og:title" content="웹페이지 제목 수집기" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="A minimal, responsive and feature-rich Jekyll theme for technical writing." />
-<meta property="og:description" content="A minimal, responsive and feature-rich Jekyll theme for technical writing." />
-<link rel="canonical" href="https://forte-naop.github.io/posts/Unreal/" />
-<meta property="og:url" content="https://forte-naop.github.io/posts/Unreal/" />
+<meta name="description" content="구현 정리 1. 구성 요소 1.1 TaskQueue wget 작업을 다루는 Task Queue 헤더: task_queue.h 구현: task_queue.c 함수: TaskQueue_init: TaskQueue 초기화. TaskQueue_push: Task 추가. TaskQueue_pop: Task를 Queue에서 하나 꺼냄. TaskQueue_destroy: Queue에서 사용한 자원을 정리. Task Structure: 1 2 3 4 5 6 typedef struct Task { char url[MAX_DOMAIN_SIZE]; char filename[16]; bool final; // 스레드 종료를 위한 작업 종료 지시자 struct Task *next; } Task; 1.2 스레드 풀 wget 작업을 병렬로 처리하기 위한 스레드 풀 헤더: task_queue.h 구현: task_queue.c 함수: thread_pool_init: 스레드 풀 초기화. thread_pool_add_task: Task Queue에 Task 추가. thread_pool_wait: 모든 Task 끝날 때까지 대기. thread_pool_destroy: 큐에 종료 Task를 추가해 모든 스레드 종료 후 자원 정리. 1.3 메모리 풀 수집한 Domain, Title 쌍을 저장하기 위한 BST 전용 메모리 풀 헤더: memory_pool.h 구현: memory_pool.c 함수: MemoryPool_init: 메모리 풀 초기화. MemoryPool_alloc: 메모리 풀에서 자원 할당. MemoryPool_free: 메모리 풀로 자원 반환. MemoryPool_destroy: 메모리 풀 정리. 1.4 Binary Search Tree (BST) 수집한 Domain, Title 쌍을 이진 탐색 트리 형태로 저장 헤더: bst.h 구현: bst.c 함수: BST_new: BST 노드 생성. BST_insert: Domain, Title 쌍 추가. BST_search: Domain 검색. BST_print_inorder: 디버깅 용 BST Inorder 출력 함수. 1.5 Collect 과제에서 요구하는 기능들 집합 헤더: collect.h 구현: collect.c 함수: wget: 페이지를 다운로드하고 title을 추출해서 BST에 저장. find_title: HTML file에서 title 태그 추출. get_domain_name: URL에서 Domain Name을 추출. concat_string: 여러 개의 문자열을 연걸. 1.6 BackupStack load 명령 실행 시 남아있던 기존 명령을 스택에 백업함 구현: main.c 함수: backup: 남은 명령을 입력으로부터 저장. restore: 저장된 명령을 입력으로 복원. 2. 작업 흐름 명령어를 읽어들임. 읽지 못했을 경우 현재 입력이 표준 입력이고 남은 명령어가 없을 경우 자원을 정리하고 종료 리다이렉트 됐을 경우 남은 명령어가 없으면 표준 입력으로 복구 남았을 경우 명령어 백업으로부터 복구 읽었을 경우 개행문자 기준으로 토큰화 작업 수행 URL의 경우, thread_pool에 작업 추가 print, stat의 경우 모든 thread 작업 완료 대기 후 명령 수행 load의 경우 load 이후에 남아있는 명령 백업 후 입력 리다이렉션 및 1번으로 이동 quit의 경우 자원 정리 후 종료" />
+<meta property="og:description" content="구현 정리 1. 구성 요소 1.1 TaskQueue wget 작업을 다루는 Task Queue 헤더: task_queue.h 구현: task_queue.c 함수: TaskQueue_init: TaskQueue 초기화. TaskQueue_push: Task 추가. TaskQueue_pop: Task를 Queue에서 하나 꺼냄. TaskQueue_destroy: Queue에서 사용한 자원을 정리. Task Structure: 1 2 3 4 5 6 typedef struct Task { char url[MAX_DOMAIN_SIZE]; char filename[16]; bool final; // 스레드 종료를 위한 작업 종료 지시자 struct Task *next; } Task; 1.2 스레드 풀 wget 작업을 병렬로 처리하기 위한 스레드 풀 헤더: task_queue.h 구현: task_queue.c 함수: thread_pool_init: 스레드 풀 초기화. thread_pool_add_task: Task Queue에 Task 추가. thread_pool_wait: 모든 Task 끝날 때까지 대기. thread_pool_destroy: 큐에 종료 Task를 추가해 모든 스레드 종료 후 자원 정리. 1.3 메모리 풀 수집한 Domain, Title 쌍을 저장하기 위한 BST 전용 메모리 풀 헤더: memory_pool.h 구현: memory_pool.c 함수: MemoryPool_init: 메모리 풀 초기화. MemoryPool_alloc: 메모리 풀에서 자원 할당. MemoryPool_free: 메모리 풀로 자원 반환. MemoryPool_destroy: 메모리 풀 정리. 1.4 Binary Search Tree (BST) 수집한 Domain, Title 쌍을 이진 탐색 트리 형태로 저장 헤더: bst.h 구현: bst.c 함수: BST_new: BST 노드 생성. BST_insert: Domain, Title 쌍 추가. BST_search: Domain 검색. BST_print_inorder: 디버깅 용 BST Inorder 출력 함수. 1.5 Collect 과제에서 요구하는 기능들 집합 헤더: collect.h 구현: collect.c 함수: wget: 페이지를 다운로드하고 title을 추출해서 BST에 저장. find_title: HTML file에서 title 태그 추출. get_domain_name: URL에서 Domain Name을 추출. concat_string: 여러 개의 문자열을 연걸. 1.6 BackupStack load 명령 실행 시 남아있던 기존 명령을 스택에 백업함 구현: main.c 함수: backup: 남은 명령을 입력으로부터 저장. restore: 저장된 명령을 입력으로 복원. 2. 작업 흐름 명령어를 읽어들임. 읽지 못했을 경우 현재 입력이 표준 입력이고 남은 명령어가 없을 경우 자원을 정리하고 종료 리다이렉트 됐을 경우 남은 명령어가 없으면 표준 입력으로 복구 남았을 경우 명령어 백업으로부터 복구 읽었을 경우 개행문자 기준으로 토큰화 작업 수행 URL의 경우, thread_pool에 작업 추가 print, stat의 경우 모든 thread 작업 완료 대기 후 명령 수행 load의 경우 load 이후에 남아있는 명령 백업 후 입력 리다이렉션 및 1번으로 이동 quit의 경우 자원 정리 후 종료" />
+<link rel="canonical" href="https://forte-naop.github.io/posts/Title_Collector/" />
+<meta property="og:url" content="https://forte-naop.github.io/posts/Title_Collector/" />
 <meta property="og:site_name" content="Forte’s Notes" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-01-01T13:50:56+09:00" />
+<meta property="article:published_time" content="2025-01-04T16:59:17+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Udemy Unreal 메모" />
+<meta property="twitter:title" content="웹페이지 제목 수집기" />
 <meta name="twitter:site" content="@kirameki_ing" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-01-01T13:50:56+09:00","datePublished":"2025-01-01T13:50:56+09:00","description":"A minimal, responsive and feature-rich Jekyll theme for technical writing.","headline":"Udemy Unreal 메모","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Unreal/"},"url":"https://forte-naop.github.io/posts/Unreal/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-01-04T16:59:17+09:00","datePublished":"2025-01-04T16:59:17+09:00","description":"구현 정리 1. 구성 요소 1.1 TaskQueue wget 작업을 다루는 Task Queue 헤더: task_queue.h 구현: task_queue.c 함수: TaskQueue_init: TaskQueue 초기화. TaskQueue_push: Task 추가. TaskQueue_pop: Task를 Queue에서 하나 꺼냄. TaskQueue_destroy: Queue에서 사용한 자원을 정리. Task Structure: 1 2 3 4 5 6 typedef struct Task { char url[MAX_DOMAIN_SIZE]; char filename[16]; bool final; // 스레드 종료를 위한 작업 종료 지시자 struct Task *next; } Task; 1.2 스레드 풀 wget 작업을 병렬로 처리하기 위한 스레드 풀 헤더: task_queue.h 구현: task_queue.c 함수: thread_pool_init: 스레드 풀 초기화. thread_pool_add_task: Task Queue에 Task 추가. thread_pool_wait: 모든 Task 끝날 때까지 대기. thread_pool_destroy: 큐에 종료 Task를 추가해 모든 스레드 종료 후 자원 정리. 1.3 메모리 풀 수집한 Domain, Title 쌍을 저장하기 위한 BST 전용 메모리 풀 헤더: memory_pool.h 구현: memory_pool.c 함수: MemoryPool_init: 메모리 풀 초기화. MemoryPool_alloc: 메모리 풀에서 자원 할당. MemoryPool_free: 메모리 풀로 자원 반환. MemoryPool_destroy: 메모리 풀 정리. 1.4 Binary Search Tree (BST) 수집한 Domain, Title 쌍을 이진 탐색 트리 형태로 저장 헤더: bst.h 구현: bst.c 함수: BST_new: BST 노드 생성. BST_insert: Domain, Title 쌍 추가. BST_search: Domain 검색. BST_print_inorder: 디버깅 용 BST Inorder 출력 함수. 1.5 Collect 과제에서 요구하는 기능들 집합 헤더: collect.h 구현: collect.c 함수: wget: 페이지를 다운로드하고 title을 추출해서 BST에 저장. find_title: HTML file에서 title 태그 추출. get_domain_name: URL에서 Domain Name을 추출. concat_string: 여러 개의 문자열을 연걸. 1.6 BackupStack load 명령 실행 시 남아있던 기존 명령을 스택에 백업함 구현: main.c 함수: backup: 남은 명령을 입력으로부터 저장. restore: 저장된 명령을 입력으로 복원. 2. 작업 흐름 명령어를 읽어들임. 읽지 못했을 경우 현재 입력이 표준 입력이고 남은 명령어가 없을 경우 자원을 정리하고 종료 리다이렉트 됐을 경우 남은 명령어가 없으면 표준 입력으로 복구 남았을 경우 명령어 백업으로부터 복구 읽었을 경우 개행문자 기준으로 토큰화 작업 수행 URL의 경우, thread_pool에 작업 추가 print, stat의 경우 모든 thread 작업 완료 대기 후 명령 수행 load의 경우 load 이후에 남아있는 명령 백업 후 입력 리다이렉션 및 1번으로 이동 quit의 경우 자원 정리 후 종료","headline":"웹페이지 제목 수집기","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Title_Collector/"},"url":"https://forte-naop.github.io/posts/Title_Collector/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>Udemy Unreal 메모 | Forte's Notes
+  <title>웹페이지 제목 수집기 | Forte's Notes
   </title>
 
   <!--
@@ -445,7 +445,7 @@
         
           
             
-              <span>Udemy Unreal 메모</span>
+              <span>웹페이지 제목 수집기</span>
             
 
           
@@ -513,457 +513,6 @@
 
 
 
-  
-  
-
-  
-    
-      
-      
-    
-
-    
-    
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-      
-
-      
-    
-
-    <!-- take out classes -->
-    
-
-    
-    
-
-    
-
-    
-      
-    
-
-    <!-- lazy-load images -->
-    
-
-    
-      <!-- make sure the `<img>` is wrapped by `<a>` -->
-      
-
-      
-        <!-- create the image wrapper -->
-        
-
-        
-        
-      
-    
-
-    <!-- combine -->
-    
-  
-    
-
-    
-    
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-      
-
-      
-    
-
-    <!-- take out classes -->
-    
-
-    
-    
-
-    
-
-    
-      
-    
-
-    <!-- lazy-load images -->
-    
-
-    
-      <!-- make sure the `<img>` is wrapped by `<a>` -->
-      
-
-      
-        <!-- create the image wrapper -->
-        
-
-        
-        
-      
-    
-
-    <!-- combine -->
-    
-  
-    
-
-    
-    
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-      
-
-      
-    
-
-    <!-- take out classes -->
-    
-
-    
-    
-
-    
-
-    
-      
-    
-
-    <!-- lazy-load images -->
-    
-
-    
-      <!-- make sure the `<img>` is wrapped by `<a>` -->
-      
-
-      
-        <!-- create the image wrapper -->
-        
-
-        
-        
-      
-    
-
-    <!-- combine -->
-    
-  
-    
-
-    
-    
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-      
-
-      
-    
-
-    <!-- take out classes -->
-    
-
-    
-    
-
-    
-
-    
-      
-    
-
-    <!-- lazy-load images -->
-    
-
-    
-      <!-- make sure the `<img>` is wrapped by `<a>` -->
-      
-
-      
-        <!-- create the image wrapper -->
-        
-
-        
-        
-      
-    
-
-    <!-- combine -->
-    
-  
-    
-
-    
-    
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-      
-
-      
-    
-
-    <!-- take out classes -->
-    
-
-    
-    
-
-    
-
-    
-      
-    
-
-    <!-- lazy-load images -->
-    
-
-    
-      <!-- make sure the `<img>` is wrapped by `<a>` -->
-      
-
-      
-        <!-- create the image wrapper -->
-        
-
-        
-        
-      
-    
-
-    <!-- combine -->
-    
-  
-    
-
-    
-    
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-      
-
-      
-    
-
-    <!-- take out classes -->
-    
-
-    
-    
-
-    
-
-    
-      
-    
-
-    <!-- lazy-load images -->
-    
-
-    
-      <!-- make sure the `<img>` is wrapped by `<a>` -->
-      
-
-      
-        <!-- create the image wrapper -->
-        
-
-        
-        
-      
-    
-
-    <!-- combine -->
-    
-  
-    
-
-    
-    
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-      
-
-      
-    
-
-    <!-- take out classes -->
-    
-
-    
-    
-
-    
-
-    
-      
-    
-
-    <!-- lazy-load images -->
-    
-
-    
-      <!-- make sure the `<img>` is wrapped by `<a>` -->
-      
-
-      
-        <!-- create the image wrapper -->
-        
-
-        
-        
-      
-    
-
-    <!-- combine -->
-    
-  
-
-  
-
 
 <!-- Add header for code snippets -->
 
@@ -1008,39 +557,6 @@
 
       
     
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
 
     
   
@@ -1048,6 +564,82 @@
   
   
 
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
   
 
   
@@ -1076,7 +668,7 @@
 
 <article class="px-1" data-toc="true">
   <header>
-    <h1 data-toc-skip>Udemy Unreal 메모</h1>
+    <h1 data-toc-skip>웹페이지 제목 수집기</h1>
     
 
     <div class="post-meta text-muted">
@@ -1093,13 +685,13 @@
 
 <time
   
-  data-ts="1735707056"
+  data-ts="1735977557"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Jan  1, 2025
+  Jan  4, 2025
 </time>
 
       </span>
@@ -1148,9 +740,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="474 words"
+  title="663 words"
 >
-  <em>2 min</em> read</span>
+  <em>3 min</em> read</span>
 
         </div>
       </div>
@@ -1159,7 +751,7 @@
 
   
     <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
-      <span class="label text-truncate">Udemy Unreal 메모</span>
+      <span class="label text-truncate">웹페이지 제목 수집기</span>
       <button type="button" class="toc-trigger btn me-1">
         <i class="fa-solid fa-list-ul fa-fw"></i>
       </button>
@@ -1172,7 +764,7 @@
 
     <dialog id="toc-popup" class="p-0">
       <div class="header d-flex flex-row align-items-center justify-content-between">
-        <div class="label text-truncate py-2 ms-4">Udemy Unreal 메모</div>
+        <div class="label text-truncate py-2 ms-4">웹페이지 제목 수집기</div>
         <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
           <i class="fas fa-close"></i>
         </button>
@@ -1182,85 +774,177 @@
   
 
   <div class="content">
-    
-<div class="language-plaintext highlighter-rouge"><div class="code-header">
-        <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
+    <h1 id="구현-정리"><strong>구현 정리</strong></h1>
+
+<hr />
+
+<h2 id="1-구성-요소"><span class="me-2"><strong>1. 구성 요소</strong></span><a href="#1-구성-요소" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h3 id="11-taskqueue"><span class="me-2"><strong>1.1 TaskQueue</strong></span><a href="#11-taskqueue" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>wget 작업을 다루는 Task Queue</p>
+
+<ul>
+  <li><strong>헤더:</strong> <code class="language-plaintext highlighter-rouge">task_queue.h</code></li>
+  <li><strong>구현:</strong> <code class="language-plaintext highlighter-rouge">task_queue.c</code></li>
+</ul>
+
+<p><strong>함수:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">TaskQueue_init</code>: TaskQueue 초기화.</li>
+  <li><code class="language-plaintext highlighter-rouge">TaskQueue_push</code>: Task 추가.</li>
+  <li><code class="language-plaintext highlighter-rouge">TaskQueue_pop</code>: Task를 Queue에서 하나 꺼냄.</li>
+  <li><code class="language-plaintext highlighter-rouge">TaskQueue_destroy</code>: Queue에서 사용한 자원을 정리.</li>
+</ul>
+
+<p><strong>Task Structure:</strong></p>
+
+<div class="language-c highlighter-rouge"><div class="code-header">
+        <span data-label-text="C"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre># Lecture Note
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">typedef</span> <span class="k">struct</span> <span class="n">Task</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">url</span><span class="p">[</span><span class="n">MAX_DOMAIN_SIZE</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">filename</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+    <span class="n">bool</span> <span class="n">final</span><span class="p">;</span> <span class="c1">// 스레드 종료를 위한 작업 종료 지시자</span>
+    <span class="k">struct</span> <span class="n">Task</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">Task</span><span class="p">;</span>
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>Udemy 강의 (<a href="https://www.udemy.com/course/unrealcourse-korean/">https://www.udemy.com/course/unrealcourse-korean/</a>)</p>
+<hr />
 
-<h2 id="object"><span class="me-2">Object</span><a href="#object" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h3 id="12-스레드-풀"><span class="me-2"><strong>1.2 스레드 풀</strong></span><a href="#12-스레드-풀" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>wget 작업을 병렬로 처리하기 위한 스레드 풀</p>
 
 <ul>
-  <li>데이터와 기능의 집합</li>
-  <li>액터: 레벨에 들어가는 오브젝트</li>
-  <li>컴포넌트: 액터에 들어가는 오브젝트</li>
-  <li>블루프린트에서 참조 방법
+  <li><strong>헤더:</strong> <code class="language-plaintext highlighter-rouge">task_queue.h</code></li>
+  <li><strong>구현:</strong> <code class="language-plaintext highlighter-rouge">task_queue.c</code></li>
+</ul>
+
+<p><strong>함수:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">thread_pool_init</code>: 스레드 풀 초기화.</li>
+  <li><code class="language-plaintext highlighter-rouge">thread_pool_add_task</code>: Task Queue에 Task 추가.</li>
+  <li><code class="language-plaintext highlighter-rouge">thread_pool_wait</code>: 모든 Task 끝날 때까지 대기.</li>
+  <li><code class="language-plaintext highlighter-rouge">thread_pool_destroy</code>: 큐에 종료 Task를 추가해 모든 스레드 종료 후 자원 정리.</li>
+</ul>
+
+<hr />
+
+<h3 id="13-메모리-풀"><span class="me-2"><strong>1.3 메모리 풀</strong></span><a href="#13-메모리-풀" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>수집한 Domain, Title 쌍을 저장하기 위한 BST 전용 메모리 풀</p>
+
+<ul>
+  <li><strong>헤더:</strong> <code class="language-plaintext highlighter-rouge">memory_pool.h</code></li>
+  <li><strong>구현:</strong> <code class="language-plaintext highlighter-rouge">memory_pool.c</code></li>
+</ul>
+
+<p><strong>함수:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">MemoryPool_init</code>: 메모리 풀 초기화.</li>
+  <li><code class="language-plaintext highlighter-rouge">MemoryPool_alloc</code>: 메모리 풀에서 자원 할당.</li>
+  <li><code class="language-plaintext highlighter-rouge">MemoryPool_free</code>: 메모리 풀로 자원 반환.</li>
+  <li><code class="language-plaintext highlighter-rouge">MemoryPool_destroy</code>: 메모리 풀 정리.</li>
+</ul>
+
+<hr />
+
+<h3 id="14-binary-search-tree-bst"><span class="me-2"><strong>1.4 Binary Search Tree (BST)</strong></span><a href="#14-binary-search-tree-bst" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>수집한 Domain, Title 쌍을 이진 탐색 트리 형태로 저장</p>
+
+<ul>
+  <li><strong>헤더:</strong> <code class="language-plaintext highlighter-rouge">bst.h</code></li>
+  <li><strong>구현:</strong> <code class="language-plaintext highlighter-rouge">bst.c</code></li>
+</ul>
+
+<p><strong>함수:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">BST_new</code>: BST 노드 생성.</li>
+  <li><code class="language-plaintext highlighter-rouge">BST_insert</code>: Domain, Title 쌍 추가.</li>
+  <li><code class="language-plaintext highlighter-rouge">BST_search</code>: Domain 검색.</li>
+  <li><code class="language-plaintext highlighter-rouge">BST_print_inorder</code>: 디버깅 용 BST Inorder 출력 함수.</li>
+</ul>
+
+<hr />
+
+<h3 id="15-collect"><span class="me-2"><strong>1.5 Collect</strong></span><a href="#15-collect" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>과제에서 요구하는 기능들 집합</p>
+
+<ul>
+  <li><strong>헤더:</strong> <code class="language-plaintext highlighter-rouge">collect.h</code></li>
+  <li><strong>구현:</strong> <code class="language-plaintext highlighter-rouge">collect.c</code></li>
+</ul>
+
+<p><strong>함수:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">wget</code>: 페이지를 다운로드하고 title을 추출해서 BST에 저장.</li>
+  <li><code class="language-plaintext highlighter-rouge">find_title</code>: HTML file에서 title 태그 추출.</li>
+  <li><code class="language-plaintext highlighter-rouge">get_domain_name</code>: URL에서 Domain Name을 추출.</li>
+  <li><code class="language-plaintext highlighter-rouge">concat_string</code>: 여러 개의 문자열을 연걸.</li>
+</ul>
+
+<hr />
+
+<h3 id="16-backupstack"><span class="me-2"><strong>1.6 BackupStack</strong></span><a href="#16-backupstack" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>load 명령 실행 시 남아있던 기존 명령을 스택에 백업함</p>
+
+<ul>
+  <li><strong>구현:</strong> <code class="language-plaintext highlighter-rouge">main.c</code></li>
+</ul>
+
+<p><strong>함수:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">backup</code>: 남은 명령을 입력으로부터 저장.</li>
+  <li><code class="language-plaintext highlighter-rouge">restore</code>: 저장된 명령을 입력으로 복원.</li>
+</ul>
+
+<hr />
+
+<h2 id="2-작업-흐름"><span class="me-2"><strong>2. 작업 흐름</strong></span><a href="#2-작업-흐름" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<ol>
+  <li>명령어를 읽어들임.
     <ul>
-      <li>화면 안의 액터 선택 후 BP의 이벤트 그래프에서 우클릭 후 <code class="language-plaintext highlighter-rouge">Create a Reference</code> 선택</li>
+      <li>읽지 못했을 경우
+        <ul>
+          <li>현재 입력이 표준 입력이고 남은 명령어가 없을 경우 자원을 정리하고 종료</li>
+          <li>리다이렉트 됐을 경우
+            <ul>
+              <li>남은 명령어가 없으면 표준 입력으로 복구</li>
+              <li>남았을 경우 명령어 백업으로부터 복구</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>읽었을 경우 개행문자 기준으로 토큰화</li>
     </ul>
   </li>
-  <li>Data Pin: BP 노드의 In/Out</li>
-  <li>Execution Pin: 노드의 실행 흐름</li>
-</ul>
-
-<h2 id="bp--instance"><span class="me-2">BP &amp; Instance</span><a href="#bp--instance" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<p><a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/image.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/image.png" alt="alt text" loading="lazy"></a></p>
-
-<p>액터 선택 후 오른쪽의 디테일 혹은 툴바에서 BP 클래스로 변환 가능하다.</p>
-
-<p><a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/image-1.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/image-1.png" alt="alt text" loading="lazy"></a></p>
-
-<p>BP 편집 화면에서 해당 클래스의 여러 속성들을 편집할 수 있으며</p>
-
-<p><a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/image-2.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/image-2.png" alt="alt text" loading="lazy"></a></p>
-
-<p>컨텐츠 드로어에서 씬에 드래그하는 식으로 해당 BP클래스의 인스턴스를 생성할 수 있다.</p>
-
-<h2 id="spawn-bp"><span class="me-2">Spawn BP</span><a href="#spawn-bp" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<p><a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/spawn_bp.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/spawn_bp.png" alt="alt text" loading="lazy"></a></p>
-
-<p>class : 스폰할 액터의 클래스</p>
-
-<p>transform : location, rotation, scale</p>
-
-<p>collision : 스폰 지점 충돌 처리</p>
-
-<p>instigator : 이벤트 리스너</p>
-
-<p><a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/pin_decouple.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/pin_decouple.png" alt="alt text" loading="lazy"></a></p>
-
-<p>여러 데이터 타입이 결합된 핀의 경우, 우클릭해서 핀 분할을 통해 세부 타입으로 분리할 수 있다.</p>
-
-<p><a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/spawn_impulse.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/spawn_impulse.png" alt="alt text" loading="lazy"></a></p>
-
-<p>SpawnActor는 스폰한 인스턴스의 참조를 반환한다. 해당 참조를 이용해 추가적인 작업이 가능하다.</p>
-
-<h2 id="control-rotation"><span class="me-2">Control Rotation</span><a href="#control-rotation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<ul>
-  <li>Get Control Rotation : 컨트롤러의 회전 벡터를 반환한다.</li>
-  <li>Get Forward Vector : 회전 벡터를 정면 벡터로 변환환다.
+  <li>작업 수행
     <ul>
-      <li>Forward Vector: 객체의 정면 방향을 월드 좌표계에서 나타낸 <strong>단위 벡터</strong></li>
-      <li>Rotator : 객체의 회전을 표한하는 벡터  <a href="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/rotator.png" class="popup img-link  shimmer"><img src="https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/capture/rotator.png" alt="alt text" loading="lazy"></a></li>
-      <li>물체를 기준으로 바라봤을 때 좌우 회전(Z축 중심)을 Yaw, 상하 회전(Y축 중심)을 Pitch, 물체의 수평 기울기(X축 중심)을 Roll이라고 한다.</li>
+      <li>URL의 경우, thread_pool에 작업 추가</li>
+      <li>print, stat의 경우 모든 thread 작업 완료 대기 후 명령 수행</li>
+      <li>load의 경우 load 이후에 남아있는 명령 백업 후 입력 리다이렉션 및 1번으로 이동</li>
+      <li>quit의 경우 자원 정리 후 종료</li>
     </ul>
   </li>
-</ul>
+</ol>
 
-<h2 id="pure-function"><span class="me-2">Pure Function</span><a href="#pure-function" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<ul>
-  <li>side effect가 없는 함수</li>
-  <li>BP 상에서 실행 핀이 없는 함수</li>
-</ul>
-
-<p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/study/Unreal/lecture.md" target="_blank">원본 파일 보기</a></p>
+<p>🔗 <a href="https://github.com/Forte-NaoP/Univ-Project/tree/main/Software-Practice/title-collect" target="_blank">원본 파일 보기</a></p>
 
   </div>
 
@@ -1270,8 +954,8 @@
       <div class="post-meta mb-3">
         <i class="far fa-folder-open fa-fw me-1"></i>
         
-          <a href="/categories/study/">Study</a>,
-          <a href="/categories/unreal/">Unreal</a>
+          <a href="/categories/univ/">Univ</a>,
+          <a href="/categories/project/">Project</a>
       </div>
     
 
@@ -1281,9 +965,9 @@
         <i class="fa fa-tags fa-fw me-1"></i>
         
           <a
-            href="/tags/unreal/"
+            href="/tags/title-collector/"
             class="post-tag no-text-decoration"
-          >Unreal</a>
+          >Title_Collector</a>
         
       </div>
     
@@ -1319,21 +1003,21 @@
 
       
 
-      <a href="https://twitter.com/intent/tweet?text=Udemy%20Unreal%20%EB%A9%94%EB%AA%A8%20-%20Forte's%20Notes&url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FUnreal%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+      <a href="https://twitter.com/intent/tweet?text=%EC%9B%B9%ED%8E%98%EC%9D%B4%EC%A7%80%20%EC%A0%9C%EB%AA%A9%20%EC%88%98%EC%A7%91%EA%B8%B0%20-%20Forte's%20Notes&url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FTitle_Collector%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
         <i class="fa-fw fa-brands fa-square-x-twitter"></i>
       </a>
     
 
       
 
-      <a href="https://www.facebook.com/sharer/sharer.php?title=Udemy%20Unreal%20%EB%A9%94%EB%AA%A8%20-%20Forte's%20Notes&u=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FUnreal%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+      <a href="https://www.facebook.com/sharer/sharer.php?title=%EC%9B%B9%ED%8E%98%EC%9D%B4%EC%A7%80%20%EC%A0%9C%EB%AA%A9%20%EC%88%98%EC%A7%91%EA%B8%B0%20-%20Forte's%20Notes&u=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FTitle_Collector%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
         <i class="fa-fw fab fa-facebook-square"></i>
       </a>
     
 
       
 
-      <a href="https://t.me/share/url?url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FUnreal%2F&text=Udemy%20Unreal%20%EB%A9%94%EB%AA%A8%20-%20Forte's%20Notes" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FTitle_Collector%2F&text=%EC%9B%B9%ED%8E%98%EC%9D%B4%EC%A7%80%20%EC%A0%9C%EB%AA%A9%20%EC%88%98%EC%A7%91%EA%B8%B0%20-%20Forte's%20Notes" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
         <i class="fa-fw fab fa-telegram"></i>
       </a>
     
@@ -1909,91 +1593,19 @@
   
 
   
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -2009,7 +1621,7 @@
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
       
         <article class="col">
-          <a href="/posts/SQL/" class="post-preview card h-100">
+          <a href="/posts/Swsh/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
@@ -2021,36 +1633,25 @@
 
 <time
   
-  data-ts="1735491541"
+  data-ts="1736496105"
   data-df="ll"
   
 >
-  Dec 30, 2024
+  Jan 10, 2025
 </time>
 
-              <h4 class="pt-0 my-2">SQL 메모</h4>
+              <h4 class="pt-0 my-2">미니 쉘 만들기</h4>
               <div class="text-muted">
-                <p>Database MEMO
+                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Univ-Project/main/Software-Practice/swsh/Implementation.md %}
 
-SQL 구문 해석 순서
-
-
-  FROM: 데이터 소스를 지정
-  ON: 조인 조건을 설정
-  JOIN: 필요한 테이블 결합
-  WHERE: 행을 필터링
-  GROUP BY: 데이터를 그룹화
-  HAVING: 그룹화된 데이터에 추가 조건 적용
-  SELECT: 선택한 컬럼을 가져옴
-  DISTINCT: 중복된 행 제거
-  OR...</p>
+🔗 원본 파일 보기</p>
               </div>
             </div>
           </a>
         </article>
       
         <article class="col">
-          <a href="/posts/CPP/" class="post-preview card h-100">
+          <a href="/posts/Stringh/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
@@ -2062,78 +1663,36 @@ SQL 구문 해석 순서
 
 <time
   
-  data-ts="1735491308"
+  data-ts="1735890020"
   data-df="ll"
   
 >
-  Dec 30, 2024
+  Jan  3, 2025
 </time>
 
-              <h4 class="pt-0 my-2">C++ 정리</h4>
+              <h4 class="pt-0 my-2">string.h 직접 구현하기</h4>
               <div class="text-muted">
-                <p>C++ 정리
+                <p>문자열 라이브러리 구현
 
-Const
-
-
-  상수에 관한 키워드
+1. 개요
 
 
-일반 변수에서의 const
-
-
-  변수 선언시 이후 해당 변수에 대한 변경을 막는다.
-  
-    const 키워드 이후의 구문에 대한 변경을 막는다고 간주할 수 있다.
-
-    // 기본 자료형(int, float 등)은 무시하고 생각
-const int val = 10;
-int const val...</p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
-          <a href="/posts/OOP/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
+  C 표준 라이브러리의 &amp;lt;string.h&amp;gt; 및 기타 문자열 관련 함수들을 직접 구현.
+  앞으로의 과제를 위해 문자열 처리와 변환 함수들을 준비.
 
 
 
 
-<time
-  
-  data-ts="1734620216"
-  data-df="ll"
-  
->
-  Dec 19, 2024
-</time>
+2. 구현 함수
 
-              <h4 class="pt-0 my-2">OOP 정리</h4>
-              <div class="text-muted">
-                <p>OOP
+2.1 숫자 변환 (Conversions)
 
-특징
+문자열 → 숫자
 
 
-  
-    추상화
-
-    대상의 공통적인 특성들을 묶어 표현하는 것 (abstract, interface class)
-  
-  
-    상속
-
+  int atoi2(const char *str):
     
-      기존 클래스의 속성과 메서드를 물려받는 것
-      코드 재사용성과 확장성을 높임
-      부모 클래스의 public, protected 멤버를 상속받는다.
-    ...</p>
+ ...</p>
               </div>
             </div>
           </a>
@@ -2154,21 +1713,21 @@ int const val...</p>
 
   
     <a
-      href="/posts/SQL/"
+      href="/posts/Stringh/"
       class="btn btn-outline-primary"
       aria-label="Older"
     >
-      <p>SQL 메모</p>
+      <p>string.h 직접 구현하기</p>
     </a>
   
 
   
     <a
-      href="/posts/Stringh/"
+      href="/posts/Swsh/"
       class="btn btn-outline-primary"
       aria-label="Newer"
     >
-      <p>string.h 직접 구현하기</p>
+      <p>미니 쉘 만들기</p>
     </a>
   
 </nav>

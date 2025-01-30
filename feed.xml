@@ -4,7 +4,7 @@
   <id>https://forte-naop.github.io/</id>
   <title>Forte's Notes</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-30T15:20:15+09:00</updated>
+  <updated>2025-01-30T17:17:08+09:00</updated>
   <author>
     <name>Forte</name>
     <uri>https://forte-naop.github.io/</uri>
@@ -50,6 +50,173 @@
 
  {% capture remote_content %} &amp;amp;lt;!--remote_content 변수에 remote resource 저장 --&amp;amp;gt;
 ...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>미니 쉘 만들기</title>
+    <link href="https://forte-naop.github.io/posts/Swsh/" rel="alternate" type="text/html" title="미니 쉘 만들기" />
+    <published>2025-01-10T17:01:45+09:00</published>
+  
+    <updated>2025-01-10T17:01:45+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/Swsh/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/Swsh/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Univ" />
+    
+    <category term="Project" />
+    
+  
+
+  <summary>미니쉘 (swsh) 동작 과정
+
+1. 초기 설정
+
+1.1 환경 변수 설정
+
+
+  custom_binary = &amp;quot;./commands/bin:&amp;quot;을 기존 PATH 환경 변수와 합쳐서 새로운 PATH를 설정한다.
+  이를 통해 사용자가 실행 파일을 ./commands/bin/ 디렉토리에서 실행할 수 있도록 함.
+
+
+1.2 시그널 핸들링
+
+
+  SIGINT (Ctrl+C)와 SIGTSTP (Ctrl+Z)를 무시하도록 설정.
+  SIGCHLD 시그널을 처리하여 종료된 자식 프로세스를 정리하는 핸들러 chld_handler 등록.
+
+
+2. 입력 및 파싱
+
+2.1 사용자 입력 처리
+
+
+  read(0, input, 256)을 이용해 최대 256바이트까지 입력을 읽음.
+  입력을 split_commands(input,...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>웹페이지 제목 수집기</title>
+    <link href="https://forte-naop.github.io/posts/Title_Collector/" rel="alternate" type="text/html" title="웹페이지 제목 수집기" />
+    <published>2025-01-04T16:59:17+09:00</published>
+  
+    <updated>2025-01-04T16:59:17+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/Title_Collector/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/Title_Collector/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Univ" />
+    
+    <category term="Project" />
+    
+  
+
+  <summary>구현 정리
+
+
+
+1. 구성 요소
+
+1.1 TaskQueue
+
+wget 작업을 다루는 Task Queue
+
+
+  헤더: task_queue.h
+  구현: task_queue.c
+
+
+함수:
+
+
+  TaskQueue_init: TaskQueue 초기화.
+  TaskQueue_push: Task 추가.
+  TaskQueue_pop: Task를 Queue에서 하나 꺼냄.
+  TaskQueue_destroy: Queue에서 사용한 자원을 정리.
+
+
+Task Structure:
+
+typedef struct Task {
+    char url[MAX_DOMAIN_SIZE];
+    char filename[16];
+    bool final; // 스레드 종료를 위한 작업 종료 지시자
+    struct Task *...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>string.h 직접 구현하기</title>
+    <link href="https://forte-naop.github.io/posts/Stringh/" rel="alternate" type="text/html" title="string.h 직접 구현하기" />
+    <published>2025-01-03T16:40:20+09:00</published>
+  
+    <updated>2025-01-03T16:40:20+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/Stringh/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/Stringh/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Univ" />
+    
+    <category term="Project" />
+    
+  
+
+  <summary>문자열 라이브러리 구현
+
+1. 개요
+
+
+  C 표준 라이브러리의 &amp;amp;lt;string.h&amp;amp;gt; 및 기타 문자열 관련 함수들을 직접 구현.
+  앞으로의 과제를 위해 문자열 처리와 변환 함수들을 준비.
+
+
+
+
+2. 구현 함수
+
+2.1 숫자 변환 (Conversions)
+
+문자열 → 숫자
+
+
+  int atoi2(const char *str):
+    
+      문자열 str을 int로 변환.
+      int는 32비트 정수로 간주.
+    
+  
+  long atol2(const char *str):
+    
+      문자열 str을 long으로 변환.
+      long은 64비트 정수로 간주.
+    
+  
+
+
+숫자 → 문자열
+
+
+  char *int2str(char *dest, int num):...</summary>
 
   </entry>
 
@@ -108,181 +275,6 @@ BP 편집 화면에서 해당 클래스의 여러 속성들을 편집할 수 있
 
 
 컨...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>SQL 메모</title>
-    <link href="https://forte-naop.github.io/posts/SQL/" rel="alternate" type="text/html" title="SQL 메모" />
-    <published>2024-12-30T01:59:01+09:00</published>
-  
-    <updated>2024-12-30T01:59:01+09:00</updated>
-  
-    <id>https://forte-naop.github.io/posts/SQL/</id>
-    <content type="text/html" src="https://forte-naop.github.io/posts/SQL/" />
-    <author>
-      <name>Forte</name>
-    </author>
-
-  
-    
-    <category term="Study" />
-    
-    <category term="Database" />
-    
-  
-
-  <summary>Database MEMO
-
-SQL 구문 해석 순서
-
-
-  FROM: 데이터 소스를 지정
-  ON: 조인 조건을 설정
-  JOIN: 필요한 테이블 결합
-  WHERE: 행을 필터링
-  GROUP BY: 데이터를 그룹화
-  HAVING: 그룹화된 데이터에 추가 조건 적용
-  SELECT: 선택한 컬럼을 가져옴
-  DISTINCT: 중복된 행 제거
-  ORDER BY: 결과를 정렬
-  LIMIT: 결과의 개수를 제한
-
-
-구문 별 문법
-
-
-  
-    
-      
-        
-          LIMIT B, A
-          LIMIT A OFFSET B: B번째 행부터 A개의 행 선택 (0-index)
-        
-      
-    
-  
-
-
-ACID
-
-🔗 원본 파일 보기</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>C++ 정리</title>
-    <link href="https://forte-naop.github.io/posts/CPP/" rel="alternate" type="text/html" title="C++ 정리" />
-    <published>2024-12-30T01:55:08+09:00</published>
-  
-    <updated>2024-12-30T01:55:08+09:00</updated>
-  
-    <id>https://forte-naop.github.io/posts/CPP/</id>
-    <content type="text/html" src="https://forte-naop.github.io/posts/CPP/" />
-    <author>
-      <name>Forte</name>
-    </author>
-
-  
-    
-    <category term="Study" />
-    
-    <category term="Programming Language" />
-    
-  
-
-  <summary>C++ 정리
-
-Const
-
-
-  상수에 관한 키워드
-
-
-일반 변수에서의 const
-
-
-  변수 선언시 이후 해당 변수에 대한 변경을 막는다.
-  
-    const 키워드 이후의 구문에 대한 변경을 막는다고 간주할 수 있다.
-
-    // 기본 자료형(int, float 등)은 무시하고 생각
-const int val = 10;
-int const val = 10;
-// -&amp;amp;gt; val에 대한 변경 금지
-
-const int *val = ...;
-// 이후 *val = ...; 금지
-// val = ...; 가능
-
-const int **val = ...;
-// **val = ...; 금지
-// *val = ...; val = ...; 가능
-
-const int * const *val = ...;
-// **v...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>OOP 정리</title>
-    <link href="https://forte-naop.github.io/posts/OOP/" rel="alternate" type="text/html" title="OOP 정리" />
-    <published>2024-12-19T23:56:56+09:00</published>
-  
-    <updated>2024-12-19T23:56:56+09:00</updated>
-  
-    <id>https://forte-naop.github.io/posts/OOP/</id>
-    <content type="text/html" src="https://forte-naop.github.io/posts/OOP/" />
-    <author>
-      <name>Forte</name>
-    </author>
-
-  
-    
-    <category term="Study" />
-    
-    <category term="OOP" />
-    
-  
-
-  <summary>OOP
-
-특징
-
-
-  
-    추상화
-
-    대상의 공통적인 특성들을 묶어 표현하는 것 (abstract, interface class)
-  
-  
-    상속
-
-    
-      기존 클래스의 속성과 메서드를 물려받는 것
-      코드 재사용성과 확장성을 높임
-      부모 클래스의 public, protected 멤버를 상속받는다.
-    
-  
-  
-    캡슐화
-
-    
-      데이터와 메서드를 묶고, 데이터에 대한 직접 접근을 막는 것
-    
-  
-  
-    다형성
-
-    
-      같은 이름의 메서드나 연산자가 다른 동작을 하는 것
-      오버로딩과 오버라이딩을 통해 구현
-        
-          오버로딩: 이름은 같지만 시그니쳐가 다른 것
-          ...</summary>
 
   </entry>
 

@@ -526,6 +526,208 @@
 <div id="post-list" class="flex-grow-1 px-xl-1">
   
     <article class="card-wrapper card">
+      <a href="/posts/Sort/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+
+        <div class="col-md-12">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">정렬 알고리즘</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>정렬
+
+Bubble Sort
+
+인접한 두 원소를 비교하여 역순이면 교환한다.
+
+# seq = []
+# 총 n번 반복
+for i in range(n - 1, -1, -1):
+    is_swapped = False
+    # 매 반복 후에 seq[i + 1:]은 정렬된 상태이므로 
+    # seq[:i] 까지만 확인
+    for j in range(...</p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1732896921"
+  data-df="ll"
+  
+>
+  Nov 30, 2024
+</time>
+
+
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      Study,
+                      Algorithm
+                  </span>
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
+      <a href="/posts/Edit_distance/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+
+        <div class="col-md-12">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">편집 거리</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>편집 거리
+
+문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수
+
+DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수
+
+A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1]
+
+A[i] != B[j]라면 편집이 필요하다.
+
+추가하...</p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1732896144"
+  data-df="ll"
+  
+>
+  Nov 30, 2024
+</time>
+
+
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      Study,
+                      Algorithm
+                  </span>
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
+      <a href="/posts/Topology_Sort/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+
+        <div class="col-md-12">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">위상 정렬</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>위상정렬
+
+비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것
+
+각 노드에 선행 조건이 존재할 때 사용 가능
+
+정렬 방법
+
+
+  각 노드의 진입 차수 기록
+  진입 차수가 0인 정점을 큐에 삽입
+  큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소
+  2-3과정을 큐가 비거나 모든 정점을 탐색할 때까...</p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1732892474"
+  data-df="ll"
+  
+>
+  Nov 30, 2024
+</time>
+
+
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      Study,
+                      Algorithm
+                  </span>
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
       <a href="/posts/Introduce/" class="post-preview row g-0 flex-md-row-reverse">
         
 
@@ -696,28 +898,28 @@
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/Swsh/">미니 쉘 만들기</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Title_Collector/">웹페이지 제목 수집기</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Stringh/">string.h 직접 구현하기</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/Unreal/">Udemy Unreal 메모</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/SQL/">SQL 메모</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/CPP/">C++ 정리</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/OOP/">OOP 정리</a>
         </li>
       
     </ul>
@@ -810,15 +1012,6 @@
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
   
     
     
@@ -828,18 +1021,6 @@
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -877,13 +1058,6 @@
     
     
       
-    
-  
-    
-    
-    
-    
-      
         
         
 
@@ -903,13 +1077,6 @@
     
     
     
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -964,6 +1131,100 @@
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -995,6 +1256,13 @@
     
     
     
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -1060,6 +1328,9 @@
         <a class="post-tag btn btn-outline-primary" href="/tags/lcs/">LCS</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/mini-shell/">mini_shell</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/oop/">OOP</a>
       
         
@@ -1069,7 +1340,7 @@
         <a class="post-tag btn btn-outline-primary" href="/tags/sql/">SQL</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/unreal/">Unreal</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/string-h/">string.h</a>
       
     </div>
   </section>
@@ -1215,15 +1486,6 @@
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
   
     
     
@@ -1233,18 +1495,6 @@
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -1282,13 +1532,6 @@
     
     
       
-    
-  
-    
-    
-    
-    
-      
         
         
 
@@ -1308,13 +1551,6 @@
     
     
     
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -1369,6 +1605,100 @@
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -1400,6 +1730,13 @@
     
     
     
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -1465,6 +1802,9 @@
         <a class="post-tag btn btn-outline-primary" href="/tags/lcs/">LCS</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/mini-shell/">mini_shell</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/oop/">OOP</a>
       
         
@@ -1474,7 +1814,7 @@
         <a class="post-tag btn btn-outline-primary" href="/tags/sql/">SQL</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/unreal/">Unreal</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/string-h/">string.h</a>
       
     </div>
   </section>

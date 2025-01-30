@@ -32,18 +32,18 @@
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="편집 거리" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="편집 거리 문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수 DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수 A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1] A[i] != B[j]라면 편집이 필요하다. 추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다. 변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1 삭제는 DP[i - 1][j] + 1이 된다. (A[..i - 1]로 B[j]를 만들었으므로 A[i]를 삭제)" />
-<meta property="og:description" content="편집 거리 문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수 DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수 A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1] A[i] != B[j]라면 편집이 필요하다. 추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다. 변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1 삭제는 DP[i - 1][j] + 1이 된다. (A[..i - 1]로 B[j]를 만들었으므로 A[i]를 삭제)" />
+<meta name="description" content="편집 거리 문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수 DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수 A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1] A[i] != B[j]라면 편집이 필요하다. 추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다. 변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1 삭제는 DP[i - 1][j] + 1이 된다. (A[..i - 1]로 B[j]를 만들었으므로 A[i]를 삭제) 🔗 원본 파일 보기" />
+<meta property="og:description" content="편집 거리 문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수 DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수 A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1] A[i] != B[j]라면 편집이 필요하다. 추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다. 변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1 삭제는 DP[i - 1][j] + 1이 된다. (A[..i - 1]로 B[j]를 만들었으므로 A[i]를 삭제) 🔗 원본 파일 보기" />
 <link rel="canonical" href="https://forte-naop.github.io/posts/Edit_distance/" />
 <meta property="og:url" content="https://forte-naop.github.io/posts/Edit_distance/" />
 <meta property="og:site_name" content="Forte’s Notes" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-01-30T01:02:24+09:00" />
+<meta property="article:published_time" content="2024-11-30T01:02:24+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="편집 거리" />
 <meta name="twitter:site" content="@kirameki_ing" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-01-30T01:02:24+09:00","datePublished":"2025-01-30T01:02:24+09:00","description":"편집 거리 문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수 DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수 A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1] A[i] != B[j]라면 편집이 필요하다. 추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다. 변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1 삭제는 DP[i - 1][j] + 1이 된다. (A[..i - 1]로 B[j]를 만들었으므로 A[i]를 삭제)","headline":"편집 거리","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Edit_distance/"},"url":"https://forte-naop.github.io/posts/Edit_distance/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-11-30T01:02:24+09:00","datePublished":"2024-11-30T01:02:24+09:00","description":"편집 거리 문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수 DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수 A[i] == B[j]라면 해당 위치에 대해서는 편집할 필요가 없으므로 DP[i][j] == DP[i - 1][j - 1] A[i] != B[j]라면 편집이 필요하다. 추가하는 경우는 A[i]에 문자열을 하나 추가해서 B[j]가 되어야 하므로 DP[i][j - 1] + 1, 즉 A[..i]를 B[..j - 1]로 변경하는 최소 횟수에 1을 더해준다. 변경은 A[i]를 B[j]로 바꾸는 것이므로 DP[i - 1][j - 1] + 1 삭제는 DP[i - 1][j] + 1이 된다. (A[..i - 1]로 B[j]를 만들었으므로 A[i]를 삭제) 🔗 원본 파일 보기","headline":"편집 거리","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Edit_distance/"},"url":"https://forte-naop.github.io/posts/Edit_distance/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -570,13 +570,13 @@
 
 <time
   
-  data-ts="1738166544"
+  data-ts="1732896144"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Jan 30, 2025
+  Nov 30, 2024
 </time>
 
       </span>
@@ -625,7 +625,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="205 words"
+  title="212 words"
 >
   <em>1 min</em> read</span>
 
@@ -653,6 +653,8 @@
 
 <p>삭제는 <code class="language-plaintext highlighter-rouge">DP[i - 1][j] + 1</code>이 된다.
 (<code class="language-plaintext highlighter-rouge">A[..i - 1]</code>로 <code class="language-plaintext highlighter-rouge">B[j]</code>를 만들었으므로 <code class="language-plaintext highlighter-rouge">A[i]</code>를 삭제)</p>
+
+<p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/study/edit_distance.md" target="_blank">원본 파일 보기</a></p>
 
   </div>
 
@@ -794,6 +796,13 @@
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/OOP/">OOP 정리</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/LCS/">최장 공통 부분 수열</a>
         </li>
       
@@ -802,13 +811,6 @@
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Sort/">정렬 알고리즘</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Edit_distance/">편집 거리</a>
         </li>
       
     </ul>
@@ -1113,19 +1115,19 @@
   
 
   
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
   
 
   
@@ -1201,16 +1203,17 @@
 
 <time
   
-  data-ts="1738167584"
+  data-ts="1732897184"
   data-df="ll"
   
 >
-  Jan 30, 2025
+  Nov 30, 2024
 </time>
 
               <h4 class="pt-0 my-2">최장 공통 부분 수열</h4>
               <div class="text-muted">
-                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/LCS.md %}</p>
+                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/LCS.md %}
+🔗 원본 파일 보기</p>
               </div>
             </div>
           </a>
@@ -1229,16 +1232,17 @@
 
 <time
   
-  data-ts="1738167321"
+  data-ts="1732896921"
   data-df="ll"
   
 >
-  Jan 30, 2025
+  Nov 30, 2024
 </time>
 
               <h4 class="pt-0 my-2">정렬 알고리즘</h4>
               <div class="text-muted">
-                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/sort.md %}</p>
+                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/sort.md %}
+🔗 원본 파일 보기</p>
               </div>
             </div>
           </a>
@@ -1257,11 +1261,11 @@
 
 <time
   
-  data-ts="1738162874"
+  data-ts="1732892474"
   data-df="ll"
   
 >
-  Jan 30, 2025
+  Nov 30, 2024
 </time>
 
               <h4 class="pt-0 my-2">위상 정렬</h4>

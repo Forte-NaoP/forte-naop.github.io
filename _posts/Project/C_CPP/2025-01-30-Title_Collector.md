@@ -1,7 +1,7 @@
 ---
 title: "웹페이지 제목 수집기"
 date: "2025-01-04 16:59:17 +0900"
-categories: [Univ, Project]
+categories: [Project, C_CPP]
 tags: [Title_Collector]
 ---
 

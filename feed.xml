@@ -4,7 +4,7 @@
   <id>https://forte-naop.github.io/</id>
   <title>Forte's Notes</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-01-31T10:08:37+09:00</updated>
+  <updated>2025-01-31T14:47:17+09:00</updated>
   <author>
     <name>Forte</name>
     <uri>https://forte-naop.github.io/</uri>
@@ -17,6 +17,66 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>고정 크기 Heap 구현</title>
+    <link href="https://forte-naop.github.io/posts/Heap_with_Array/" rel="alternate" type="text/html" title="고정 크기 Heap 구현" />
+    <published>2025-01-31T07:49:01+09:00</published>
+  
+    <updated>2025-01-31T07:49:01+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/Heap_with_Array/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/Heap_with_Array/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Study" />
+    
+    <category term="Algorithm" />
+    
+  
+
+  <summary>힙(Heap)
+완전 이진 트리(Complete Binary Tree) 기반의 자료구조  
+최댓값 또는 최솟값을 빠르게 접근 및 관리하는 데 사용된다.
+
+
+
+1. 힙의 종류
+
+🔹 최대 힙 (Max Heap)
+
+
+  부모 노드는 항상 자식보다 크거나 같음
+  루트 노드에는 가장 큰 값이 위치함
+  삽입(push)과 삭제(pop) 후에도 이 속성이 유지됨
+
+
+✅ 예시 (최대 힙)
+
+        50
+       /  \
+     30    40
+    /  \   /
+   10  20 35
+
+
+
+  top()을 하면 50이 반환됨
+  pop()을 하면 50이 제거되고, 힙 속성이 유지됨
+
+
+🔹 최소 힙 (Min Heap)
+
+
+  부모 노드는 항상 자식보다 작거나 같음
+  루트 노드에는 가장 작은 값이 위치...</summary>
+
+  </entry>
 
   
   <entry>
@@ -204,62 +264,6 @@
 
   read(0, input, 256)을 이용해 최대 256바이트까지 입력을 읽음.
   입력을 split_commands(input,...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>웹페이지 제목 수집기</title>
-    <link href="https://forte-naop.github.io/posts/Title_Collector/" rel="alternate" type="text/html" title="웹페이지 제목 수집기" />
-    <published>2025-01-04T16:59:17+09:00</published>
-  
-    <updated>2025-01-04T16:59:17+09:00</updated>
-  
-    <id>https://forte-naop.github.io/posts/Title_Collector/</id>
-    <content type="text/html" src="https://forte-naop.github.io/posts/Title_Collector/" />
-    <author>
-      <name>Forte</name>
-    </author>
-
-  
-    
-    <category term="Project" />
-    
-    <category term="C_CPP" />
-    
-  
-
-  <summary>구현 정리
-
-
-
-1. 구성 요소
-
-1.1 TaskQueue
-
-wget 작업을 다루는 Task Queue
-
-
-  헤더: task_queue.h
-  구현: task_queue.c
-
-
-함수:
-
-
-  TaskQueue_init: TaskQueue 초기화.
-  TaskQueue_push: Task 추가.
-  TaskQueue_pop: Task를 Queue에서 하나 꺼냄.
-  TaskQueue_destroy: Queue에서 사용한 자원을 정리.
-
-
-Task Structure:
-
-typedef struct Task {
-    char url[MAX_DOMAIN_SIZE];
-    char filename[16];
-    bool final; // 스레드 종료를 위한 작업 종료 지시자
-    struct Task *...</summary>
 
   </entry>
 

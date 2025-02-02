@@ -1,6 +1,57 @@
 [
   
   {
+    "title": "게임 보드 관련 잡설",
+    "url": "/posts/Bot_note_3/",
+    "categories": "Project, Discord_Bot",
+    "tags": "Bot",
+    "date": "2025-02-02 18:09:53 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "점수판과 재생 정보는 board.rs에서 다룸register_channel.rs에서 등록한 텍스트 채널에스레드 생성후 점수판과 재생 정보 embed를 갱신하는 방식고려사항  text channel 등록없이 play 하는 경우  …24-05-22현재 board와 guild_queue가 분리되어 있어 트랙 이벤트가 발생할 때 board에 접근하기 불편함....",
+    "content": "점수판과 재생 정보는 board.rs에서 다룸register_channel.rs에서 등록한 텍스트 채널에스레드 생성후 점수판과 재생 정보 embed를 갱신하는 방식고려사항  text channel 등록없이 play 하는 경우  …24-05-22현재 board와 guild_queue가 분리되어 있어 트랙 이벤트가 발생할 때 board에 접근하기 불편함.두 기능은 같이 동작하므로 결합시킬 예정GuildQueue와 Board를 합치는 과정중pub async fn register_channel(&amp;self, channel: GuildChannel) {    let mut inner = self.inner.lock();    let channel_id = channel.id.into();    let http = inner.http.clone();    inner.board.set(http, channel).await;    inner.channel = Some(channel_id);}inner.board.set(http, channel).await; 라인에서 future is not Send as this value is used across an await 에러가 발생함.parking_lot::MutexGuard가 not Send라서 발생하는 것 같은데, GuildQueue의 Mutex를 tokio::sync::Mutex로 변경할지GuildQueue와 Board를 분리할 지 생각해봐야겠다.24-05-23board와 guild_queue를 다음과 같이 결합함. 상기한 문제가 됐던 부분 또한 다음과 같이 수정함.pub struct GuildQueueCore {    // ...    board: Arc&lt;tokio::sync::Mutex&lt;Board&gt;&gt;,}pub async fn register_channel(&amp;self, channel: &amp;GuildChannel) {    let board_lock = {        let mut inner = self.inner.lock();        let channel_id = channel.id.into();        inner.channel = Some(channel_id);        inner.board.clone()    };        let mut board = board_lock.lock().await;    board.set(channel).await;}기존 코드 구조에서 GuildQueue는 동기적으로 동작했으므로 변경을 줄이기 위해 Board만 tokio::sync::Mutex로 감쌈.inner의 MutexGuard는 not Send이기 때문에 블록으로 감싸서 await 구문 전에 drop 시켜줌.음악의 재생과 메세지의 업데이트를 QueueHandler에서 다루기 위해서 하나로 합쳤는데, async/await를 사용하지 않던 부분에 Board를 끼워넣다보니 전체적인 구조가 이상해진 느낌.나중에 고쳐야 할 듯🔗 원본 파일 보기"
+  },
+  
+  {
+    "title": "음성 관련",
+    "url": "/posts/Bot_note_2/",
+    "categories": "Project, Discord_Bot",
+    "tags": "Bot",
+    "date": "2025-02-02 18:06:00 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "구버전에서 dca라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함.Input::Lazy 의 FlowYoutubeDl::into()     YoutubeDl::create_async (Compose trait 구현 사항)        HttpRequest::create_async ...",
+    "content": "구버전에서 dca라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함.Input::Lazy 의 FlowYoutubeDl::into()     YoutubeDl::create_async (Compose trait 구현 사항)        HttpRequest::create_async (Compose trait 구현 사항)            HttpRequest::create_stream                reqwest::Client::get -&gt; reqwest::Response                reqwest::Response::bytes_stream -&gt; Box&lt;tokio_io::StreamReader&gt;                 Box&lt;tokio_io::StreamReader&gt; -&gt; songbird::HttpStream            songbird::HttpStream::stream -&gt; AsyncAdapterStream        songbird::HttpStream -&gt; songbird::AudioStream    return songbird::AudioStream create_stream에서 resume를 이용해서 계속 파일을 받아오는 것 같음.연속된 네트워크 스트림에서 특정 부분만 잘라내는건 어려워보이므로 yt-dlp로 원본을, ffmpeg로 잘라낸 부분을 파일로 저장 후 songbird::File을 이용해서 songbird::Input을 생성songbird::Call과 songbird::Songbird의 메소드 차이점songbird::Call는 한 서버 내의 음성 연결을 담당songbird::Songbird는 내부적으로 DashMap을 사용해 디스코드 서버마다 songbird::Call을 관리connection.rs의 다음 부분에서 1. | let manager = songbird::get(ctx).await.clone(); 2. | // ... 3. | if let Some(call) = manager.get(guild_id) { 4. |    let mut call = call.lock().await; 5. |    if let Some(bot_channel) = call.current_channel() { 6. |        // ...     7. |    } else { 8. |        match call.join(user_channel).await { 9. |            Ok(_) =&gt; Ok(ConnectionSuccessCode::NewConnection),10. |            Err(why) =&gt; Err(ConnectionErrorCode::JoinError(why))11. |        }12. |    }13. |    // ...14. | }기존에 8번 라인의 call.join(user_channel).await 대신 manager.join(guild_id, user_channel).await 사용했었는데 이 경우 DeadLock 발생함.이유는  4번 라인에서 call에 대한 Mutex 획득  8번 라인 실행 시 해당 흐름은 block 후 manager.join이 반환될 때 까지 block  manager.join에서 다시 call 에 대한 Mutex 획득 시도 후 잠겨 있으므로 block 됨  따라서 manager.join이 반환되지 못하고, 호출자도 block 되어 있게 됨일반 채팅으로 재생중인 곡을 스킵하려면  이벤트 핸들러에서 async fn message(&amp;self, ctx: Context, msg: Message)함수로 채팅 확인  채팅이 특정 채널에서 발생했는지 확인  채팅이 재생 중인 곡의 키워드랑 일치하는지 확인2번에서 특정 채널을 확인하기 위해 명령어로 확인할 채널을 등록하도록 함이는 CommandDataOptionValue에 Channel(ChannelId) 필드가 존재하므로 가능할 것으로 보임재생 중인 곡의 키워드와 채팅 채널을 확인하기 위해 TrackQueue를 수정하여 GuildQueue를 만듦🔗 원본 파일 보기"
+  },
+  
+  {
+    "title": "Rust 동시성 문제",
+    "url": "/posts/Bot_note_1/",
+    "categories": "Project, Discord_Bot",
+    "tags": "Concurrency, Bot",
+    "date": "2025-02-02 17:57:07 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "      std::process::Stdio::piped() 는 새로운 파이프를 생성한다. std::process::Command::stdin(Stdio::piped()) 같은 식으로 사용하면 stdin이 생성된 파이프로 대체 되는 식.CommandObject.stdin.take().unwrap()으로 해당 파이프 디스크립터를 가져올 수 있다.   ...",
+    "content": "      std::process::Stdio::piped() 는 새로운 파이프를 생성한다. std::process::Command::stdin(Stdio::piped()) 같은 식으로 사용하면 stdin이 생성된 파이프로 대체 되는 식.CommandObject.stdin.take().unwrap()으로 해당 파이프 디스크립터를 가져올 수 있다.        Command::spawn()으로 생성된 Child 객체는 wait[_with_output]나 kill 호출 전까지 완료/종료되지 않는다.만약 파일을 저장하는 작업 이후 연속해서 다른 Command 가 그 파일을 읽으려 한다면 파일이 생성되지 않아 정상적으로 작동하지 않는다. 버퍼 관련 문제인듯따라서 wait 를 사용해 프로세스를 기다리면 파일이 저장되어 사용 가능하다.하지만 pipe로 출력과 입력을 연결하면 출력버퍼에서 직접 스트림을 읽을 수 있기 때문에 wait가 필요 없다.        파이프 관련하여  만약 Command::spawn()으로 프로세스를 하나 생성 할 때, 이 프로세스의 stdin과 stdout을 모두 파이프 처리했을 때 deadlock이 발생할 수 있다.예를 들어          use std::{          io::{Read, Write},          process::{Command, Stdio},      };      let mut ffmpeg = Command::new(\"ffmpeg\")          .args(&amp;[\"-i\", \"-\"])          .args(&amp;FFMPEG_ARGS)          .arg(\"-\")          .stdin(Stdio::piped())          .stdout(Stdio::piped())          .spawn()          .unwrap();      let mut stdin = ffmpeg.stdin.take().unwrap();      stdin.write_all(&amp;data).unwrap();              let mut output = vec![];      let mut stdout = ffmpeg.stdout.take().unwrap();      stdout.read_to_end(&amp;mut output).unwrap();              ffmpeg.wait().unwrap();        다음과 같은 코드가 있을 때, stdin.write_all(&amp;data).unwrap();부분에서 deadlock이 발생할 수 있다.가능한 시나리오는 다음과 같다.          Rust 프로세스가 stdin.write_all(&amp;data)을 실행함      std::io는 Blocking I/O이기 때문에 Rust 프로세스는 데이터를 전부 쓰기 전까지 write_all 에서 블록된다.      ffmpeg는 stdin에서 데이터를 소비하여 stdout에 데이터를 쓴다.      ffmpeg가 작업을 진행하여 stdout가 가득 차게 되면 ffmpeg도 block된다.      ffmpeg가 깨어나려면 stdout애서 데이터가 소비 되어야 한다.      그러나 ffmpeg가 Block 됐기 때문에 stdin에서 데이터를 소비할 수 없어 Rust 프로세스 또한 계속 write_all에서 Block 되어 있다.      따라서 실행 흐름이 stdout.read_to_end(&amp;mut output).unwrap();까지 도달하지 못해 ffmpeg의 stdout을 비워 줄 수 없으므로 두 프로세스 모두 Block 되는 deadlock에 빠지게 된다.        이를 해결하려면   stdin.write_all(&amp;data).unwrap();를 tokio::spawn으로 감싸 task를 분리해주면 된다.      tokio::spawn(async move {      stdin.write_all(&amp;data).await.unwrap();  });        이렇게 하면 write_all은 여전히 block되지만 다른 task에서 block되므로 기존의 task는 stdout.read_to_end(&amp;mut output).unwrap();까지 도달하여 stdout을 소비하여 spawn된 프로세스를 계속 실행시킬 수 있기 때문에 deadlock이 발생하지 않게 된다.    단, 이를 위해서 기존의 std::process::Command를 tokio::process::Command로 바꿔야한다.  tokio::spawn은 Future에 대해 동작하기 때문인데, std::io는 Future가 될 수 없기 때문이다.    다른 방법으로는 파이프를 사용하지 않고 파일로 저장한 후 스폰 할 프로세스에서 파일을 처리하도록 하는 것도 가능하다.  Arc 타입에 관해  원자적으로 동작하는 복수의 소유권을 가지는 스마트 포인터  Arc::clone 하면 값을 clone하는게 아니라 소유권을 가져오면서 참조 카운팅을 늘린다.  단 해당 참조는 immutable하므로 Mutex나 RwLock를 감싸서 Arc&lt;Mutex&lt;T&gt;&gt;로 가변성을 얻는 식으로 많이 사용한다.음성 채널 연결을 관리하는 부분을 connection handler로 분리했을 때let manager = songbird::get(ctx)    .await    .expect(\"Songbird Voice client placed in at initialisation.\");이부분에서 future cannot be sent between threads safely 에러가 발생했다.찾아보니let voice_states: &amp;HashMap&lt;UserId, VoiceState&gt; = &amp;guild_id    .to_guild_cached(ctx)    .unwrap()    .voice_states;let user_channel = voice_states    .get(&amp;command.user.id)    .and_then(|voice_state| voice_state.channel_id);to_guild_cached로 가져오는 CacheRef가 NotSend였기 때문에 songbird::get(ctx).await 호출 시점에도 voice_states가 살아있어서 발생한 문제였다.let user_channel = {    // CacheRef is not Send    let voice_states: &amp;HashMap&lt;UserId, VoiceState&gt; = &amp;guild_id        .to_guild_cached(ctx)        .unwrap()        .voice_states;    voice_states        .get(&amp;command.user.id)        .and_then(|voice_state| voice_state.channel_id)}; // So must drop here그래서 다음과 같이 블록을 만들어서 voice_states를 블록 내에서만 사용하도록 수정했다.🔗 원본 파일 보기"
+  },
+  
+  {
     "title": "고정 크기 Heap 구현",
     "url": "/posts/Heap_with_Array/",
     "categories": "Study, Algorithm",

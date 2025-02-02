@@ -29,24 +29,24 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="위상 정렬" />
+<meta property="og:title" content="음성 관련" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="위상정렬 비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것 각 노드에 선행 조건이 존재할 때 사용 가능 정렬 방법 각 노드의 진입 차수 기록 진입 차수가 0인 정점을 큐에 삽입 큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소 2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복 구현 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 graph = defaultdict(list) indegree = [0] * (n + 1) # 인접 리스트 및 진입 차수 초기화 # for _ in range(k): # a, b = map(int, input().split()) # graph[a].append(b) # indegree[b] += 1 # 진입 차수 0인 정점 큐에 추가 q = deque(filter(lambda x: indegree[x] == 0, range(1, n + 1))) while q: cur = st.popleft() print(q) if cur in graph: for nxt in graph[cur]: indegree[nxt] -= 1 if indegree[nxt] == 0: st.append(nxt) 🔗 원본 파일 보기" />
-<meta property="og:description" content="위상정렬 비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것 각 노드에 선행 조건이 존재할 때 사용 가능 정렬 방법 각 노드의 진입 차수 기록 진입 차수가 0인 정점을 큐에 삽입 큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소 2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복 구현 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 graph = defaultdict(list) indegree = [0] * (n + 1) # 인접 리스트 및 진입 차수 초기화 # for _ in range(k): # a, b = map(int, input().split()) # graph[a].append(b) # indegree[b] += 1 # 진입 차수 0인 정점 큐에 추가 q = deque(filter(lambda x: indegree[x] == 0, range(1, n + 1))) while q: cur = st.popleft() print(q) if cur in graph: for nxt in graph[cur]: indegree[nxt] -= 1 if indegree[nxt] == 0: st.append(nxt) 🔗 원본 파일 보기" />
-<link rel="canonical" href="https://forte-naop.github.io/posts/Topology_Sort/" />
-<meta property="og:url" content="https://forte-naop.github.io/posts/Topology_Sort/" />
+<meta name="description" content="구버전에서 dca라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함. 1 2 3 4 5 6 7 8 9 10 11 Input::Lazy 의 Flow YoutubeDl::into() YoutubeDl::create_async (Compose trait 구현 사항) HttpRequest::create_async (Compose trait 구현 사항) HttpRequest::create_stream reqwest::Client::get -&gt; reqwest::Response reqwest::Response::bytes_stream -&gt; Box&lt;tokio_io::StreamReader&gt; Box&lt;tokio_io::StreamReader&gt; -&gt; songbird::HttpStream songbird::HttpStream::stream -&gt; AsyncAdapterStream songbird::HttpStream -&gt; songbird::AudioStream return songbird::AudioStream create_stream에서 resume를 이용해서 계속 파일을 받아오는 것 같음. 연속된 네트워크 스트림에서 특정 부분만 잘라내는건 어려워보이므로 yt-dlp로 원본을, ffmpeg로 잘라낸 부분을 파일로 저장 후 songbird::File을 이용해서 songbird::Input을 생성 songbird::Call과 songbird::Songbird의 메소드 차이점 songbird::Call는 한 서버 내의 음성 연결을 담당 songbird::Songbird는 내부적으로 DashMap을 사용해 디스코드 서버마다 songbird::Call을 관리 connection.rs의 다음 부분에서 1 2 3 4 5 6 7 8 9 10 11 12 13 14 1. | let manager = songbird::get(ctx).await.clone(); 2. | // ... 3. | if let Some(call) = manager.get(guild_id) { 4. | let mut call = call.lock().await; 5. | if let Some(bot_channel) = call.current_channel() { 6. | // ... 7. | } else { 8. | match call.join(user_channel).await { 9. | Ok(_) =&gt; Ok(ConnectionSuccessCode::NewConnection), 10. | Err(why) =&gt; Err(ConnectionErrorCode::JoinError(why)) 11. | } 12. | } 13. | // ... 14. | } 기존에 8번 라인의 call.join(user_channel).await 대신 manager.join(guild_id, user_channel).await 사용했었는데 이 경우 DeadLock 발생함.이유는 4번 라인에서 call에 대한 Mutex 획득 8번 라인 실행 시 해당 흐름은 block 후 manager.join이 반환될 때 까지 block manager.join에서 다시 call 에 대한 Mutex 획득 시도 후 잠겨 있으므로 block 됨 따라서 manager.join이 반환되지 못하고, 호출자도 block 되어 있게 됨 일반 채팅으로 재생중인 곡을 스킵하려면 이벤트 핸들러에서 async fn message(&amp;self, ctx: Context, msg: Message)함수로 채팅 확인 채팅이 특정 채널에서 발생했는지 확인 채팅이 재생 중인 곡의 키워드랑 일치하는지 확인 2번에서 특정 채널을 확인하기 위해 명령어로 확인할 채널을 등록하도록 함 이는 CommandDataOptionValue에 Channel(ChannelId) 필드가 존재하므로 가능할 것으로 보임 재생 중인 곡의 키워드와 채팅 채널을 확인하기 위해 TrackQueue를 수정하여 GuildQueue를 만듦" />
+<meta property="og:description" content="구버전에서 dca라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함. 1 2 3 4 5 6 7 8 9 10 11 Input::Lazy 의 Flow YoutubeDl::into() YoutubeDl::create_async (Compose trait 구현 사항) HttpRequest::create_async (Compose trait 구현 사항) HttpRequest::create_stream reqwest::Client::get -&gt; reqwest::Response reqwest::Response::bytes_stream -&gt; Box&lt;tokio_io::StreamReader&gt; Box&lt;tokio_io::StreamReader&gt; -&gt; songbird::HttpStream songbird::HttpStream::stream -&gt; AsyncAdapterStream songbird::HttpStream -&gt; songbird::AudioStream return songbird::AudioStream create_stream에서 resume를 이용해서 계속 파일을 받아오는 것 같음. 연속된 네트워크 스트림에서 특정 부분만 잘라내는건 어려워보이므로 yt-dlp로 원본을, ffmpeg로 잘라낸 부분을 파일로 저장 후 songbird::File을 이용해서 songbird::Input을 생성 songbird::Call과 songbird::Songbird의 메소드 차이점 songbird::Call는 한 서버 내의 음성 연결을 담당 songbird::Songbird는 내부적으로 DashMap을 사용해 디스코드 서버마다 songbird::Call을 관리 connection.rs의 다음 부분에서 1 2 3 4 5 6 7 8 9 10 11 12 13 14 1. | let manager = songbird::get(ctx).await.clone(); 2. | // ... 3. | if let Some(call) = manager.get(guild_id) { 4. | let mut call = call.lock().await; 5. | if let Some(bot_channel) = call.current_channel() { 6. | // ... 7. | } else { 8. | match call.join(user_channel).await { 9. | Ok(_) =&gt; Ok(ConnectionSuccessCode::NewConnection), 10. | Err(why) =&gt; Err(ConnectionErrorCode::JoinError(why)) 11. | } 12. | } 13. | // ... 14. | } 기존에 8번 라인의 call.join(user_channel).await 대신 manager.join(guild_id, user_channel).await 사용했었는데 이 경우 DeadLock 발생함.이유는 4번 라인에서 call에 대한 Mutex 획득 8번 라인 실행 시 해당 흐름은 block 후 manager.join이 반환될 때 까지 block manager.join에서 다시 call 에 대한 Mutex 획득 시도 후 잠겨 있으므로 block 됨 따라서 manager.join이 반환되지 못하고, 호출자도 block 되어 있게 됨 일반 채팅으로 재생중인 곡을 스킵하려면 이벤트 핸들러에서 async fn message(&amp;self, ctx: Context, msg: Message)함수로 채팅 확인 채팅이 특정 채널에서 발생했는지 확인 채팅이 재생 중인 곡의 키워드랑 일치하는지 확인 2번에서 특정 채널을 확인하기 위해 명령어로 확인할 채널을 등록하도록 함 이는 CommandDataOptionValue에 Channel(ChannelId) 필드가 존재하므로 가능할 것으로 보임 재생 중인 곡의 키워드와 채팅 채널을 확인하기 위해 TrackQueue를 수정하여 GuildQueue를 만듦" />
+<link rel="canonical" href="https://forte-naop.github.io/posts/Bot_note_2/" />
+<meta property="og:url" content="https://forte-naop.github.io/posts/Bot_note_2/" />
 <meta property="og:site_name" content="Forte’s Notes" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-11-30T00:01:14+09:00" />
+<meta property="article:published_time" content="2025-02-02T18:06:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="위상 정렬" />
+<meta property="twitter:title" content="음성 관련" />
 <meta name="twitter:site" content="@kirameki_ing" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-11-30T00:01:14+09:00","datePublished":"2024-11-30T00:01:14+09:00","description":"위상정렬 비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것 각 노드에 선행 조건이 존재할 때 사용 가능 정렬 방법 각 노드의 진입 차수 기록 진입 차수가 0인 정점을 큐에 삽입 큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소 2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복 구현 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 graph = defaultdict(list) indegree = [0] * (n + 1) # 인접 리스트 및 진입 차수 초기화 # for _ in range(k): # a, b = map(int, input().split()) # graph[a].append(b) # indegree[b] += 1 # 진입 차수 0인 정점 큐에 추가 q = deque(filter(lambda x: indegree[x] == 0, range(1, n + 1))) while q: cur = st.popleft() print(q) if cur in graph: for nxt in graph[cur]: indegree[nxt] -= 1 if indegree[nxt] == 0: st.append(nxt) 🔗 원본 파일 보기","headline":"위상 정렬","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Topology_Sort/"},"url":"https://forte-naop.github.io/posts/Topology_Sort/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-02-02T18:06:00+09:00","datePublished":"2025-02-02T18:06:00+09:00","description":"구버전에서 dca라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함. 1 2 3 4 5 6 7 8 9 10 11 Input::Lazy 의 Flow YoutubeDl::into() YoutubeDl::create_async (Compose trait 구현 사항) HttpRequest::create_async (Compose trait 구현 사항) HttpRequest::create_stream reqwest::Client::get -&gt; reqwest::Response reqwest::Response::bytes_stream -&gt; Box&lt;tokio_io::StreamReader&gt; Box&lt;tokio_io::StreamReader&gt; -&gt; songbird::HttpStream songbird::HttpStream::stream -&gt; AsyncAdapterStream songbird::HttpStream -&gt; songbird::AudioStream return songbird::AudioStream create_stream에서 resume를 이용해서 계속 파일을 받아오는 것 같음. 연속된 네트워크 스트림에서 특정 부분만 잘라내는건 어려워보이므로 yt-dlp로 원본을, ffmpeg로 잘라낸 부분을 파일로 저장 후 songbird::File을 이용해서 songbird::Input을 생성 songbird::Call과 songbird::Songbird의 메소드 차이점 songbird::Call는 한 서버 내의 음성 연결을 담당 songbird::Songbird는 내부적으로 DashMap을 사용해 디스코드 서버마다 songbird::Call을 관리 connection.rs의 다음 부분에서 1 2 3 4 5 6 7 8 9 10 11 12 13 14 1. | let manager = songbird::get(ctx).await.clone(); 2. | // ... 3. | if let Some(call) = manager.get(guild_id) { 4. | let mut call = call.lock().await; 5. | if let Some(bot_channel) = call.current_channel() { 6. | // ... 7. | } else { 8. | match call.join(user_channel).await { 9. | Ok(_) =&gt; Ok(ConnectionSuccessCode::NewConnection), 10. | Err(why) =&gt; Err(ConnectionErrorCode::JoinError(why)) 11. | } 12. | } 13. | // ... 14. | } 기존에 8번 라인의 call.join(user_channel).await 대신 manager.join(guild_id, user_channel).await 사용했었는데 이 경우 DeadLock 발생함.이유는 4번 라인에서 call에 대한 Mutex 획득 8번 라인 실행 시 해당 흐름은 block 후 manager.join이 반환될 때 까지 block manager.join에서 다시 call 에 대한 Mutex 획득 시도 후 잠겨 있으므로 block 됨 따라서 manager.join이 반환되지 못하고, 호출자도 block 되어 있게 됨 일반 채팅으로 재생중인 곡을 스킵하려면 이벤트 핸들러에서 async fn message(&amp;self, ctx: Context, msg: Message)함수로 채팅 확인 채팅이 특정 채널에서 발생했는지 확인 채팅이 재생 중인 곡의 키워드랑 일치하는지 확인 2번에서 특정 채널을 확인하기 위해 명령어로 확인할 채널을 등록하도록 함 이는 CommandDataOptionValue에 Channel(ChannelId) 필드가 존재하므로 가능할 것으로 보임 재생 중인 곡의 키워드와 채팅 채널을 확인하기 위해 TrackQueue를 수정하여 GuildQueue를 만듦","headline":"음성 관련","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Bot_note_2/"},"url":"https://forte-naop.github.io/posts/Bot_note_2/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>위상 정렬 | Forte's Notes
+  <title>음성 관련 | Forte's Notes
   </title>
 
   <!--
@@ -212,16 +212,9 @@
 
   
 
-  
-    
-
-    
-
-  
 
 
-
-  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js,npm/tocbot@4.32.2/dist/tocbot.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js"></script>
 
 
 
@@ -444,7 +437,7 @@
         
           
             
-              <span>위상 정렬</span>
+              <span>음성 관련</span>
             
 
           
@@ -529,38 +522,6 @@
   
 
   
-    
-    
-
-    
-      
-        
-        
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-
-    
-  
 
   
   
@@ -591,9 +552,9 @@
 
 
 
-<article class="px-1" data-toc="true">
+<article class="px-1" data-toc="false">
   <header>
-    <h1 data-toc-skip>위상 정렬</h1>
+    <h1 data-toc-skip>음성 관련</h1>
     
 
     <div class="post-meta text-muted">
@@ -610,13 +571,13 @@
 
 <time
   
-  data-ts="1732892474"
+  data-ts="1738487160"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Nov 30, 2024
+  Feb  2, 2025
 </time>
 
       </span>
@@ -665,9 +626,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="249 words"
+  title="590 words"
 >
-  <em>1 min</em> read</span>
+  <em>3 min</em> read</span>
 
         </div>
       </div>
@@ -675,49 +636,50 @@
   </header>
 
   
-    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
-      <span class="label text-truncate">위상 정렬</span>
-      <button type="button" class="toc-trigger btn me-1">
-        <i class="fa-solid fa-list-ul fa-fw"></i>
-      </button>
-    </div>
-
-    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
-      <span class="label ps-2 pe-1">Contents</span>
-      <i class="fa-solid fa-angle-right fa-fw"></i>
-    </button>
-
-    <dialog id="toc-popup" class="p-0">
-      <div class="header d-flex flex-row align-items-center justify-content-between">
-        <div class="label text-truncate py-2 ms-4">위상 정렬</div>
-        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
-          <i class="fas fa-close"></i>
-        </button>
-      </div>
-      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
-    </dialog>
-  
 
   <div class="content">
-    <h1 id="위상정렬">위상정렬</h1>
+    
+<p>구버전에서 dca라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함.</p>
+<div class="language-rust highlighter-rouge"><div class="code-header">
+        <span data-label-text="Rust"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="nn">Input</span><span class="p">::</span><span class="n">Lazy</span> <span class="n">의</span> <span class="n">Flow</span>
+<span class="nn">YoutubeDl</span><span class="p">::</span><span class="nf">into</span><span class="p">()</span> 
+    <span class="nn">YoutubeDl</span><span class="p">::</span><span class="nf">create_async</span> <span class="p">(</span><span class="n">Compose</span> <span class="k">trait</span> <span class="n">구현</span> <span class="n">사항</span><span class="p">)</span>
+        <span class="nn">HttpRequest</span><span class="p">::</span><span class="nf">create_async</span> <span class="p">(</span><span class="n">Compose</span> <span class="k">trait</span> <span class="n">구현</span> <span class="n">사항</span><span class="p">)</span>
+            <span class="nn">HttpRequest</span><span class="p">::</span><span class="n">create_stream</span>
+                <span class="nn">reqwest</span><span class="p">::</span><span class="nn">Client</span><span class="p">::</span><span class="n">get</span> <span class="k">-&gt;</span> <span class="nn">reqwest</span><span class="p">::</span><span class="n">Response</span>
+                <span class="nn">reqwest</span><span class="p">::</span><span class="nn">Response</span><span class="p">::</span><span class="n">bytes_stream</span> <span class="k">-&gt;</span> <span class="nb">Box</span><span class="o">&lt;</span><span class="nn">tokio_io</span><span class="p">::</span><span class="n">StreamReader</span><span class="o">&gt;</span> 
+                <span class="nb">Box</span><span class="o">&lt;</span><span class="nn">tokio_io</span><span class="p">::</span><span class="n">StreamReader</span><span class="o">&gt;</span> <span class="k">-&gt;</span> <span class="nn">songbird</span><span class="p">::</span><span class="n">HttpStream</span>
+            <span class="nn">songbird</span><span class="p">::</span><span class="nn">HttpStream</span><span class="p">::</span><span class="n">stream</span> <span class="k">-&gt;</span> <span class="n">AsyncAdapterStream</span>
+        <span class="nn">songbird</span><span class="p">::</span><span class="n">HttpStream</span> <span class="k">-&gt;</span> <span class="nn">songbird</span><span class="p">::</span><span class="n">AudioStream</span>
+    <span class="k">return</span> <span class="nn">songbird</span><span class="p">::</span><span class="n">AudioStream</span> 
+</pre></td></tr></tbody></table></code></div></div>
+<p>create_stream에서 resume를 이용해서 계속 파일을 받아오는 것 같음.</p>
 
-<p>비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것</p>
+<p>연속된 네트워크 스트림에서 특정 부분만 잘라내는건 어려워보이므로 
+yt-dlp로 원본을, ffmpeg로 잘라낸 부분을 파일로 저장 후 songbird::File을 이용해서 songbird::Input을 생성</p>
 
-<p>각 노드에 선행 조건이 존재할 때 사용 가능</p>
+<hr />
 
-<h2 id="정렬-방법"><span class="me-2">정렬 방법</span><a href="#정렬-방법" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p><code class="language-plaintext highlighter-rouge">songbird::Call</code>과 <code class="language-plaintext highlighter-rouge">songbird::Songbird</code>의 메소드 차이점</p>
 
-<ol>
-  <li>각 노드의 진입 차수 기록</li>
-  <li>진입 차수가 0인 정점을 큐에 삽입</li>
-  <li>큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소</li>
-  <li>2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복</li>
-</ol>
+<p><code class="language-plaintext highlighter-rouge">songbird::Call</code>는 한 서버 내의 음성 연결을 담당
+<code class="language-plaintext highlighter-rouge">songbird::Songbird</code>는 내부적으로 <code class="language-plaintext highlighter-rouge">DashMap</code>을 사용해 디스코드 서버마다 <code class="language-plaintext highlighter-rouge">songbird::Call</code>을 관리</p>
 
-<h2 id="구현"><span class="me-2">구현</span><a href="#구현" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<div class="language-python highlighter-rouge"><div class="code-header">
-        <span data-label-text="Python"><i class="fas fa-code fa-fw small"></i></span>
+<p><code class="language-plaintext highlighter-rouge">connection.rs</code>의 다음 부분에서</p>
+<div class="language-rust highlighter-rouge"><div class="code-header">
+        <span data-label-text="Rust"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -732,37 +694,45 @@
 12
 13
 14
-15
-16
-17
-18
-19
-20
-21
-</pre></td><td class="rouge-code"><pre><span class="n">graph</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-<span class="n">indegree</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># 인접 리스트 및 진입 차수 초기화
-# for _ in range(k):
-#     a, b = map(int, input().split())
-#     graph[a].append(b)
-#     indegree[b] += 1
-</span>
-<span class="c1"># 진입 차수 0인 정점 큐에 추가
-</span><span class="n">q</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">(</span><span class="nf">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">indegree</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
-
-<span class="k">while</span> <span class="n">q</span><span class="p">:</span>
-    <span class="n">cur</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">cur</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">nxt</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">cur</span><span class="p">]:</span>
-            <span class="n">indegree</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">indegree</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">st</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">nxt</span><span class="p">)</span>
+</pre></td><td class="rouge-code"><pre> <span class="mf">1.</span> <span class="p">|</span> <span class="k">let</span> <span class="n">manager</span> <span class="o">=</span> <span class="nn">songbird</span><span class="p">::</span><span class="nf">get</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span><span class="k">.await</span><span class="nf">.clone</span><span class="p">();</span>
+ <span class="mf">2.</span> <span class="p">|</span> <span class="c1">// ...</span>
+ <span class="mf">3.</span> <span class="p">|</span> <span class="k">if</span> <span class="k">let</span> <span class="nf">Some</span><span class="p">(</span><span class="n">call</span><span class="p">)</span> <span class="o">=</span> <span class="n">manager</span><span class="nf">.get</span><span class="p">(</span><span class="n">guild_id</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mf">4.</span> <span class="p">|</span>    <span class="k">let</span> <span class="k">mut</span> <span class="n">call</span> <span class="o">=</span> <span class="n">call</span><span class="nf">.lock</span><span class="p">()</span><span class="k">.await</span><span class="p">;</span>
+ <span class="mf">5.</span> <span class="p">|</span>    <span class="k">if</span> <span class="k">let</span> <span class="nf">Some</span><span class="p">(</span><span class="n">bot_channel</span><span class="p">)</span> <span class="o">=</span> <span class="n">call</span><span class="nf">.current_channel</span><span class="p">()</span> <span class="p">{</span>
+ <span class="mf">6.</span> <span class="p">|</span>        <span class="c1">// ...    </span>
+ <span class="mf">7.</span> <span class="p">|</span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+ <span class="mf">8.</span> <span class="p">|</span>        <span class="k">match</span> <span class="n">call</span><span class="nf">.join</span><span class="p">(</span><span class="n">user_channel</span><span class="p">)</span><span class="k">.await</span> <span class="p">{</span>
+ <span class="mf">9.</span> <span class="p">|</span>            <span class="nf">Ok</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="nf">Ok</span><span class="p">(</span><span class="nn">ConnectionSuccessCode</span><span class="p">::</span><span class="n">NewConnection</span><span class="p">),</span>
+<span class="mf">10.</span> <span class="p">|</span>            <span class="nf">Err</span><span class="p">(</span><span class="n">why</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="nf">Err</span><span class="p">(</span><span class="nn">ConnectionErrorCode</span><span class="p">::</span><span class="nf">JoinError</span><span class="p">(</span><span class="n">why</span><span class="p">))</span>
+<span class="mf">11.</span> <span class="p">|</span>        <span class="p">}</span>
+<span class="mf">12.</span> <span class="p">|</span>    <span class="p">}</span>
+<span class="mf">13.</span> <span class="p">|</span>    <span class="c1">// ...</span>
+<span class="mf">14.</span> <span class="p">|</span> <span class="p">}</span>
 </pre></td></tr></tbody></table></code></div></div>
+<p>기존에 8번 라인의 <code class="language-plaintext highlighter-rouge">call.join(user_channel).await</code> 대신 <code class="language-plaintext highlighter-rouge">manager.join(guild_id, user_channel).await</code> 사용했었는데 이 경우 DeadLock 발생함.<br />이유는</p>
+<ol>
+  <li>4번 라인에서 <code class="language-plaintext highlighter-rouge">call</code>에 대한 <code class="language-plaintext highlighter-rouge">Mutex</code> 획득</li>
+  <li>8번 라인 실행 시 해당 흐름은 block 후 <code class="language-plaintext highlighter-rouge">manager.join</code>이 반환될 때 까지 block</li>
+  <li><code class="language-plaintext highlighter-rouge">manager.join</code>에서 다시 <code class="language-plaintext highlighter-rouge">call</code> 에 대한 <code class="language-plaintext highlighter-rouge">Mutex</code> 획득 시도 후 잠겨 있으므로 block 됨</li>
+  <li>따라서 <code class="language-plaintext highlighter-rouge">manager.join</code>이 반환되지 못하고, 호출자도 block 되어 있게 됨</li>
+</ol>
 
-<p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/study/topology_sort.md" target="_blank">원본 파일 보기</a></p>
+<hr />
+
+<p>일반 채팅으로 재생중인 곡을 스킵하려면</p>
+<ol>
+  <li>이벤트 핸들러에서 <code class="language-plaintext highlighter-rouge">async fn message(&amp;self, ctx: Context, msg: Message)</code>함수로 채팅 확인</li>
+  <li>채팅이 특정 채널에서 발생했는지 확인</li>
+  <li>채팅이 재생 중인 곡의 키워드랑 일치하는지 확인</li>
+</ol>
+
+<p>2번에서 특정 채널을 확인하기 위해 명령어로 확인할 채널을 등록하도록 함</p>
+
+<p>이는 <code class="language-plaintext highlighter-rouge">CommandDataOptionValue</code>에 <code class="language-plaintext highlighter-rouge">Channel(ChannelId)</code> 필드가 존재하므로 가능할 것으로 보임</p>
+
+<p>재생 중인 곡의 키워드와 채팅 채널을 확인하기 위해 <code class="language-plaintext highlighter-rouge">TrackQueue</code>를 수정하여 <code class="language-plaintext highlighter-rouge">GuildQueue</code>를 만듦</p>
+
+<p>🔗 <a href="https://github.com/Forte-NaoP/DiscordBot/blob/main/memo/%EC%9D%8C%EC%84%B1%20%EA%B4%80%EB%A0%A8.md" target="_blank">원본 파일 보기</a></p>
 
   </div>
 
@@ -772,8 +742,8 @@
       <div class="post-meta mb-3">
         <i class="far fa-folder-open fa-fw me-1"></i>
         
-          <a href="/categories/study/">Study</a>,
-          <a href="/categories/algorithm/">Algorithm</a>
+          <a href="/categories/project/">Project</a>,
+          <a href="/categories/discord-bot/">Discord_Bot</a>
       </div>
     
 
@@ -783,9 +753,9 @@
         <i class="fa fa-tags fa-fw me-1"></i>
         
           <a
-            href="/tags/sort/"
+            href="/tags/bot/"
             class="post-tag no-text-decoration"
-          >Sort</a>
+          >Bot</a>
         
       </div>
     
@@ -821,21 +791,21 @@
 
       
 
-      <a href="https://twitter.com/intent/tweet?text=%EC%9C%84%EC%83%81%20%EC%A0%95%EB%A0%AC%20-%20Forte's%20Notes&url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FTopology_Sort%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+      <a href="https://twitter.com/intent/tweet?text=%EC%9D%8C%EC%84%B1%20%EA%B4%80%EB%A0%A8%20-%20Forte's%20Notes&url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FBot_note_2%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
         <i class="fa-fw fa-brands fa-square-x-twitter"></i>
       </a>
     
 
       
 
-      <a href="https://www.facebook.com/sharer/sharer.php?title=%EC%9C%84%EC%83%81%20%EC%A0%95%EB%A0%AC%20-%20Forte's%20Notes&u=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FTopology_Sort%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+      <a href="https://www.facebook.com/sharer/sharer.php?title=%EC%9D%8C%EC%84%B1%20%EA%B4%80%EB%A0%A8%20-%20Forte's%20Notes&u=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FBot_note_2%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
         <i class="fa-fw fab fa-facebook-square"></i>
       </a>
     
 
       
 
-      <a href="https://t.me/share/url?url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FTopology_Sort%2F&text=%EC%9C%84%EC%83%81%20%EC%A0%95%EB%A0%AC%20-%20Forte's%20Notes" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FBot_note_2%2F&text=%EC%9D%8C%EC%84%B1%20%EA%B4%80%EB%A0%A8%20-%20Forte's%20Notes" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
         <i class="fa-fw fab fa-telegram"></i>
       </a>
     
@@ -1396,12 +1366,6 @@
 
 
 
-  <div class="toc-border-cover z-3"></div>
-  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
-    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
-    <nav id="toc"></nav>
-  </section>
-
  
           </aside>
         </div>
@@ -1436,103 +1400,127 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
   
 
   
@@ -1560,7 +1548,7 @@
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
       
         <article class="col">
-          <a href="/posts/Sort/" class="post-preview card h-100">
+          <a href="/posts/Bot_note_1/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
@@ -1572,16 +1560,49 @@
 
 <time
   
-  data-ts="1732896921"
+  data-ts="1738486627"
   data-df="ll"
   
 >
-  Nov 30, 2024
+  Feb  2, 2025
 </time>
 
-              <h4 class="pt-0 my-2">정렬 알고리즘</h4>
+              <h4 class="pt-0 my-2">Rust 동시성 문제</h4>
               <div class="text-muted">
-                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/sort.md %}
+                <p>std::process::Stdio::piped() 는 새로운 파이프를 생성한다. std::process::Command::stdin(Stdio::piped()) 같은 식으로 사용하면 stdin이 생성된 파이프로 대체 되는 식.
+CommandObject.stdin.take().unwrap()으로 해당 파이프 디스크립터를 가져올 수 있다.
+  
+  
+ ...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/Bot_note_3/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1738487393"
+  data-df="ll"
+  
+>
+  Feb  2, 2025
+</time>
+
+              <h4 class="pt-0 my-2">게임 보드 관련 잡설</h4>
+              <div class="text-muted">
+                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/DiscordBot/refs/heads/main/memo/%EA%B2%8C%EC%9E%84%20%EB%B3%B4%EB%93%9C.md %}
+
 🔗 원본 파일 보기</p>
               </div>
             </div>
@@ -1589,7 +1610,7 @@
         </article>
       
         <article class="col">
-          <a href="/posts/Heap_with_Array/" class="post-preview card h-100">
+          <a href="/posts/MFQ/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
@@ -1601,59 +1622,31 @@
 
 <time
   
-  data-ts="1738277341"
+  data-ts="1737534653"
   data-df="ll"
   
 >
-  Jan 31, 2025
+  Jan 22, 2025
 </time>
 
-              <h4 class="pt-0 my-2">고정 크기 Heap 구현</h4>
+              <h4 class="pt-0 my-2">Multi-level Feedack Queue 구현하기</h4>
               <div class="text-muted">
-                <p>힙(Heap)
-완전 이진 트리(Complete Binary Tree) 기반의 자료구조  
-최댓값 또는 최솟값을 빠르게 접근 및 관리하는 데 사용된다.
+                <p>멀티 레벨 피드백 큐(MFQ) 스케줄링
 
 
 
-1. 힙의 종류
-
-🔹 최대 힙 (Max Heap)
+코드 구조
 
 
-  부모 노드는 항상 자식보다 크거나 같음
-  루트 노드에는 가장 큰 값이 위치함
-  삽입(push)과 삭제(pop) 후에도 이 속성이 유지됨
-...</p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
-          <a href="/posts/LCS/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
+  데이터 구조
+    
+      Process 구조체: 각 프로세스를 표현하는 구조체.
+      waitq, finishedq, global_io_q: 대기 큐, 완료 큐, 글로벌 I/O 큐.
+    
   
-  data-ts="1732897184"
-  data-df="ll"
-  
->
-  Nov 30, 2024
-</time>
-
-              <h4 class="pt-0 my-2">최장 공통 부분 수열</h4>
-              <div class="text-muted">
-                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/LCS.md %}
-🔗 원본 파일 보기</p>
+  스케줄러 클래스
+    
+      SchedulerBase (추상 클래스):...</p>
               </div>
             </div>
           </a>
@@ -1671,21 +1664,21 @@
 
   
     <a
-      href="/posts/Introduce/"
+      href="/posts/Bot_note_1/"
       class="btn btn-outline-primary"
       aria-label="Older"
     >
-      <p>블로그 소개</p>
+      <p>Rust 동시성 문제</p>
     </a>
   
 
   
     <a
-      href="/posts/Edit_distance/"
+      href="/posts/Bot_note_3/"
       class="btn btn-outline-primary"
       aria-label="Newer"
     >
-      <p>편집 거리</p>
+      <p>게임 보드 관련 잡설</p>
     </a>
   
 </nav>

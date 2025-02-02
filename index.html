@@ -527,6 +527,196 @@
 <div id="post-list" class="flex-grow-1 px-xl-1">
   
     <article class="card-wrapper card">
+      <a href="/posts/Bot_note_3/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+
+        <div class="col-md-12">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">게임 보드 관련 잡설</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>점수판과 재생 정보는 board.rs에서 다룸
+register_channel.rs에서 등록한 텍스트 채널에
+스레드 생성후 점수판과 재생 정보 embed를 갱신하는 방식
+
+고려사항
+
+  text channel 등록없이 play 하는 경우
+  …
+
+
+
+
+24-05-22
+
+현재 board와 guild_queue가 분리되어 있어 트랙 이벤트가 발생할 때 bo...</p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1738487393"
+  data-df="ll"
+  
+>
+  Feb  2, 2025
+</time>
+
+
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      Project,
+                      Discord_Bot
+                  </span>
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
+      <a href="/posts/Bot_note_2/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+
+        <div class="col-md-12">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">음성 관련</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>구버전에서 dca라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함.
+Input::Lazy 의 Flow
+YoutubeDl::into() 
+    YoutubeDl::create_async (Compose trait 구현 사항)
+        HttpRequest::create_as...</p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1738487160"
+  data-df="ll"
+  
+>
+  Feb  2, 2025
+</time>
+
+
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      Project,
+                      Discord_Bot
+                  </span>
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
+      <a href="/posts/Bot_note_1/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+
+        <div class="col-md-12">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">Rust 동시성 문제</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>std::process::Stdio::piped() 는 새로운 파이프를 생성한다. std::process::Command::stdin(Stdio::piped()) 같은 식으로 사용하면 stdin이 생성된 파이프로 대체 되는 식.
+CommandObject.stdin.take().unwrap()으로 해당 파이프 디스크립터를 가져올 수 있다.
+  
+  
+ ...</p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1738486627"
+  data-df="ll"
+  
+>
+  Feb  2, 2025
+</time>
+
+
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      Project,
+                      Discord_Bot
+                  </span>
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
       <a href="/posts/Heap_with_Array/" class="post-preview row g-0 flex-md-row-reverse">
         
 
@@ -1022,217 +1212,6 @@ wget 작업을 다루는 Task Queue
       </a>
     </article>
   
-    <article class="card-wrapper card">
-      <a href="/posts/Unreal/" class="post-preview row g-0 flex-md-row-reverse">
-        
-
-        
-
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">Udemy Unreal 메모</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p># Lecture Note
-
-
-Udemy 강의 (https://www.udemy.com/course/unrealcourse-korean/)
-
-Object
-
-
-  데이터와 기능의 집합
-  액터: 레벨에 들어가는 오브젝트
-  컴포넌트: 액터에 들어가는 오브젝트
-  블루프린트에서 참조 방법
-    
-      화면 안의 액터 선택 후 BP의 이벤트 그래프에...</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1735707056"
-  data-df="ll"
-  
->
-  Jan  1, 2025
-</time>
-
-
-                <!-- categories -->
-                
-                  <i class="far fa-folder-open fa-fw me-1"></i>
-                  <span class="categories">
-                    
-                      Study,
-                      Unreal
-                  </span>
-                
-              </div>
-
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  
-    <article class="card-wrapper card">
-      <a href="/posts/SQL/" class="post-preview row g-0 flex-md-row-reverse">
-        
-
-        
-
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">SQL 메모</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>Database MEMO
-
-SQL 구문 해석 순서
-
-
-  FROM: 데이터 소스를 지정
-  ON: 조인 조건을 설정
-  JOIN: 필요한 테이블 결합
-  WHERE: 행을 필터링
-  GROUP BY: 데이터를 그룹화
-  HAVING: 그룹화된 데이터에 추가 조건 적용
-  SELECT: 선택한 컬럼을 가져옴
-  DISTINCT: 중복된 행 제거
-  OR...</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1735491541"
-  data-df="ll"
-  
->
-  Dec 30, 2024
-</time>
-
-
-                <!-- categories -->
-                
-                  <i class="far fa-folder-open fa-fw me-1"></i>
-                  <span class="categories">
-                    
-                      Study,
-                      Database
-                  </span>
-                
-              </div>
-
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  
-    <article class="card-wrapper card">
-      <a href="/posts/CPP/" class="post-preview row g-0 flex-md-row-reverse">
-        
-
-        
-
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">C++ 정리</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>C++ 정리
-
-Const
-
-
-  상수에 관한 키워드
-
-
-일반 변수에서의 const
-
-
-  변수 선언시 이후 해당 변수에 대한 변경을 막는다.
-  
-    const 키워드 이후의 구문에 대한 변경을 막는다고 간주할 수 있다.
-
-    // 기본 자료형(int, float 등)은 무시하고 생각
-const int val = 10;
-int const val...</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1735491308"
-  data-df="ll"
-  
->
-  Dec 30, 2024
-</time>
-
-
-                <!-- categories -->
-                
-                  <i class="far fa-folder-open fa-fw me-1"></i>
-                  <span class="categories">
-                    
-                      Study,
-                      Programming Language
-                  </span>
-                
-              </div>
-
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  
 </div>
 <!-- #post-list -->
 
@@ -1363,6 +1342,27 @@ int const val...</p>
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/Bot_note_3/">게임 보드 관련 잡설</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Bot_note_2/">음성 관련</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Bot_note_1/">Rust 동시성 문제</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/Heap_with_Array/">고정 크기 Heap 구현</a>
         </li>
       
@@ -1371,27 +1371,6 @@ int const val...</p>
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Trial_Error/">Jekyll 시행 착오들 정리</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/MFQ/">Multi-level Feedack Queue 구현하기</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Solar_System/">태양계 시뮬레이션</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Swsh/">미니 쉘 만들기</a>
         </li>
       
     </ul>
@@ -1424,6 +1403,32 @@ int const val...</p>
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -1499,69 +1504,6 @@ int const val...</p>
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -1587,138 +1529,6 @@ int const val...</p>
     
     
     
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -1751,6 +1561,85 @@ int const val...</p>
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1780,7 +1669,118 @@ int const val...</p>
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -1801,6 +1801,9 @@ int const val...</p>
   <section>
     <h2 class="panel-heading">Trending Tags</h2>
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/bot/">Bot</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/opengl/">OpenGL</a>
@@ -1824,13 +1827,10 @@ int const val...</p>
         <a class="post-tag btn btn-outline-primary" href="/tags/c/">C++</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/concurrency/">Concurrency</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/heap/">Heap</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/lcs/">LCS</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/mfq/">MFQ</a>
       
     </div>
   </section>
@@ -1915,6 +1915,32 @@ int const val...</p>
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -1990,69 +2016,6 @@ int const val...</p>
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2078,138 +2041,6 @@ int const val...</p>
     
     
     
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2242,6 +2073,85 @@ int const val...</p>
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -2271,7 +2181,118 @@ int const val...</p>
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -2292,6 +2313,9 @@ int const val...</p>
   <section>
     <h2 class="panel-heading">Trending Tags</h2>
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/bot/">Bot</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/opengl/">OpenGL</a>
@@ -2315,13 +2339,10 @@ int const val...</p>
         <a class="post-tag btn btn-outline-primary" href="/tags/c/">C++</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/concurrency/">Concurrency</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/heap/">Heap</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/lcs/">LCS</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/mfq/">MFQ</a>
       
     </div>
   </section>

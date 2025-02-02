@@ -4,7 +4,7 @@
   <id>https://forte-naop.github.io/</id>
   <title>Forte's Notes</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-02-02T18:13:39+09:00</updated>
+  <updated>2025-02-02T21:25:26+09:00</updated>
   <author>
     <name>Forte</name>
     <uri>https://forte-naop.github.io/</uri>
@@ -87,14 +87,14 @@ pub async fn register_channel(&amp;amp;amp;self, channel: GuildChannel) {
     
   
 
-  <summary>구버전에서 dca라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함.
+  <summary>구버전에서 dca(Ogg to DCA converter)라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함.
 Input::Lazy 의 Flow
 YoutubeDl::into() 
     YoutubeDl::create_async (Compose trait 구현 사항)
         HttpRequest::create_async (Compose trait 구현 사항)
             HttpRequest::create_stream
                 reqwest::Client::get -&amp;amp;gt; reqwest::Response
-                reqwest::Response::bytes_stream -&amp;amp;gt; Box&amp;amp;lt;tokio_io::Str...</summary>
+                reqwest::Response::bytes_stream -&amp;amp;gt...</summary>
 
   </entry>
 

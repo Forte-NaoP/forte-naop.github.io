@@ -4,7 +4,7 @@
   <id>https://forte-naop.github.io/</id>
   <title>Forte's Notes</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-02-03T10:09:39+09:00</updated>
+  <updated>2025-02-03T14:27:59+09:00</updated>
   <author>
     <name>Forte</name>
     <uri>https://forte-naop.github.io/</uri>
@@ -17,6 +17,56 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Trie 구현</title>
+    <link href="https://forte-naop.github.io/posts/Trie/" rel="alternate" type="text/html" title="Trie 구현" />
+    <published>2025-02-03T14:11:04+09:00</published>
+  
+    <updated>2025-02-03T14:11:04+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/Trie/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/Trie/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Study" />
+    
+    <category term="Algorithm" />
+    
+  
+
+  <summary>Trie 자료구조 (C++ 구현)
+
+문자열을 저장하고 효율적으로 검색하기 위한 트리 기반의 자료구조.
+
+
+  단어 삽입: 단어를 효율적으로 추가할 수 있음.
+  단어 검색: 저장된 단어가 존재하는지 빠르게 확인할 수 있음.
+  접두사 검색: 주어진 접두사를 갖는 단어가 존재하는지 탐색할 수 있음.
+
+
+
+
+1. TrieNode 구조체
+
+Trie의 기본 구성 단위는 TrieNode이다.
+
+
+  children: 알파벳 26개(대문자 ‘A’ ~ ‘Z’)에 대응하는 자식 노드를 저장하는 포인터 배열
+    
+      TrieNode* children[26]: 각 인덱스는 해당 알파벳에 해당하는 자식 노드 가리킴.
+    
+  
+  isEnd: 현재 노드가 단어의 끝(종료 노드)인지를 나타내는 값
+    
+ ...</summary>
+
+  </entry>
 
   
   <entry>
@@ -187,41 +237,6 @@ CommandObject.stdin.take().unwrap()으로 해당 파이프 디스크립터를 �
 
   부모 노드는 항상 자식보다 작거나 같음
   루트 노드에는 가장 작은 값이 위치...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Jekyll 시행 착오들 정리</title>
-    <link href="https://forte-naop.github.io/posts/Trial_Error/" rel="alternate" type="text/html" title="Jekyll 시행 착오들 정리" />
-    <published>2025-01-30T14:57:40+09:00</published>
-  
-    <updated>2025-01-30T14:57:40+09:00</updated>
-  
-    <id>https://forte-naop.github.io/posts/Trial_Error/</id>
-    <content type="text/html" src="https://forte-naop.github.io/posts/Trial_Error/" />
-    <author>
-      <name>Forte</name>
-    </author>
-
-  
-    
-    <category term="Blogging" />
-    
-  
-
-  <summary>Github Pages 시행착오들
-
-
-  링크는 https:// 로 시작해야 htmlproofer 검사에서 오류가 나지 않음
-  
-    markdown 문서에서 상대경로로 포함된 리소스는 절대 경로로 변환해줘야 함.
-
-     {% assign remote_url = &amp;quot;https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/lecture.md&amp;quot; %}
- {% assign img_url = remote_url | remove: &amp;quot;lecture.md&amp;quot; | append: &amp;quot;capture/&amp;quot; %}
-
- {% capture remote_content %} &amp;amp;lt;!--remote_content 변수에 remote resource 저장 --&amp;amp;gt;
-...</summary>
 
   </entry>
 

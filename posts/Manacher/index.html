@@ -29,24 +29,24 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="위상 정렬" />
+<meta property="og:title" content="Manacher 알고리즘" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="위상정렬 비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것 각 노드에 선행 조건이 존재할 때 사용 가능 정렬 방법 각 노드의 진입 차수 기록 진입 차수가 0인 정점을 큐에 삽입 큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소 2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복 구현 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 graph = defaultdict(list) indegree = [0] * (n + 1) # 인접 리스트 및 진입 차수 초기화 # for _ in range(k): # a, b = map(int, input().split()) # graph[a].append(b) # indegree[b] += 1 # 진입 차수 0인 정점 큐에 추가 q = deque(filter(lambda x: indegree[x] == 0, range(1, n + 1))) while q: cur = st.popleft() print(q) if cur in graph: for nxt in graph[cur]: indegree[nxt] -= 1 if indegree[nxt] == 0: st.append(nxt) 🔗 원본 파일 보기" />
-<meta property="og:description" content="위상정렬 비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것 각 노드에 선행 조건이 존재할 때 사용 가능 정렬 방법 각 노드의 진입 차수 기록 진입 차수가 0인 정점을 큐에 삽입 큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소 2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복 구현 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 graph = defaultdict(list) indegree = [0] * (n + 1) # 인접 리스트 및 진입 차수 초기화 # for _ in range(k): # a, b = map(int, input().split()) # graph[a].append(b) # indegree[b] += 1 # 진입 차수 0인 정점 큐에 추가 q = deque(filter(lambda x: indegree[x] == 0, range(1, n + 1))) while q: cur = st.popleft() print(q) if cur in graph: for nxt in graph[cur]: indegree[nxt] -= 1 if indegree[nxt] == 0: st.append(nxt) 🔗 원본 파일 보기" />
-<link rel="canonical" href="https://forte-naop.github.io/posts/Topology_Sort/" />
-<meta property="og:url" content="https://forte-naop.github.io/posts/Topology_Sort/" />
+<meta name="description" content="문자열 내에서 가장 긴 팰린드롬 부분 문자열(Longest Palindromic Substring)을 $O(n)$ 시간에 찾을 수 있는 알고리즘. 일반적으로 팰린드롬 부분 문자열 문제를 단순 확장 방식(Expand Around Center)으로 풀면 $O(n^2)$ 시간이 걸리지만, Manacher 알고리즘을 사용하면 이를 선형 시간에 해결할 수 있다." />
+<meta property="og:description" content="문자열 내에서 가장 긴 팰린드롬 부분 문자열(Longest Palindromic Substring)을 $O(n)$ 시간에 찾을 수 있는 알고리즘. 일반적으로 팰린드롬 부분 문자열 문제를 단순 확장 방식(Expand Around Center)으로 풀면 $O(n^2)$ 시간이 걸리지만, Manacher 알고리즘을 사용하면 이를 선형 시간에 해결할 수 있다." />
+<link rel="canonical" href="https://forte-naop.github.io/posts/Manacher/" />
+<meta property="og:url" content="https://forte-naop.github.io/posts/Manacher/" />
 <meta property="og:site_name" content="Forte’s Notes" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-11-30T00:01:14+09:00" />
+<meta property="article:published_time" content="2025-02-06T08:42:47+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="위상 정렬" />
+<meta property="twitter:title" content="Manacher 알고리즘" />
 <meta name="twitter:site" content="@kirameki_ing" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-11-30T00:01:14+09:00","datePublished":"2024-11-30T00:01:14+09:00","description":"위상정렬 비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것 각 노드에 선행 조건이 존재할 때 사용 가능 정렬 방법 각 노드의 진입 차수 기록 진입 차수가 0인 정점을 큐에 삽입 큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소 2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복 구현 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 graph = defaultdict(list) indegree = [0] * (n + 1) # 인접 리스트 및 진입 차수 초기화 # for _ in range(k): # a, b = map(int, input().split()) # graph[a].append(b) # indegree[b] += 1 # 진입 차수 0인 정점 큐에 추가 q = deque(filter(lambda x: indegree[x] == 0, range(1, n + 1))) while q: cur = st.popleft() print(q) if cur in graph: for nxt in graph[cur]: indegree[nxt] -= 1 if indegree[nxt] == 0: st.append(nxt) 🔗 원본 파일 보기","headline":"위상 정렬","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Topology_Sort/"},"url":"https://forte-naop.github.io/posts/Topology_Sort/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-02-06T08:42:47+09:00","datePublished":"2025-02-06T08:42:47+09:00","description":"문자열 내에서 가장 긴 팰린드롬 부분 문자열(Longest Palindromic Substring)을 $O(n)$ 시간에 찾을 수 있는 알고리즘. 일반적으로 팰린드롬 부분 문자열 문제를 단순 확장 방식(Expand Around Center)으로 풀면 $O(n^2)$ 시간이 걸리지만, Manacher 알고리즘을 사용하면 이를 선형 시간에 해결할 수 있다.","headline":"Manacher 알고리즘","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Manacher/"},"url":"https://forte-naop.github.io/posts/Manacher/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>위상 정렬 | Forte's Notes
+  <title>Manacher 알고리즘 | Forte's Notes
   </title>
 
   <!--
@@ -444,7 +444,7 @@
         
           
             
-              <span>위상 정렬</span>
+              <span>Manacher 알고리즘</span>
             
 
           
@@ -558,6 +558,28 @@
 
       
     
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
 
     
   
@@ -593,7 +615,7 @@
 
 <article class="px-1" data-toc="true">
   <header>
-    <h1 data-toc-skip>위상 정렬</h1>
+    <h1 data-toc-skip>Manacher 알고리즘</h1>
     
 
     <div class="post-meta text-muted">
@@ -610,13 +632,13 @@
 
 <time
   
-  data-ts="1732892474"
+  data-ts="1738798967"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Nov 30, 2024
+  Feb  6, 2025
 </time>
 
       </span>
@@ -665,9 +687,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="249 words"
+  title="1372 words"
 >
-  <em>1 min</em> read</span>
+  <em>7 min</em> read</span>
 
         </div>
       </div>
@@ -676,7 +698,7 @@
 
   
     <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
-      <span class="label text-truncate">위상 정렬</span>
+      <span class="label text-truncate">Manacher 알고리즘</span>
       <button type="button" class="toc-trigger btn me-1">
         <i class="fa-solid fa-list-ul fa-fw"></i>
       </button>
@@ -689,7 +711,7 @@
 
     <dialog id="toc-popup" class="p-0">
       <div class="header d-flex flex-row align-items-center justify-content-between">
-        <div class="label text-truncate py-2 ms-4">위상 정렬</div>
+        <div class="label text-truncate py-2 ms-4">Manacher 알고리즘</div>
         <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
           <i class="fas fa-close"></i>
         </button>
@@ -699,25 +721,44 @@
   
 
   <div class="content">
-    <h1 id="위상정렬">위상정렬</h1>
+    <p>문자열 내에서 <strong>가장 긴 팰린드롬 부분 문자열(Longest Palindromic Substring)을 $O(n)$ 시간</strong>에 찾을 수 있는 알고리즘. 일반적으로 팰린드롬 부분 문자열 문제를 단순 확장 방식(Expand Around Center)으로 풀면 $O(n^2)$ 시간이 걸리지만, Manacher 알고리즘을 사용하면 이를 선형 시간에 해결할 수 있다.</p>
 
-<p>비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것</p>
+<hr />
 
-<p>각 노드에 선행 조건이 존재할 때 사용 가능</p>
+<h2 id="1-핵심-아이디어"><span class="me-2">1. 핵심 아이디어</span><a href="#1-핵심-아이디어" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<h2 id="정렬-방법"><span class="me-2">정렬 방법</span><a href="#정렬-방법" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p>Manacher 알고리즘의 핵심 아이디어는 다음과 같다.</p>
 
 <ol>
-  <li>각 노드의 진입 차수 기록</li>
-  <li>진입 차수가 0인 정점을 큐에 삽입</li>
-  <li>큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소</li>
-  <li>2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복</li>
+  <li><strong>문자열의 변형(Preprocessing)</strong>
+    <ul>
+      <li>짝수 길이 팰린드롬까지 다룰 수 있도록, 길이 N의 원본 문자열 각 문자 사이사이에 특정 구분 문자(대개 <code class="language-plaintext highlighter-rouge">#</code>)를 삽입해 길이 <code class="language-plaintext highlighter-rouge">2N + 1</code>의 확장 문자열로 만든다.</li>
+      <li>예를 들어, 문자열 <code class="language-plaintext highlighter-rouge">abba</code>를 <code class="language-plaintext highlighter-rouge">#a#b#b#a#</code>와 같이 변형.</li>
+    </ul>
+  </li>
+  <li><strong>팰린드롬의 중심(Center)과 오른쪽 경계(Right Boundary) 추적</strong>
+    <ul>
+      <li>변형된 문자열에서, 특정 구간 동안 알고 있는 가장 오른쪽에 도달하는 팰린드롬을 추적한다.</li>
+      <li>알고리즘이 진행되는 과정에서 “현재까지 확인한 팰린드롬 중 가장 오른쪽 끝”을 <code class="language-plaintext highlighter-rouge">R</code>이라 하고, 그 팰린드롬의 중심을 <code class="language-plaintext highlighter-rouge">C</code>라고 한다.</li>
+      <li>현재 인덱스 <code class="language-plaintext highlighter-rouge">i</code>에 대해서 팰린드롬 반경 <code class="language-plaintext highlighter-rouge">P[i]</code>를 초기화할 때, <code class="language-plaintext highlighter-rouge">i</code>의 좌우 대칭 원소 <code class="language-plaintext highlighter-rouge">i'</code>(= <code class="language-plaintext highlighter-rouge">2C - i</code>)의 정보를 활용. (즉, 기존에 구해놓은 팰린드롬 정보를 재활용)</li>
+    </ul>
+  </li>
 </ol>
 
-<h2 id="구현"><span class="me-2">구현</span><a href="#구현" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<hr />
 
-<div class="language-python highlighter-rouge"><div class="code-header">
-        <span data-label-text="Python"><i class="fas fa-code fa-fw small"></i></span>
+<h2 id="4-시간-복잡도"><span class="me-2">4. 시간 복잡도</span><a href="#4-시간-복잡도" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<ul>
+  <li>각 인덱스에서 팰린드롬 반경을 확장할 때, 이미 확장한 부분은 재활용하며 중복 계산을 하지 않는다.</li>
+  <li>따라서 각 문자를 중심으로 하는 최대 팰린드롬 확장 연산이 전체적으로 $O(n)$ 시간 안에 끝남.</li>
+  <li>전처리에 걸리는 시간(구분 문자 삽입)도 $O(n)$ 이므로, $O(n)$ 시간 알고리즘이다.</li>
+</ul>
+
+<h2 id="rust-구현"><span class="me-2">Rust 구현</span><a href="#rust-구현" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<div class="language-rust highlighter-rouge"><div class="code-header">
+        <span data-label-text="Rust"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -739,30 +780,192 @@
 19
 20
 21
-</pre></td><td class="rouge-code"><pre><span class="n">graph</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-<span class="n">indegree</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+</pre></td><td class="rouge-code"><pre><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">cmp</span><span class="p">::</span><span class="n">min</span><span class="p">;</span>
 
-<span class="c1"># 인접 리스트 및 진입 차수 초기화
-# for _ in range(k):
-#     a, b = map(int, input().split())
-#     graph[a].append(b)
-#     indegree[b] += 1
-</span>
-<span class="c1"># 진입 차수 0인 정점 큐에 추가
-</span><span class="n">q</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">(</span><span class="nf">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">indegree</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="k">fn</span> <span class="nf">manacher</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">u64</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">e</span> <span class="o">=</span> <span class="n">s</span><span class="nf">.len</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">extended</span> <span class="o">=</span> <span class="nd">vec!</span><span class="p">[</span><span class="mi">0</span><span class="p">;</span> <span class="n">e</span><span class="p">];</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">s</span><span class="nf">.len</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">extended</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 현재까지의 팰린드롬 중 가장 긴 것의 오른쪽 끝</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 현재까지의 팰린드롬 중 가장 긴 것의 중심</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">dp</span> <span class="o">=</span> <span class="nd">vec!</span><span class="p">[</span><span class="mi">0</span><span class="p">;</span> <span class="n">e</span><span class="p">];</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">e</span> <span class="p">{</span>
+        <span class="c1">// DP[i] 초기화</span>
+        <span class="c1">// i &gt; r 이라면 검증된 팰린드롬을 벗어났음을 의미 =&gt; DP[i] = 0</span>
+        <span class="c1">// 이외의 경우, 다음과 같은 3가지 케이스가 존재</span>
+        <span class="c1">// 1) 현재 문자 기준 팰린드롬이 검증된 가장 긴 팰린드롬 안에 존재 </span>
+        <span class="c1">//    - p를 기준으로 현재 문자 i의 대칭점(2 * p - i)과 동일한 길이만큼 팰린드롬임이 보장됨</span>
+        <span class="c1">//    - 따라서 DP[i] = DP[2 * p - i]</span>
+        <span class="c1">// 2) 현재 문자 기준 팰린드롬이 검증된 가장 긴 팰린드롬과 겹치는 경우</span>
+        <span class="c1">//    - 검증된 가장 긴 팰린드롬까지는 팰린드롬임이 보장됨</span>
+        <span class="c1">//    - 따라서 DP[i] = r - i</span>
+        <span class="c1">// 3) 현재 문자 기준 팰린드롬이 검증된 가장 긴 팰린드롬을 넘어가는 경우</span>
+        <span class="c1">//    - 검증된 가장 긴 팰린드롬까지는 팰린드롬임이 보장됨</span>
+        <span class="c1">//    - 따라서 DP[i] = r - i</span>
+        <span class="c1">//</span>
+        <span class="c1">// 1)의 경우 DP[2 * p - i] &lt; r - i (검증된 가장 긴 팰린드롬을 넘어가지 않아야 하므로)</span>
+        <span class="c1">// 2), 3)의 경우 r - i &lt;= DP[2 * p - i] (검증된 가장 긴 팰린드롬과 겹치거나 넘어가야 하므로)</span>
+        <span class="c1">// =&gt; DP[2 * p - i] 와 r - i 중 작은 값으로 초기화</span>
+        <span class="c1">// 출처 : https://sam0308.tistory.com/127</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">r</span> <span class="p">{</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">p</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">i</span><span class="p">],</span> <span class="n">r</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
 
-<span class="k">while</span> <span class="n">q</span><span class="p">:</span>
-    <span class="n">cur</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+        <span class="c1">// 팰린드롬 확장</span>
+        <span class="k">while</span> 
+            <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="c1">// 현재 문자 i 기준 좌측 끝 (i - dp[i] - 1 &gt;= 0)</span>
+            <span class="n">i</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">e</span> <span class="o">&amp;&amp;</span> <span class="c1">// 현재 문자 i 기준 우측 끝 </span>
+            <span class="n">extended</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">extended</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="p">{</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
 
-    <span class="k">if</span> <span class="n">cur</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">nxt</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">cur</span><span class="p">]:</span>
-            <span class="n">indegree</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">indegree</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">st</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">nxt</span><span class="p">)</span>
+        <span class="c1">// 팰린드롬 확장 반영</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">{</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">ans</span> <span class="o">+=</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="nb">u64</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">ans</span>
+<span class="p">}</span>
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/study/topology_sort.md" target="_blank">원본 파일 보기</a></p>
+<p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/rust/src/manacher.rs" target="_blank">원본 파일 보기</a></p>
+
+<h2 id="cpp-구현"><span class="me-2">CPP 구현</span><a href="#cpp-구현" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<div class="language-cpp highlighter-rouge"><div class="code-header">
+        <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cstdint&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sstream&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="n">string</span> <span class="nf">manacher</span><span class="p">(</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">s_len</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">e_len</span> <span class="o">=</span> <span class="n">s_len</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span> <span class="n">extended</span><span class="p">(</span><span class="n">e_len</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s_len</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">extended</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="kt">size_t</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">e_len</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">e_len</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">p</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">i</span><span class="p">],</span> <span class="n">r</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">while</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> 
+            <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">e_len</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+            <span class="p">(</span><span class="n">extended</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">extended</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">size_t</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">dp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">max_element</span><span class="p">(</span><span class="n">dp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">dp</span><span class="p">.</span><span class="n">end</span><span class="p">()));</span>
+
+    <span class="n">stringstream</span> <span class="n">ss</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">dp</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">idx</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">extended</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">ss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/cpp/manacher.cpp" target="_blank">원본 파일 보기</a></p>
 
   </div>
 
@@ -783,9 +986,14 @@
         <i class="fa fa-tags fa-fw me-1"></i>
         
           <a
-            href="/tags/sort/"
+            href="/tags/palindrome/"
             class="post-tag no-text-decoration"
-          >Sort</a>
+          >Palindrome</a>
+        
+          <a
+            href="/tags/manacher/"
+            class="post-tag no-text-decoration"
+          >Manacher</a>
         
       </div>
     
@@ -821,21 +1029,21 @@
 
       
 
-      <a href="https://twitter.com/intent/tweet?text=%EC%9C%84%EC%83%81%20%EC%A0%95%EB%A0%AC%20-%20Forte's%20Notes&url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FTopology_Sort%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+      <a href="https://twitter.com/intent/tweet?text=Manacher%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20-%20Forte's%20Notes&url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FManacher%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
         <i class="fa-fw fa-brands fa-square-x-twitter"></i>
       </a>
     
 
       
 
-      <a href="https://www.facebook.com/sharer/sharer.php?title=%EC%9C%84%EC%83%81%20%EC%A0%95%EB%A0%AC%20-%20Forte's%20Notes&u=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FTopology_Sort%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+      <a href="https://www.facebook.com/sharer/sharer.php?title=Manacher%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20-%20Forte's%20Notes&u=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FManacher%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
         <i class="fa-fw fab fa-facebook-square"></i>
       </a>
     
 
       
 
-      <a href="https://t.me/share/url?url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FTopology_Sort%2F&text=%EC%9C%84%EC%83%81%20%EC%A0%95%EB%A0%AC%20-%20Forte's%20Notes" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fforte-naop.github.io%2Fposts%2FManacher%2F&text=Manacher%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20-%20Forte's%20Notes" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
         <i class="fa-fw fab fa-telegram"></i>
       </a>
     
@@ -1456,139 +1664,139 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
 
@@ -1602,35 +1810,6 @@
   <aside id="related-posts" aria-labelledby="related-label">
     <h3 class="mb-4" id="related-label">Further Reading</h3>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
-      
-        <article class="col">
-          <a href="/posts/Sort/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1732896921"
-  data-df="ll"
-  
->
-  Nov 30, 2024
-</time>
-
-              <h4 class="pt-0 my-2">정렬 알고리즘</h4>
-              <div class="text-muted">
-                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/sort.md %}
-🔗 원본 파일 보기</p>
-              </div>
-            </div>
-          </a>
-        </article>
       
         <article class="col">
           <a href="/posts/Heap_with_Array/" class="post-preview card h-100">
@@ -1696,8 +1875,60 @@
 
               <h4 class="pt-0 my-2">최장 공통 부분 수열</h4>
               <div class="text-muted">
-                <p>{% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/LCS.md %}
-🔗 원본 파일 보기</p>
+                <p>최장 공통 부분 수열(LCS: Longest Common Subsequence)
+
+
+
+LCS 길이 구하기
+
+DP[i][j]: A[..i], B[..j]까지의 LCS길이
+
+
+  
+    A[i] == B[j]: DP[i][j] = DP[i - 1][j - 1] + 1
+  
+  
+    A[i] != B[j]: DP[i][j] = max(DP[i - 1]...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/Sort/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1732896921"
+  data-df="ll"
+  
+>
+  Nov 30, 2024
+</time>
+
+              <h4 class="pt-0 my-2">정렬 알고리즘</h4>
+              <div class="text-muted">
+                <p>정렬
+
+Bubble Sort
+
+인접한 두 원소를 비교하여 역순이면 교환한다.
+
+# seq = []
+# 총 n번 반복
+for i in range(n - 1, -1, -1):
+    is_swapped = False
+    # 매 반복 후에 seq[i + 1:]은 정렬된 상태이므로 
+    # seq[:i] 까지만 확인
+    for j in range(...</p>
               </div>
             </div>
           </a>
@@ -1715,22 +1946,18 @@
 
   
     <a
-      href="/posts/Introduce/"
+      href="/posts/Trie/"
       class="btn btn-outline-primary"
       aria-label="Older"
     >
-      <p>블로그 소개</p>
+      <p>Trie 구현</p>
     </a>
   
 
   
-    <a
-      href="/posts/Edit_distance/"
-      class="btn btn-outline-primary"
-      aria-label="Newer"
-    >
-      <p>편집 거리</p>
-    </a>
+    <div class="btn btn-outline-primary disabled" aria-label="Newer">
+      <p>-</p>
+    </div>
   
 </nav>
   <!-- The Footer -->

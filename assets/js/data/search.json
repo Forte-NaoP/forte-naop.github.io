@@ -1,6 +1,23 @@
 [
   
   {
+    "title": "Manacher 알고리즘",
+    "url": "/posts/Manacher/",
+    "categories": "Study, Algorithm",
+    "tags": "Palindrome, Manacher",
+    "date": "2025-02-06 08:42:47 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "문자열 내에서 가장 긴 팰린드롬 부분 문자열(Longest Palindromic Substring)을 $O(n)$ 시간에 찾을 수 있는 알고리즘. 일반적으로 팰린드롬 부분 문자열 문제를 단순 확장 방식(Expand Around Center)으로 풀면 $O(n^2)$ 시간이 걸리지만, Manacher 알고리즘을 사용하면 이를 선형 시간에 해결할 수 있다...",
+    "content": "문자열 내에서 가장 긴 팰린드롬 부분 문자열(Longest Palindromic Substring)을 $O(n)$ 시간에 찾을 수 있는 알고리즘. 일반적으로 팰린드롬 부분 문자열 문제를 단순 확장 방식(Expand Around Center)으로 풀면 $O(n^2)$ 시간이 걸리지만, Manacher 알고리즘을 사용하면 이를 선형 시간에 해결할 수 있다.1. 핵심 아이디어Manacher 알고리즘의 핵심 아이디어는 다음과 같다.  문자열의 변형(Preprocessing)          짝수 길이 팰린드롬까지 다룰 수 있도록, 길이 N의 원본 문자열 각 문자 사이사이에 특정 구분 문자(대개 #)를 삽입해 길이 2N + 1의 확장 문자열로 만든다.      예를 들어, 문자열 abba를 #a#b#b#a#와 같이 변형.        팰린드롬의 중심(Center)과 오른쪽 경계(Right Boundary) 추적          변형된 문자열에서, 특정 구간 동안 알고 있는 가장 오른쪽에 도달하는 팰린드롬을 추적한다.      알고리즘이 진행되는 과정에서 “현재까지 확인한 팰린드롬 중 가장 오른쪽 끝”을 R이라 하고, 그 팰린드롬의 중심을 C라고 한다.      현재 인덱스 i에 대해서 팰린드롬 반경 P[i]를 초기화할 때, i의 좌우 대칭 원소 i'(= 2C - i)의 정보를 활용. (즉, 기존에 구해놓은 팰린드롬 정보를 재활용)      4. 시간 복잡도  각 인덱스에서 팰린드롬 반경을 확장할 때, 이미 확장한 부분은 재활용하며 중복 계산을 하지 않는다.  따라서 각 문자를 중심으로 하는 최대 팰린드롬 확장 연산이 전체적으로 $O(n)$ 시간 안에 끝남.  전처리에 걸리는 시간(구분 문자 삽입)도 $O(n)$ 이므로, $O(n)$ 시간 알고리즘이다.Rust 구현use std::cmp::min;fn manacher(s: Vec&lt;u8&gt;) -&gt; u64 {    let e = s.len() * 2 + 1;    let mut extended = vec![0; e];    for i in 0..s.len() {        extended[i * 2 + 1] = s[i];    }    let mut r = 0; // 현재까지의 팰린드롬 중 가장 긴 것의 오른쪽 끝    let mut p = 0; // 현재까지의 팰린드롬 중 가장 긴 것의 중심    let mut dp = vec![0; e];    let mut ans = 0;    for i in 0..e {        // DP[i] 초기화        // i &gt; r 이라면 검증된 팰린드롬을 벗어났음을 의미 =&gt; DP[i] = 0        // 이외의 경우, 다음과 같은 3가지 케이스가 존재        // 1) 현재 문자 기준 팰린드롬이 검증된 가장 긴 팰린드롬 안에 존재         //    - p를 기준으로 현재 문자 i의 대칭점(2 * p - i)과 동일한 길이만큼 팰린드롬임이 보장됨        //    - 따라서 DP[i] = DP[2 * p - i]        // 2) 현재 문자 기준 팰린드롬이 검증된 가장 긴 팰린드롬과 겹치는 경우        //    - 검증된 가장 긴 팰린드롬까지는 팰린드롬임이 보장됨        //    - 따라서 DP[i] = r - i        // 3) 현재 문자 기준 팰린드롬이 검증된 가장 긴 팰린드롬을 넘어가는 경우        //    - 검증된 가장 긴 팰린드롬까지는 팰린드롬임이 보장됨        //    - 따라서 DP[i] = r - i        //        // 1)의 경우 DP[2 * p - i] &lt; r - i (검증된 가장 긴 팰린드롬을 넘어가지 않아야 하므로)        // 2), 3)의 경우 r - i &lt;= DP[2 * p - i] (검증된 가장 긴 팰린드롬과 겹치거나 넘어가야 하므로)        // =&gt; DP[2 * p - i] 와 r - i 중 작은 값으로 초기화        // 출처 : https://sam0308.tistory.com/127        if i &lt;= r {            dp[i] = min(dp[p * 2 - i], r - i);        }        // 팰린드롬 확장        while             i &gt;= dp[i] + 1 &amp;&amp; // 현재 문자 i 기준 좌측 끝 (i - dp[i] - 1 &gt;= 0)            i + dp[i] + 1 &lt; e &amp;&amp; // 현재 문자 i 기준 우측 끝             extended[i - dp[i] - 1] == extended[i + dp[i] + 1] {            dp[i] += 1;        }        // 팰린드롬 확장 반영        if r &lt; i + dp[i] {            r = i + dp[i];            p = i;        }        ans += (dp[i] + 1) as u64 / 2;    }    ans}🔗 원본 파일 보기CPP 구현#include &lt;vector&gt;#include &lt;string&gt;#include &lt;cstdint&gt;#include &lt;algorithm&gt;#include &lt;sstream&gt;using namespace std;string manacher(string&amp; s) {    size_t s_len = s.length();    size_t e_len = s_len * 2 + 1;    vector&lt;char&gt; extended(e_len, 0);    for (size_t i = 0; i &lt; s_len; ++i) {        extended[i * 2 + 1] = s[i];    }    size_t r = 0, p = 0;    vector&lt;size_t&gt; dp(e_len, 0);    for (size_t i = 0; i &lt; e_len; ++i) {        if (i &lt;= r) {            dp[i] = min(dp[p * 2 - i], r - i);        }        while (            (i &gt;= dp[i] + 1) &amp;&amp;             (i + dp[i] + 1 &lt; e_len) &amp;&amp;            (extended[i - dp[i] - 1] == extended[i + dp[i] + 1])        ) {            dp[i] += 1;        }        if (r &lt; i + dp[i]) {            r = i + dp[i];            p = i;        }    }    size_t idx = distance(dp.begin(), max_element(dp.begin(), dp.end()));    stringstream ss;    for (int i = idx - dp[idx] + 1; i &lt; idx + dp[idx]; i += 2) {        ss &lt;&lt; extended[i];    }        return ss.str();}🔗 원본 파일 보기"
+  },
+  
+  {
     "title": "Trie 구현",
     "url": "/posts/Trie/",
     "categories": "Study, Algorithm",

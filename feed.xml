@@ -4,7 +4,7 @@
   <id>https://forte-naop.github.io/</id>
   <title>Forte's Notes</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-03-10T15:18:44+09:00</updated>
+  <updated>2025-03-10T17:40:34+09:00</updated>
   <author>
     <name>Forte</name>
     <uri>https://forte-naop.github.io/</uri>
@@ -17,6 +17,50 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Simple REST Server</title>
+    <link href="https://forte-naop.github.io/posts/Simple_REST_Server/" rel="alternate" type="text/html" title="Simple REST Server" />
+    <published>2025-03-10T17:36:13+09:00</published>
+  
+    <updated>2025-03-10T17:36:13+09:00</updated>
+  
+    <id>https://forte-naop.github.io/posts/Simple_REST_Server/</id>
+    <content type="text/html" src="https://forte-naop.github.io/posts/Simple_REST_Server/" />
+    <author>
+      <name>Forte</name>
+    </author>
+
+  
+    
+    <category term="Project" />
+    
+    <category term="Network" />
+    
+  
+
+  <summary>Implementation
+
+HTTP 모듈(Flask 등)을 사용하지 않고, Python의 기본 socket 모듈과 스레딩(threading) 등을 이용하여 간단한 RESTful API를 구현한다. 전체적으로 사용자 정보 관리와 고정 메시지 응답, 그리고 Preflight 요청(CORS 처리) 등을 지원하며, 각 HTTP 메서드(GET, POST, PUT, DELETE, OPTIONS)에 대해 별도의 핸들러를 구현하였다.
+
+
+
+1. main.py
+
+
+  
+    역할:
+서버의 엔트리 포인트로, 소켓을 생성하고 클라이언트 연결을 기다리며 각 연결마다 새로운 스레드를 생성하여 요청을 처리함.
+  
+  
+    구현:
+    
+      소켓 생성 및 바인딩:
+        
+          HOST와 P...</summary>
+
+  </entry>
 
   
   <entry>
@@ -183,38 +227,6 @@ YoutubeDl::into()
             HttpRequest::create_stream
                 reqwest::Client::get -&amp;amp;gt; reqwest::Response
                 reqwest::Response::bytes_stream -&amp;amp;gt...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Rust 동시성 문제</title>
-    <link href="https://forte-naop.github.io/posts/Bot_note_1/" rel="alternate" type="text/html" title="Rust 동시성 문제" />
-    <published>2025-02-02T17:57:07+09:00</published>
-  
-    <updated>2025-02-02T17:57:07+09:00</updated>
-  
-    <id>https://forte-naop.github.io/posts/Bot_note_1/</id>
-    <content type="text/html" src="https://forte-naop.github.io/posts/Bot_note_1/" />
-    <author>
-      <name>Forte</name>
-    </author>
-
-  
-    
-    <category term="Project" />
-    
-    <category term="Discord_Bot" />
-    
-  
-
-  <summary>std::process::Stdio::piped() 는 새로운 파이프를 생성한다. std::process::Command::stdin(Stdio::piped()) 같은 식으로 사용하면 stdin이 생성된 파이프로 대체 되는 식.
-CommandObject.stdin.take().unwrap()으로 해당 파이프 디스크립터를 가져올 수 있다.
-  
-  
-    Command::spawn()으로 생성된 Child 객체는 wait[_with_output]나 kill 호출 전까지 완료/종료되지 않는다.
-만약 파일을 저장하는 작업 이후 연속해서 다른 Command 가 그 파일을 읽으려 한다면 파일이 생성되지 않아 정상적으로 작동하지 않는다. 버퍼 관련 문제인듯
-따라서 wait 를 사용해 프로세스를 기다리면 파일이 ...</summary>
 
   </entry>
 

@@ -5,15 +5,15 @@ categories: [Study, OS]
 tags: [Scheduling]
 ---
 
-{% assign remote_url = "https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/OS/scheduling.md" %}
-{% assign img_url = remote_url | remove: "scheduling.md" %}
+{% assign remote_url = "https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/CS/OS/Scheduling.md" %}
+{% assign img_url = remote_url | remove: "Scheduling.md" %}
 
 {% capture remote_content %}
-    {% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/OS/scheduling.md %}
+    {% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/CS/OS/Scheduling.md %}
 {% endcapture %}
 
 {{ remote_content 
   | replace: './', img_url 
 }}
 
-<p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/study/OS/scheduling.md" target="_blank">원본 파일 보기</a></p>
+<p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/study/CS/OS/Scheduling.md" target="_blank">원본 파일 보기</a></p>

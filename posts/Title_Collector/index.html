@@ -212,16 +212,9 @@
 
   
 
-  
-    
-
-    
-
-  
 
 
-
-  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js,npm/tocbot@4.32.2/dist/tocbot.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js"></script>
 
 
 
@@ -529,118 +522,10 @@
   
 
   
-    
-    
-
-    
-      
-        
-        
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-
-    
-  
 
   
   
 
-  
-    
-    
-
-    
-      
-        
-        
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-
-    
   
 
   
@@ -667,7 +552,7 @@
 
 
 
-<article class="px-1" data-toc="true">
+<article class="px-1" data-toc="false">
   <header>
     <h1 data-toc-skip>웹페이지 제목 수집기</h1>
     
@@ -741,9 +626,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="663 words"
+  title="7 words"
 >
-  <em>3 min</em> read</span>
+  <em>1 min</em> read</span>
 
         </div>
       </div>
@@ -751,200 +636,9 @@
   </header>
 
   
-    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
-      <span class="label text-truncate">웹페이지 제목 수집기</span>
-      <button type="button" class="toc-trigger btn me-1">
-        <i class="fa-solid fa-list-ul fa-fw"></i>
-      </button>
-    </div>
-
-    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
-      <span class="label ps-2 pe-1">Contents</span>
-      <i class="fa-solid fa-angle-right fa-fw"></i>
-    </button>
-
-    <dialog id="toc-popup" class="p-0">
-      <div class="header d-flex flex-row align-items-center justify-content-between">
-        <div class="label text-truncate py-2 ms-4">웹페이지 제목 수집기</div>
-        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
-          <i class="fas fa-close"></i>
-        </button>
-      </div>
-      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
-    </dialog>
-  
 
   <div class="content">
-    <h1 id="구현-정리"><strong>구현 정리</strong></h1>
-
-<hr />
-
-<h2 id="1-구성-요소"><span class="me-2"><strong>1. 구성 요소</strong></span><a href="#1-구성-요소" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<h3 id="11-taskqueue"><span class="me-2"><strong>1.1 TaskQueue</strong></span><a href="#11-taskqueue" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<p>wget 작업을 다루는 Task Queue</p>
-
-<ul>
-  <li><strong>헤더:</strong> <code class="language-plaintext highlighter-rouge">task_queue.h</code></li>
-  <li><strong>구현:</strong> <code class="language-plaintext highlighter-rouge">task_queue.c</code></li>
-</ul>
-
-<p><strong>함수:</strong></p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">TaskQueue_init</code>: TaskQueue 초기화.</li>
-  <li><code class="language-plaintext highlighter-rouge">TaskQueue_push</code>: Task 추가.</li>
-  <li><code class="language-plaintext highlighter-rouge">TaskQueue_pop</code>: Task를 Queue에서 하나 꺼냄.</li>
-  <li><code class="language-plaintext highlighter-rouge">TaskQueue_destroy</code>: Queue에서 사용한 자원을 정리.</li>
-</ul>
-
-<p><strong>Task Structure:</strong></p>
-
-<div class="language-c highlighter-rouge"><div class="code-header">
-        <span data-label-text="C"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td><td class="rouge-code"><pre><span class="k">typedef</span> <span class="k">struct</span> <span class="n">Task</span> <span class="p">{</span>
-    <span class="kt">char</span> <span class="n">url</span><span class="p">[</span><span class="n">MAX_DOMAIN_SIZE</span><span class="p">];</span>
-    <span class="kt">char</span> <span class="n">filename</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
-    <span class="n">bool</span> <span class="n">final</span><span class="p">;</span> <span class="c1">// 스레드 종료를 위한 작업 종료 지시자</span>
-    <span class="k">struct</span> <span class="n">Task</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">Task</span><span class="p">;</span>
-</pre></td></tr></tbody></table></code></div></div>
-
-<hr />
-
-<h3 id="12-스레드-풀"><span class="me-2"><strong>1.2 스레드 풀</strong></span><a href="#12-스레드-풀" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<p>wget 작업을 병렬로 처리하기 위한 스레드 풀</p>
-
-<ul>
-  <li><strong>헤더:</strong> <code class="language-plaintext highlighter-rouge">task_queue.h</code></li>
-  <li><strong>구현:</strong> <code class="language-plaintext highlighter-rouge">task_queue.c</code></li>
-</ul>
-
-<p><strong>함수:</strong></p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">thread_pool_init</code>: 스레드 풀 초기화.</li>
-  <li><code class="language-plaintext highlighter-rouge">thread_pool_add_task</code>: Task Queue에 Task 추가.</li>
-  <li><code class="language-plaintext highlighter-rouge">thread_pool_wait</code>: 모든 Task 끝날 때까지 대기.</li>
-  <li><code class="language-plaintext highlighter-rouge">thread_pool_destroy</code>: 큐에 종료 Task를 추가해 모든 스레드 종료 후 자원 정리.</li>
-</ul>
-
-<hr />
-
-<h3 id="13-메모리-풀"><span class="me-2"><strong>1.3 메모리 풀</strong></span><a href="#13-메모리-풀" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<p>수집한 Domain, Title 쌍을 저장하기 위한 BST 전용 메모리 풀</p>
-
-<ul>
-  <li><strong>헤더:</strong> <code class="language-plaintext highlighter-rouge">memory_pool.h</code></li>
-  <li><strong>구현:</strong> <code class="language-plaintext highlighter-rouge">memory_pool.c</code></li>
-</ul>
-
-<p><strong>함수:</strong></p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">MemoryPool_init</code>: 메모리 풀 초기화.</li>
-  <li><code class="language-plaintext highlighter-rouge">MemoryPool_alloc</code>: 메모리 풀에서 자원 할당.</li>
-  <li><code class="language-plaintext highlighter-rouge">MemoryPool_free</code>: 메모리 풀로 자원 반환.</li>
-  <li><code class="language-plaintext highlighter-rouge">MemoryPool_destroy</code>: 메모리 풀 정리.</li>
-</ul>
-
-<hr />
-
-<h3 id="14-binary-search-tree-bst"><span class="me-2"><strong>1.4 Binary Search Tree (BST)</strong></span><a href="#14-binary-search-tree-bst" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<p>수집한 Domain, Title 쌍을 이진 탐색 트리 형태로 저장</p>
-
-<ul>
-  <li><strong>헤더:</strong> <code class="language-plaintext highlighter-rouge">bst.h</code></li>
-  <li><strong>구현:</strong> <code class="language-plaintext highlighter-rouge">bst.c</code></li>
-</ul>
-
-<p><strong>함수:</strong></p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">BST_new</code>: BST 노드 생성.</li>
-  <li><code class="language-plaintext highlighter-rouge">BST_insert</code>: Domain, Title 쌍 추가.</li>
-  <li><code class="language-plaintext highlighter-rouge">BST_search</code>: Domain 검색.</li>
-  <li><code class="language-plaintext highlighter-rouge">BST_print_inorder</code>: 디버깅 용 BST Inorder 출력 함수.</li>
-</ul>
-
-<hr />
-
-<h3 id="15-collect"><span class="me-2"><strong>1.5 Collect</strong></span><a href="#15-collect" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<p>과제에서 요구하는 기능들 집합</p>
-
-<ul>
-  <li><strong>헤더:</strong> <code class="language-plaintext highlighter-rouge">collect.h</code></li>
-  <li><strong>구현:</strong> <code class="language-plaintext highlighter-rouge">collect.c</code></li>
-</ul>
-
-<p><strong>함수:</strong></p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">wget</code>: 페이지를 다운로드하고 title을 추출해서 BST에 저장.</li>
-  <li><code class="language-plaintext highlighter-rouge">find_title</code>: HTML file에서 title 태그 추출.</li>
-  <li><code class="language-plaintext highlighter-rouge">get_domain_name</code>: URL에서 Domain Name을 추출.</li>
-  <li><code class="language-plaintext highlighter-rouge">concat_string</code>: 여러 개의 문자열을 연걸.</li>
-</ul>
-
-<hr />
-
-<h3 id="16-backupstack"><span class="me-2"><strong>1.6 BackupStack</strong></span><a href="#16-backupstack" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<p>load 명령 실행 시 남아있던 기존 명령을 스택에 백업함</p>
-
-<ul>
-  <li><strong>구현:</strong> <code class="language-plaintext highlighter-rouge">main.c</code></li>
-</ul>
-
-<p><strong>함수:</strong></p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">backup</code>: 남은 명령을 입력으로부터 저장.</li>
-  <li><code class="language-plaintext highlighter-rouge">restore</code>: 저장된 명령을 입력으로 복원.</li>
-</ul>
-
-<hr />
-
-<h2 id="2-작업-흐름"><span class="me-2"><strong>2. 작업 흐름</strong></span><a href="#2-작업-흐름" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<ol>
-  <li>명령어를 읽어들임.
-    <ul>
-      <li>읽지 못했을 경우
-        <ul>
-          <li>현재 입력이 표준 입력이고 남은 명령어가 없을 경우 자원을 정리하고 종료</li>
-          <li>리다이렉트 됐을 경우
-            <ul>
-              <li>남은 명령어가 없으면 표준 입력으로 복구</li>
-              <li>남았을 경우 명령어 백업으로부터 복구</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>읽었을 경우 개행문자 기준으로 토큰화</li>
-    </ul>
-  </li>
-  <li>작업 수행
-    <ul>
-      <li>URL의 경우, thread_pool에 작업 추가</li>
-      <li>print, stat의 경우 모든 thread 작업 완료 대기 후 명령 수행</li>
-      <li>load의 경우 load 이후에 남아있는 명령 백업 후 입력 리다이렉션 및 1번으로 이동</li>
-      <li>quit의 경우 자원 정리 후 종료</li>
-    </ul>
-  </li>
-</ol>
-
+    
 <p>🔗 <a href="https://github.com/Forte-NaoP/Univ-Project/tree/main/Software-Practice/title-collect" target="_blank">원본 파일 보기</a></p>
 
   </div>
@@ -1609,12 +1303,6 @@
 
 
 
-  <div class="toc-border-cover z-3"></div>
-  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
-    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
-    <nav id="toc"></nav>
-  </section>
-
  
           </aside>
         </div>
@@ -1872,27 +1560,7 @@
 
               <h4 class="pt-0 my-2">string.h 직접 구현하기</h4>
               <div class="text-muted">
-                <p>문자열 라이브러리 구현
-
-1. 개요
-
-
-  C 표준 라이브러리의 &amp;lt;string.h&amp;gt; 및 기타 문자열 관련 함수들을 직접 구현.
-  앞으로의 과제를 위해 문자열 처리와 변환 함수들을 준비.
-
-
-
-
-2. 구현 함수
-
-2.1 숫자 변환 (Conversions)
-
-문자열 → 숫자
-
-
-  int atoi2(const char *str):
-    
- ...</p>
+                <p>🔗 원본 파일 보기</p>
               </div>
             </div>
           </a>

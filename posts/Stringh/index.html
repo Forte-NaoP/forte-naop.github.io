@@ -212,16 +212,9 @@
 
   
 
-  
-    
-
-    
-
-  
 
 
-
-  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js,npm/tocbot@4.32.2/dist/tocbot.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js"></script>
 
 
 
@@ -529,144 +522,15 @@
   
 
   
-    
-    
-
-    
-      
-        
-        
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-
-    
-  
 
   
   
 
   
-    
-    
-
-    
-      
-        
-        
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-
-    
-  
 
   
   
 
-  
-    
-    
-
-    
-      
-        
-        
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-
-    
   
 
   
@@ -688,7 +552,7 @@
 
 
 
-<article class="px-1" data-toc="true">
+<article class="px-1" data-toc="false">
   <header>
     <h1 data-toc-skip>string.h 직접 구현하기</h1>
     
@@ -762,9 +626,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="693 words"
+  title="7 words"
 >
-  <em>3 min</em> read</span>
+  <em>1 min</em> read</span>
 
         </div>
       </div>
@@ -772,192 +636,9 @@
   </header>
 
   
-    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
-      <span class="label text-truncate">string.h 직접 구현하기</span>
-      <button type="button" class="toc-trigger btn me-1">
-        <i class="fa-solid fa-list-ul fa-fw"></i>
-      </button>
-    </div>
-
-    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
-      <span class="label ps-2 pe-1">Contents</span>
-      <i class="fa-solid fa-angle-right fa-fw"></i>
-    </button>
-
-    <dialog id="toc-popup" class="p-0">
-      <div class="header d-flex flex-row align-items-center justify-content-between">
-        <div class="label text-truncate py-2 ms-4">string.h 직접 구현하기</div>
-        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
-          <i class="fas fa-close"></i>
-        </button>
-      </div>
-      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
-    </dialog>
-  
 
   <div class="content">
-    <h1 id="문자열-라이브러리-구현">문자열 라이브러리 구현</h1>
-
-<h2 id="1-개요"><span class="me-2"><strong>1. 개요</strong></span><a href="#1-개요" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<ul>
-  <li>C 표준 라이브러리의 <code class="language-plaintext highlighter-rouge">&lt;string.h&gt;</code> 및 기타 문자열 관련 함수들을 직접 구현.</li>
-  <li>앞으로의 과제를 위해 문자열 처리와 변환 함수들을 준비.</li>
-</ul>
-
-<hr />
-
-<h2 id="2-구현-함수"><span class="me-2"><strong>2. 구현 함수</strong></span><a href="#2-구현-함수" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<h3 id="21-숫자-변환-conversions"><span class="me-2"><strong>2.1 숫자 변환 (Conversions)</strong></span><a href="#21-숫자-변환-conversions" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<h4 id="문자열--숫자"><span class="me-2">문자열 → 숫자</span><a href="#문자열--숫자" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">int atoi2(const char *str)</code>:
-    <ul>
-      <li>문자열 <code class="language-plaintext highlighter-rouge">str</code>을 <code class="language-plaintext highlighter-rouge">int</code>로 변환.</li>
-      <li><code class="language-plaintext highlighter-rouge">int</code>는 32비트 정수로 간주.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">long atol2(const char *str)</code>:
-    <ul>
-      <li>문자열 <code class="language-plaintext highlighter-rouge">str</code>을 <code class="language-plaintext highlighter-rouge">long</code>으로 변환.</li>
-      <li><code class="language-plaintext highlighter-rouge">long</code>은 64비트 정수로 간주.</li>
-    </ul>
-  </li>
-</ul>
-
-<h4 id="숫자--문자열"><span class="me-2">숫자 → 문자열</span><a href="#숫자--문자열" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">char *int2str(char *dest, int num)</code>:
-    <ul>
-      <li>정수 <code class="language-plaintext highlighter-rouge">num</code>을 문자열로 변환 후 <code class="language-plaintext highlighter-rouge">dest</code>에 저장.</li>
-      <li><code class="language-plaintext highlighter-rouge">dest</code>가 <code class="language-plaintext highlighter-rouge">NULL</code>일 경우, 동적으로 메모리를 할당하여 반환.</li>
-      <li>메모리 할당 실패 시 <code class="language-plaintext highlighter-rouge">NULL</code> 반환.</li>
-    </ul>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="22-문자열-조작-string-manipulation"><span class="me-2"><strong>2.2 문자열 조작 (String Manipulation)</strong></span><a href="#22-문자열-조작-string-manipulation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">char *strcpy(char *dst, const char *src)</code>:
-    <ul>
-      <li>문자열 <code class="language-plaintext highlighter-rouge">src</code>를 <code class="language-plaintext highlighter-rouge">dst</code>로 복사.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">char *strncpy(char *dst, const char *src, size_t count)</code>:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">src</code>에서 최대 <code class="language-plaintext highlighter-rouge">count</code> 바이트를 <code class="language-plaintext highlighter-rouge">dst</code>로 복사.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">char *strcat(char *dst, const char *src)</code>:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">dst</code> 문자열의 끝에 <code class="language-plaintext highlighter-rouge">src</code>를 붙임.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">char *strncat(char *dst, const char *src, size_t count)</code>:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">dst</code> 문자열의 끝에 최대 <code class="language-plaintext highlighter-rouge">count</code> 바이트만큼 <code class="language-plaintext highlighter-rouge">src</code>를 붙임.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">char *strdup(const char *str)</code>:
-    <ul>
-      <li>문자열 <code class="language-plaintext highlighter-rouge">str</code>을 복사하여 동적 메모리에 저장하고 해당 포인터 반환.</li>
-    </ul>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="23-문자열-검사-string-examination"><span class="me-2"><strong>2.3 문자열 검사 (String Examination)</strong></span><a href="#23-문자열-검사-string-examination" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">size_t strlen(const char *str)</code>:
-    <ul>
-      <li>문자열 <code class="language-plaintext highlighter-rouge">str</code>의 길이를 반환.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">int strcmp(const char *lhs, const char *rhs)</code>:
-    <ul>
-      <li>두 문자열 <code class="language-plaintext highlighter-rouge">lhs</code>와 <code class="language-plaintext highlighter-rouge">rhs</code>를 비교.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">int strncmp(const char *lhs, const char *rhs, size_t count)</code>:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">lhs</code>와 <code class="language-plaintext highlighter-rouge">rhs</code>를 최대 <code class="language-plaintext highlighter-rouge">count</code> 바이트만큼 비교.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">char *strchr(const char *str, int ch)</code>:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">str</code>에서 문자 <code class="language-plaintext highlighter-rouge">ch</code>가 처음 나타나는 위치를 반환.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">char *strrchr(const char *str, int ch)</code>:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">str</code>에서 문자 <code class="language-plaintext highlighter-rouge">ch</code>가 마지막으로 나타나는 위치를 반환.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">char *strpbrk(const char *str, const char *accept)</code>:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">str</code>에서 <code class="language-plaintext highlighter-rouge">accept</code> 문자열 중 하나라도 처음 등장하는 위치를 반환.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">char *strstr(const char *str, const char *substr)</code>:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">str</code>에서 부분 문자열 <code class="language-plaintext highlighter-rouge">substr</code>이 처음 나타나는 위치를 반환.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">char *strtok(char *str, const char *delim)</code>:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">str</code>을 <code class="language-plaintext highlighter-rouge">delim</code>으로 토큰화.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">char *strtok_r(char *str, const char *delim, char **saveptr)</code>:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">strtok</code>와 동일하지만, 내부 상태 대신 <code class="language-plaintext highlighter-rouge">saveptr</code>에 저장.</li>
-    </ul>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="24-메모리-조작-memory-manipulation"><span class="me-2"><strong>2.4 메모리 조작 (Memory Manipulation)</strong></span><a href="#24-메모리-조작-memory-manipulation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">void *memcpy(void *dest, const void *src, size_t n)</code>:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">src</code>에서 <code class="language-plaintext highlighter-rouge">dest</code>로 <code class="language-plaintext highlighter-rouge">n</code> 바이트 복사.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">void *memset(void *dest, int ch, size_t count)</code>:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">dest</code>에서 <code class="language-plaintext highlighter-rouge">count</code> 바이트를 <code class="language-plaintext highlighter-rouge">ch</code>로 설정.</li>
-    </ul>
-  </li>
-</ul>
-
-<hr />
-
-<h2 id="4-구현-제한-사항"><span class="me-2"><strong>4. 구현 제한 사항</strong></span><a href="#4-구현-제한-사항" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<ul>
-  <li>C 표준 라이브러리 및 기타 외부 라이브러리 함수 사용 금지.</li>
-  <li><strong>허용된 함수</strong>:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">malloc</code>, <code class="language-plaintext highlighter-rouge">calloc</code>, <code class="language-plaintext highlighter-rouge">free</code>를 포함한 일부 메모리 관리 함수.</li>
-    </ul>
-  </li>
-  <li>필요한 경우 라이브러리 함수를 직접 구현 가능.</li>
-  <li>동적으로 할당된 모든 자원은 프로그램 종료 전에 반드시 해제.</li>
-</ul>
-
-<hr />
-
+    
 <p>🔗 <a href="https://github.com/Forte-NaoP/Univ-Project/tree/main/Software-Practice/mystring" target="_blank">원본 파일 보기</a></p>
 
   </div>
@@ -1621,12 +1302,6 @@
 
 
 
-
-  <div class="toc-border-cover z-3"></div>
-  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
-    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
-    <nav id="toc"></nav>
-  </section>
 
  
           </aside>

@@ -626,9 +626,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="459 words"
+  title="7 words"
 >
-  <em>2 min</em> read</span>
+  <em>1 min</em> read</span>
 
         </div>
       </div>
@@ -638,93 +638,7 @@
   
 
   <div class="content">
-    <p>점수판과 재생 정보는 <code class="language-plaintext highlighter-rouge">board.rs</code>에서 다룸
-<code class="language-plaintext highlighter-rouge">register_channel.rs</code>에서 등록한 텍스트 채널에<br />
-스레드 생성후 점수판과 재생 정보 embed를 갱신하는 방식</p>
-
-<p>고려사항</p>
-<ul>
-  <li>text channel 등록없이 play 하는 경우</li>
-  <li>…</li>
-</ul>
-
-<hr />
-<p>24-05-22<br /></p>
-
-<p>현재 <code class="language-plaintext highlighter-rouge">board</code>와 <code class="language-plaintext highlighter-rouge">guild_queue</code>가 분리되어 있어 트랙 이벤트가 발생할 때 <code class="language-plaintext highlighter-rouge">board</code>에 접근하기 불편함.</p>
-
-<p>두 기능은 같이 동작하므로 결합시킬 예정</p>
-
-<p><code class="language-plaintext highlighter-rouge">GuildQueue</code>와 <code class="language-plaintext highlighter-rouge">Board</code>를 합치는 과정중</p>
-<div class="language-rust highlighter-rouge"><div class="code-header">
-        <span data-label-text="Rust"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="rouge-code"><pre><span class="k">pub</span> <span class="k">async</span> <span class="k">fn</span> <span class="nf">register_channel</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">GuildChannel</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">inner</span> <span class="o">=</span> <span class="k">self</span><span class="py">.inner</span><span class="nf">.lock</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">channel_id</span> <span class="o">=</span> <span class="n">channel</span><span class="py">.id</span><span class="nf">.into</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">http</span> <span class="o">=</span> <span class="n">inner</span><span class="py">.http</span><span class="nf">.clone</span><span class="p">();</span>
-    <span class="n">inner</span><span class="py">.board</span><span class="nf">.set</span><span class="p">(</span><span class="n">http</span><span class="p">,</span> <span class="n">channel</span><span class="p">)</span><span class="k">.await</span><span class="p">;</span>
-    <span class="n">inner</span><span class="py">.channel</span> <span class="o">=</span> <span class="nf">Some</span><span class="p">(</span><span class="n">channel_id</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></td></tr></tbody></table></code></div></div>
-<p><code class="language-plaintext highlighter-rouge">inner.board.set(http, channel).await;</code> 라인에서 <code class="language-plaintext highlighter-rouge">future is not Send as this value is used across an await</code> 에러가 발생함.</p>
-
-<p><code class="language-plaintext highlighter-rouge">parking_lot::MutexGuard</code>가 not Send라서 발생하는 것 같은데, <code class="language-plaintext highlighter-rouge">GuildQueue</code>의 Mutex를 <code class="language-plaintext highlighter-rouge">tokio::sync::Mutex</code>로 변경할지</p>
-
-<p><code class="language-plaintext highlighter-rouge">GuildQueue</code>와 <code class="language-plaintext highlighter-rouge">Board</code>를 분리할 지 생각해봐야겠다.</p>
-
-<hr />
-<p>24-05-23<br />
-<code class="language-plaintext highlighter-rouge">board</code>와 <code class="language-plaintext highlighter-rouge">guild_queue</code>를 다음과 같이 결합함. 상기한 문제가 됐던 부분 또한 다음과 같이 수정함.</p>
-<div class="language-rust highlighter-rouge"><div class="code-header">
-        <span data-label-text="Rust"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="rouge-code"><pre><span class="k">pub</span> <span class="k">struct</span> <span class="n">GuildQueueCore</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="n">board</span><span class="p">:</span> <span class="nb">Arc</span><span class="o">&lt;</span><span class="nn">tokio</span><span class="p">::</span><span class="nn">sync</span><span class="p">::</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">Board</span><span class="o">&gt;&gt;</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="k">pub</span> <span class="k">async</span> <span class="k">fn</span> <span class="nf">register_channel</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">GuildChannel</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">board_lock</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="k">mut</span> <span class="n">inner</span> <span class="o">=</span> <span class="k">self</span><span class="py">.inner</span><span class="nf">.lock</span><span class="p">();</span>
-        <span class="k">let</span> <span class="n">channel_id</span> <span class="o">=</span> <span class="n">channel</span><span class="py">.id</span><span class="nf">.into</span><span class="p">();</span>
-        <span class="n">inner</span><span class="py">.channel</span> <span class="o">=</span> <span class="nf">Some</span><span class="p">(</span><span class="n">channel_id</span><span class="p">);</span>
-        <span class="n">inner</span><span class="py">.board</span><span class="nf">.clone</span><span class="p">()</span>
-    <span class="p">};</span>
     
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">board</span> <span class="o">=</span> <span class="n">board_lock</span><span class="nf">.lock</span><span class="p">()</span><span class="k">.await</span><span class="p">;</span>
-    <span class="n">board</span><span class="nf">.set</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span><span class="k">.await</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></td></tr></tbody></table></code></div></div>
-<p>기존 코드 구조에서 <code class="language-plaintext highlighter-rouge">GuildQueue</code>는 동기적으로 동작했으므로 변경을 줄이기 위해 <code class="language-plaintext highlighter-rouge">Board</code>만 <code class="language-plaintext highlighter-rouge">tokio::sync::Mutex</code>로 감쌈.</p>
-
-<p>inner의 MutexGuard는 not Send이기 때문에 블록으로 감싸서 await 구문 전에 drop 시켜줌.</p>
-
-<p>음악의 재생과 메세지의 업데이트를 <code class="language-plaintext highlighter-rouge">QueueHandler</code>에서 다루기 위해서 하나로 합쳤는데, async/await를 사용하지 않던 부분에 <code class="language-plaintext highlighter-rouge">Board</code>를 끼워넣다보니 전체적인 구조가 이상해진 느낌.</p>
-
-<p>나중에 고쳐야 할 듯</p>
-
 <p>🔗 <a href="https://github.com/Forte-NaoP/DiscordBot/blob/main/memo/%EA%B2%8C%EC%9E%84%20%EB%B3%B4%EB%93%9C.md" target="_blank">원본 파일 보기</a></p>
 
   </div>
@@ -1616,7 +1530,11 @@
 
               <h4 class="pt-0 my-2">Rust 동시성 문제</h4>
               <div class="text-muted">
-                <p>🔗 원본 파일 보기</p>
+                <p>std::process::Stdio::piped() 는 새로운 파이프를 생성한다. std::process::Command::stdin(Stdio::piped()) 같은 식으로 사용하면 stdin이 생성된 파이프로 대체 되는 식.
+CommandObject.stdin.take().unwrap()으로 해당 파이프 디스크립터를 가져올 수 있다.
+  
+  
+ ...</p>
               </div>
             </div>
           </a>
@@ -1644,11 +1562,7 @@
 
               <h4 class="pt-0 my-2">음성 관련</h4>
               <div class="text-muted">
-                <p>구버전에서 dca(Ogg to DCA converter)라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함.
-Input::Lazy 의 Flow
-YoutubeDl::into() 
-    YoutubeDl::create_async (Compose trait 구현 사항)
-        ...</p>
+                <p>🔗 원본 파일 보기</p>
               </div>
             </div>
           </a>

@@ -212,9 +212,16 @@
 
   
 
+  
+    
+
+    
+
+  
 
 
-  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js,npm/tocbot@4.32.2/dist/tocbot.min.js"></script>
 
 
 
@@ -522,6 +529,38 @@
   
 
   
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
 
   
   
@@ -552,7 +591,7 @@
 
 
 
-<article class="px-1" data-toc="false">
+<article class="px-1" data-toc="true">
   <header>
     <h1 data-toc-skip>OOP 정리</h1>
     
@@ -626,9 +665,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="7 words"
+  title="659 words"
 >
-  <em>1 min</em> read</span>
+  <em>3 min</em> read</span>
 
         </div>
       </div>
@@ -636,9 +675,200 @@
   </header>
 
   
+    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
+      <span class="label text-truncate">OOP 정리</span>
+      <button type="button" class="toc-trigger btn me-1">
+        <i class="fa-solid fa-list-ul fa-fw"></i>
+      </button>
+    </div>
+
+    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+      <span class="label ps-2 pe-1">Contents</span>
+      <i class="fa-solid fa-angle-right fa-fw"></i>
+    </button>
+
+    <dialog id="toc-popup" class="p-0">
+      <div class="header d-flex flex-row align-items-center justify-content-between">
+        <div class="label text-truncate py-2 ms-4">OOP 정리</div>
+        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+          <i class="fas fa-close"></i>
+        </button>
+      </div>
+      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
+    </dialog>
+  
 
   <div class="content">
-    
+    <h1 id="oop">OOP</h1>
+
+<h2 id="특징"><span class="me-2">특징</span><a href="#특징" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<ol>
+  <li>
+    <p>추상화</p>
+
+    <p>대상의 공통적인 특성들을 묶어 표현하는 것 (abstract, interface class)</p>
+  </li>
+  <li>
+    <p>상속</p>
+
+    <ul>
+      <li>기존 클래스의 속성과 메서드를 물려받는 것</li>
+      <li>코드 재사용성과 확장성을 높임</li>
+      <li>부모 클래스의 public, protected 멤버를 상속받는다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>캡슐화</p>
+
+    <ul>
+      <li>데이터와 메서드를 묶고, 데이터에 대한 직접 접근을 막는 것</li>
+    </ul>
+  </li>
+  <li>
+    <p>다형성</p>
+
+    <ul>
+      <li>같은 이름의 메서드나 연산자가 다른 동작을 하는 것</li>
+      <li>오버로딩과 오버라이딩을 통해 구현
+        <ul>
+          <li>오버로딩: 이름은 같지만 시그니쳐가 다른 것</li>
+          <li>오버라이딩: 상위 클래스의 메소드를 재정의 하는 것</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="solid-원칙"><span class="me-2">SOLID 원칙</span><a href="#solid-원칙" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<ol>
+  <li>
+    <p>단일 책임 원칙 (SRP)</p>
+
+    <p>클래스는 단 하나의 책임을 가지고 하나의 이유로만 변경되어야 한다.</p>
+  </li>
+  <li>
+    <p>개방 폐쇄 원칙 (OCP)</p>
+
+    <p>확장에는 열려 있고 수정에는 닫혀 있어야 한다.
+ 기존 코드를 수정하지 않고 기능을 추가할 수 있어야 한다.</p>
+  </li>
+  <li>
+    <p>리스코프 치환 원칙 (LSP)</p>
+
+    <p>상위 타입의 객체를 하위 타입으로 대체해도 정상적으로 동작해야 한다.</p>
+  </li>
+  <li>
+    <p>인터페이스 분리 원칙 (ISP)</p>
+
+    <p>클라이언트는 자신이 사용하지 않는 메서드에 의존하지 않아야 한다.
+ 인터페이스를 세분화하여 클라이언트가 필요한 기능만 사용할 수 있도록 제한한다.</p>
+  </li>
+  <li>
+    <p>의존성 역전 원칙 (DIP)</p>
+
+    <p>고수준 모듈(비즈니스 로직 등)은 저수준 모듈(구현 세부 사항)에 의존해서는 안 된다.
+ 고수준, 저수준 모두 둘 다 추상화(인터페이스나 추상 클래스)에 의존해야 한다.</p>
+
+    <p>DIP 위반</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="code-header">
+        <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre> <span class="k">class</span> <span class="nc">EmailService</span> <span class="p">{</span>
+     <span class="nl">public:</span>
+         <span class="kt">void</span> <span class="n">SendEmail</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Sending Email: "</span> <span class="o">&lt;&lt;</span> <span class="n">message</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+         <span class="p">}</span>
+ <span class="p">};</span>
+
+ <span class="c1">// 고수준 모듈: Notification은 EmailService에 직접 의존</span>
+ <span class="k">class</span> <span class="nc">Notification</span> <span class="p">{</span>
+     <span class="nl">private:</span>
+         <span class="n">EmailService</span> <span class="n">emailService</span><span class="p">;</span> <span class="c1">// 저수준 모듈에 직접 의존</span>
+
+     <span class="nl">public:</span>
+         <span class="kt">void</span> <span class="n">Notify</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">emailService</span><span class="p">.</span><span class="n">SendEmail</span><span class="p">(</span><span class="n">message</span><span class="p">);</span> <span class="c1">// EmailService에 직접 접근</span>
+         <span class="p">}</span>
+ <span class="p">};</span>
+</pre></td></tr></tbody></table></code></div>    </div>
+
+    <p>DIP 적용</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="code-header">
+        <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="rouge-code"><pre> <span class="k">class</span> <span class="nc">IMessageService</span> <span class="p">{</span>
+     <span class="nl">public:</span>
+         <span class="k">virtual</span> <span class="kt">void</span> <span class="n">SendMessage</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="p">};</span>
+
+ <span class="c1">// 고수준 모듈</span>
+ <span class="k">class</span> <span class="nc">Notification</span> <span class="p">{</span>
+     <span class="nl">private:</span>
+         <span class="n">IMessageService</span><span class="o">*</span> <span class="n">messageService</span><span class="p">;</span>
+
+     <span class="nl">public:</span>
+         <span class="n">Notification</span><span class="p">(</span><span class="n">IMessageService</span><span class="o">*</span> <span class="n">service</span><span class="p">)</span> <span class="o">:</span> <span class="n">messageService</span><span class="p">(</span><span class="n">service</span><span class="p">)</span> <span class="p">{}</span>
+
+         <span class="kt">void</span> <span class="nf">Notify</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">messageService</span><span class="o">-&gt;</span><span class="n">SendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+         <span class="p">}</span>
+ <span class="p">};</span>
+
+ <span class="c1">// 저수준 모듈</span>
+ <span class="k">class</span> <span class="nc">EmailService</span> <span class="o">:</span> <span class="k">public</span> <span class="n">IMessageService</span> <span class="p">{</span>
+     <span class="nl">public:</span>
+         <span class="kt">void</span> <span class="n">SendMessage</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+             <span class="c1">// 이메일 전송 로직</span>
+         <span class="p">}</span>
+ <span class="p">};</span>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+</ol>
+
 <p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/study/CS/OOP.md" target="_blank">원본 파일 보기</a></p>
 
   </div>
@@ -1302,6 +1532,12 @@
 
 
 
+
+  <div class="toc-border-cover z-3"></div>
+  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
+    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
+    <nav id="toc"></nav>
+  </section>
 
  
           </aside>

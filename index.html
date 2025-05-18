@@ -794,7 +794,21 @@ Trie의 기본 ...</p>
             <h1 class="card-title my-2 mt-md-0">게임 보드 관련 잡설</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>🔗 원본 파일 보기</p>
+              <p>점수판과 재생 정보는 board.rs에서 다룸
+register_channel.rs에서 등록한 텍스트 채널에
+스레드 생성후 점수판과 재생 정보 embed를 갱신하는 방식
+
+고려사항
+
+  text channel 등록없이 play 하는 경우
+  …
+
+
+
+
+24-05-22
+
+현재 board와 guild_queue가 분리되어 있어 트랙 이벤트가 발생할 때 bo...</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -850,7 +864,11 @@ Trie의 기본 ...</p>
             <h1 class="card-title my-2 mt-md-0">음성 관련</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>🔗 원본 파일 보기</p>
+              <p>구버전에서 dca(Ogg to DCA converter)라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함.
+Input::Lazy 의 Flow
+YoutubeDl::into() 
+    YoutubeDl::create_async (Compose trait 구현 사항)
+        ...</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">

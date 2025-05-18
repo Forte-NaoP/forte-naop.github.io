@@ -212,9 +212,16 @@
 
   
 
+  
+    
+
+    
+
+  
 
 
-  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js,npm/tocbot@4.32.2/dist/tocbot.min.js"></script>
 
 
 
@@ -522,10 +529,162 @@
   
 
   
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
 
   
   
 
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
   
 
   
@@ -552,7 +711,7 @@
 
 
 
-<article class="px-1" data-toc="false">
+<article class="px-1" data-toc="true">
   <header>
     <h1 data-toc-skip>C++ 정리</h1>
     
@@ -626,9 +785,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="7 words"
+  title="2919 words"
 >
-  <em>1 min</em> read</span>
+  <em>16 min</em> read</span>
 
         </div>
       </div>
@@ -636,9 +795,759 @@
   </header>
 
   
+    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
+      <span class="label text-truncate">C++ 정리</span>
+      <button type="button" class="toc-trigger btn me-1">
+        <i class="fa-solid fa-list-ul fa-fw"></i>
+      </button>
+    </div>
+
+    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+      <span class="label ps-2 pe-1">Contents</span>
+      <i class="fa-solid fa-angle-right fa-fw"></i>
+    </button>
+
+    <dialog id="toc-popup" class="p-0">
+      <div class="header d-flex flex-row align-items-center justify-content-between">
+        <div class="label text-truncate py-2 ms-4">C++ 정리</div>
+        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+          <i class="fas fa-close"></i>
+        </button>
+      </div>
+      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
+    </dialog>
+  
 
   <div class="content">
-    
+    <h1 id="c-정리">C++ 정리</h1>
+
+<h2 id="const"><span class="me-2">Const</span><a href="#const" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<ul>
+  <li>상수에 관한 키워드</li>
+</ul>
+
+<h3 id="일반-변수에서의-const"><span class="me-2">일반 변수에서의 <code class="language-plaintext highlighter-rouge">const</code></span><a href="#일반-변수에서의-const" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ul>
+  <li>변수 선언시 이후 해당 변수에 대한 변경을 막는다.</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">const</code> 키워드 이후의 구문에 대한 변경을 막는다고 간주할 수 있다.</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="code-header">
+        <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="c1">// 기본 자료형(int, float 등)은 무시하고 생각</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span> <span class="k">const</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="c1">// -&gt; val에 대한 변경 금지</span>
+
+<span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">val</span> <span class="o">=</span> <span class="p">...;</span>
+<span class="c1">// 이후 *val = ...; 금지</span>
+<span class="c1">// val = ...; 가능</span>
+
+<span class="k">const</span> <span class="kt">int</span> <span class="o">**</span><span class="n">val</span> <span class="o">=</span> <span class="p">...;</span>
+<span class="c1">// **val = ...; 금지</span>
+<span class="c1">// *val = ...; val = ...; 가능</span>
+
+<span class="k">const</span> <span class="kt">int</span> <span class="o">*</span> <span class="k">const</span> <span class="o">*</span><span class="n">val</span> <span class="o">=</span> <span class="p">...;</span>
+<span class="c1">// **val = ...; *val = ...; 금지</span>
+<span class="c1">// val = ...; 가능</span>
+
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+</ul>
+
+<h3 id="함수에서의-const"><span class="me-2">함수에서의 <code class="language-plaintext highlighter-rouge">const</code></span><a href="#함수에서의-const" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ul>
+  <li>반환형, 매개변수의 <code class="language-plaintext highlighter-rouge">const</code>는 일반 변수와 동일</li>
+  <li>멤버 함수의 경우 함수 시그니쳐 이후에 <code class="language-plaintext highlighter-rouge">const</code>를 사용할 수 있다.</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">const</code> 멤버 함수의 제약조건은 다음과 같다.</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="code-header">
+        <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+</pre></td><td class="rouge-code"><pre>  <span class="k">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+  <span class="nl">private:</span>
+      <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+      <span class="k">mutable</span> <span class="kt">int</span> <span class="n">mutableValue</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">static</span> <span class="kt">int</span> <span class="n">staticValue</span><span class="p">;</span>
+  <span class="nl">public:</span>
+      <span class="kt">int</span> <span class="n">getValue</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// non-const 멤버 함수</span>
+          <span class="k">return</span> <span class="n">value</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="kt">void</span> <span class="n">SetValue</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// const 멤버 함수</span>
+          <span class="n">value</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span> <span class="c1">// 일반 멤버 변수 수정 불가</span>
+          <span class="n">staticValue</span> <span class="o">=</span> <span class="n">mutableValue</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// static, mutable 멤버 변수 수정 가능</span>
+      <span class="p">}</span>
+
+      <span class="kt">bool</span> <span class="nf">IsPositive</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// const 멤버 함수</span>
+          <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">GetValue</span><span class="p">();</span>  <span class="c1">// 일반 멤버 함수 호출 불가</span>
+          <span class="n">SetValue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// const 멤버 함수 호출 가능</span>
+          <span class="n">GetStaticValue</span><span class="p">();</span> <span class="c1">// static 멤버 함수 호출 가능</span>
+          <span class="n">externalFunction</span><span class="p">(</span><span class="n">value</span><span class="p">);</span> <span class="c1">// 외부 함수 호출 가능</span>
+          <span class="k">return</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>   
+      <span class="p">}</span>
+
+      <span class="k">static</span> <span class="kt">int</span> <span class="nf">GetStaticValue</span><span class="p">()</span> <span class="p">{</span>
+          <span class="n">staticValue</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// static 멤버 함수는 static 멤버 함수/변수만 접근 가능</span>
+          <span class="k">return</span> <span class="n">staticValue</span><span class="p">;</span>
+      <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// 외부 함수</span>
+  <span class="kt">void</span> <span class="nf">externalFunction</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">val</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">int</span> <span class="n">MyClass</span><span class="o">::</span><span class="n">staticValue</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+</ul>
+
+<h2 id="상속-다형성-virtual"><span class="me-2">상속, 다형성, Virtual</span><a href="#상속-다형성-virtual" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<ul>
+  <li>상속: 부모 클래스의 속성이나 메소드를 자식 클래스가 물려 받는 것.<br />
+코드 재사용성 증가, 객체 모델링 유연성 증가</li>
+  <li>
+    <p>다형성: 같은 이름의 메소드나 연산자가 다른 클래스에 대해 다른 동작을 하는 것</p>
+  </li>
+  <li>타입 캐스팅
+    <ul>
+      <li>
+        <p><strong>업 캐스팅과 Virtual 키워드</strong><br />
+다형성을 위해 자식 클래스를 부모 클래스로 변환하는 경우</p>
+      </li>
+      <li>
+        <p><strong>다운 캐스팅과 RTTI</strong><br />
+부모 클래스의 객체를 자식 클래스로 변환하는 경우<br />
+<code class="language-plaintext highlighter-rouge">dynamic_cast</code>를 이용해 수행되며 런타임에 객체의 타입을 확인 후, 불가능한 경우 포인터는 nullptr 반환, 참조자는 <code class="language-plaintext highlighter-rouge">std::bad_cast</code> 예외를 던진다.</p>
+      </li>
+    </ul>
+
+    <div class="language-cpp highlighter-rouge"><div class="code-header">
+        <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">Animal</span> <span class="p">{</span>
+  <span class="nl">public:</span>
+      <span class="k">virtual</span> <span class="kt">void</span> <span class="n">says</span><span class="p">()</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Animal says"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+      <span class="kt">void</span> <span class="nf">what</span><span class="p">()</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Animal"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+  <span class="k">class</span> <span class="nc">Dog</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Animal</span> <span class="p">{</span>
+  <span class="nl">public:</span>
+      <span class="kt">void</span> <span class="n">says</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Dog says"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+      <span class="kt">void</span> <span class="nf">what</span><span class="p">()</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Dog"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="n">Animal</span><span class="o">*</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Animal</span><span class="p">();</span>
+  <span class="n">Animal</span><span class="o">*</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Dog</span><span class="p">();</span>
+
+  <span class="n">a</span><span class="o">-&gt;</span><span class="n">says</span><span class="p">();</span> <span class="c1">// Animal says</span>
+  <span class="n">a</span><span class="o">-&gt;</span><span class="n">what</span><span class="p">();</span> <span class="c1">// Animal</span>
+  <span class="n">b</span><span class="o">-&gt;</span><span class="n">says</span><span class="p">();</span> <span class="c1">// Dog says</span>
+  <span class="n">b</span><span class="o">-&gt;</span><span class="n">what</span><span class="p">();</span> <span class="c1">// Animal</span>
+</pre></td></tr></tbody></table></code></div>    </div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Dog</code> 클래스의 인스턴스를 부모인 <code class="language-plaintext highlighter-rouge">Animal</code>로 업캐스팅했다.<br />
+함수 호출 결과를 보면 <code class="language-plaintext highlighter-rouge">virtual</code> 함수인 <code class="language-plaintext highlighter-rouge">says</code>는 원본 클래스의 함수를 잘 호출하지만 <code class="language-plaintext highlighter-rouge">what</code>은 부모 클래스의 함수만 호출된다.</li>
+      <li><code class="language-plaintext highlighter-rouge">virtual</code> 함수가 있는 클래스는 컴파일 과정에서 <code class="language-plaintext highlighter-rouge">VTable</code>을 생성해 함수 호출을 관리한다.</li>
+      <li><code class="language-plaintext highlighter-rouge">VTable</code>은 클래스마다 생성되며 객체는 <code class="language-plaintext highlighter-rouge">VTable</code> 포인터를 통해 자신의 클래스의 함수를 호출하게 된다.</li>
+      <li>non <code class="language-plaintext highlighter-rouge">virtual</code> 함수는 컴파일 타임에 정적으로 바인딩된다.</li>
+      <li>
+        <p>가상 함수가 포함된 클래스의 메모리 레이아웃은 다음과 같다.</p>
+
+        <div class="language-md highlighter-rouge"><div class="code-header">
+        <span data-label-text="Markdown"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td><td class="rouge-code"><pre>Animal 객체 메모리 레이아웃:
++----------------------------+
+| Animal 클래스 RTTI 포인터   |
++----------------------------+
+| Animal 클래스 VTable 포인터 | &lt;-- a가 여길 가리키고 있음
++----------------------------+
+| (Animal 클래스 멤버 변수)   |
++----------------------------+
+      
+Dog 객체 메모리 레이아웃:
++----------------------------+
+| Dog 클래스 RTTI 포인터      |
++----------------------------+
+| Dog 클래스 VTable 포인터    |  &lt;-- b가 여길 가리키고 있음
++----------------------------+
+| (Animal 클래스 멤버 변수)   |  
++----------------------------+
+| (Dog 클래스 멤버 변수)      |
++----------------------------+
+
+Animal VTable:
++-----------------+
+| &amp;Animal::speak  |  // Animal의 says() 함수 주소
++-----------------+
+      
+Dog VTable:
++-----------------+
+| &amp;Dog::speak     |  // Dog의 says() 함수 주소
++-----------------+
+</pre></td></tr></tbody></table></code></div>        </div>
+
+        <ul>
+          <li>해당 메모리 레이아웃은 다음과 같은 방법으로도 확인 할 수 있다.</li>
+        </ul>
+
+        <div class="language-cpp highlighter-rouge"><div class="code-header">
+        <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+</pre></td><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+    <span class="nl">private:</span>
+        <span class="kt">int</span> <span class="n">A_num</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">A_sum</span><span class="p">;</span>
+    <span class="nl">public:</span>
+        <span class="n">A</span><span class="p">()</span> <span class="p">{</span> 
+            <span class="n">A_num</span> <span class="o">=</span> <span class="mh">0x12121212</span><span class="p">;</span>
+            <span class="n">A_sum</span> <span class="o">=</span> <span class="mh">0x34343434</span><span class="p">;</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"A 생성자</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> 
+        <span class="p">}</span>
+        <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">says</span><span class="p">()</span> <span class="p">{</span> <span class="n">printf</span><span class="p">(</span><span class="s">"A의 func</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="p">}</span>
+        <span class="k">virtual</span> <span class="o">~</span><span class="n">A</span><span class="p">()</span> <span class="p">{</span> <span class="n">printf</span><span class="p">(</span><span class="s">"A 소멸자</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="p">}</span>
+            
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">B</span> <span class="o">:</span> <span class="k">public</span> <span class="n">A</span> <span class="p">{</span>
+    <span class="nl">private:</span>
+        <span class="kt">int</span> <span class="n">B_num</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">B_sum</span><span class="p">;</span>
+    <span class="nl">public:</span>
+        <span class="n">B</span><span class="p">()</span> <span class="p">{</span> 
+            <span class="n">B_num</span> <span class="o">=</span> <span class="mh">0x56565656</span><span class="p">;</span>
+            <span class="n">B_sum</span> <span class="o">=</span> <span class="mh">0x78787878</span><span class="p">;</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"B 생성자</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> 
+        <span class="p">}</span>
+        <span class="kt">void</span> <span class="nf">says</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">printf</span><span class="p">(</span><span class="s">"B의 func</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="p">}</span>
+        <span class="o">~</span><span class="n">B</span><span class="p">()</span> <span class="p">{</span> <span class="n">printf</span><span class="p">(</span><span class="s">"B 소멸자</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">A</span><span class="o">*</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">B</span><span class="p">();</span>
+<span class="kt">uintptr_t</span><span class="o">*</span> <span class="n">vtablePtr</span> <span class="o">=</span> <span class="o">*</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">uintptr_t</span><span class="o">**&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">);</span> <span class="c1">// vtable 포인터</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"vtablePtr: %p</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">vtablePtr</span><span class="p">);</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">dataPtr</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">));</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"A_num: %x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">dataPtr</span><span class="p">);</span>
+<span class="n">dataPtr</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span> 
+<span class="n">printf</span><span class="p">(</span><span class="s">"A_sum: %x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">dataPtr</span><span class="p">);</span>
+<span class="n">dataPtr</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"B_num: %x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">dataPtr</span><span class="p">);</span>
+<span class="n">dataPtr</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"B_sum: %x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">dataPtr</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">funcPtr</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="n">A</span><span class="o">*</span><span class="p">)</span><span class="o">&gt;</span><span class="p">(</span><span class="n">vtablePtr</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="n">funcPtr</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">typeid</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">).</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">type_info</span><span class="o">*</span> <span class="n">rttiInfo</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">type_info</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">vtablePtr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"RTTI type name: "</span> <span class="o">&lt;&lt;</span> <span class="n">rttiInfo</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="c1">// 출력 결과</span>
+<span class="c1">// A 생성자</span>
+<span class="c1">// B 생성자</span>
+<span class="c1">// vtablePtr: 0x5631eb7cbcc0</span>
+<span class="c1">// A_num: 12121212</span>
+<span class="c1">// A_sum: 34343434</span>
+<span class="c1">// B_num: 56565656</span>
+<span class="c1">// B_sum: 78787878</span>
+<span class="c1">// B의 func</span>
+<span class="c1">// RTTI type name: 1B</span>
+</pre></td></tr></tbody></table></code></div>        </div>
+      </li>
+      <li>
+        <p>소멸자도 함수이기 때문에 소멸자를 가상 함수로 선언하지 않으면 부모 클래스의 소멸자만 호출되어 메모리 누수가 발생할 수 있다.</p>
+      </li>
+      <li>순수 가상 함수
+        <ul>
+          <li>가상 함수를 선언만 한 형태</li>
+        </ul>
+
+        <div class="language-cpp highlighter-rouge"><div class="code-header">
+        <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">virtual</span> <span class="kt">void</span> <span class="n">func</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></div>        </div>
+
+        <ul>
+          <li>순수 가상 함수가 하나라도 있는 클래스는 추상 클래스라 하며 해당 클래스는 객체 생성이 불가능하다.</li>
+          <li>순수 가상 함수는 상속된 클래스에서 반드시 구현해줘야 함</li>
+          <li>순수 가상 함수로만 이루어진 클래스는 인터페이스라고 함</li>
+        </ul>
+      </li>
+      <li>생성자 (소멸자) 내부 가상 함수 호출의 문제점
+        <ul>
+          <li>부모 생성자 호출 후 자식 생성자가 호출 된다.</li>
+          <li>자식 소멸자 호출 후 부모 소멸자가 호출 된다.
+            <ul>
+              <li>부모 생성자 호출 시 자식은 초기화 되어 있지 않으므로 부모의 가상 함수가 호출 된다.</li>
+              <li>순수 가상 함수라면 실제 구현된 함수가 존재하지 않으므로 링킹에 실패한다.</li>
+              <li>소멸자에서 또한 자식 소멸자 호출이 되고 나면 이후 객체는 부모 클래스로 취급되므로 자식 클래스에서 오버라이딩 한 가상 함수가 정상적으로 호출되지 않는다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="포인터와-참조자"><span class="me-2">포인터와 참조자</span><a href="#포인터와-참조자" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th><strong>특징</strong></th>
+      <th><strong>포인터</strong></th>
+      <th><strong>참조자</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>NULL 지원</strong></td>
+      <td>지원 (<code class="language-plaintext highlighter-rouge">nullptr</code>)</td>
+      <td>지원하지 않음</td>
+    </tr>
+    <tr>
+      <td><strong>초기화</strong></td>
+      <td>나중에 초기화 가능</td>
+      <td>선언과 동시에 초기화 필수</td>
+    </tr>
+    <tr>
+      <td><strong>대상 변경</strong></td>
+      <td>가능</td>
+      <td>불가능</td>
+    </tr>
+    <tr>
+      <td><strong>사용법</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">&amp;</code> 필요</td>
+      <td>간단 (변수처럼 사용 가능)</td>
+    </tr>
+    <tr>
+      <td><strong>크기</strong></td>
+      <td>메모리 주소 크기</td>
+      <td>크기 없음</td>
+    </tr>
+    <tr>
+      <td><strong>산술 연산</strong></td>
+      <td>가능 (<code class="language-plaintext highlighter-rouge">ptr++</code>)</td>
+      <td>불가능</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<h3 id="선택-기준"><span class="me-2">선택 기준</span><a href="#선택-기준" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ul>
+  <li><strong>포인터를 사용할 때</strong>:
+    <ul>
+      <li>동적 메모리 할당 및 관리가 필요할 때</li>
+      <li>NULL 값을 가리키거나 가리키는 대상을 변경해야 할 때</li>
+      <li>배열, 문자열, 하드웨어 주소를 다룰 때</li>
+    </ul>
+  </li>
+  <li><strong>참조자를 사용할 때</strong>:
+    <ul>
+      <li>매개변수로 데이터를 전달하여 복사를 피하고 싶을 때</li>
+      <li>반환값으로 객체를 참조해야 할 때</li>
+      <li>간단하고 직관적인 코드를 작성하고 싶을 때</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="객체의-초기화"><span class="me-2">객체의 초기화</span><a href="#객체의-초기화" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>C++에서 클래스 생성자는 <strong>객체가 생성될 때 호출되어 멤버 변수나 기타 자원을 초기화하는 특별한 함수</strong>다.</p>
+
+<hr />
+
+<h3 id="1-멤버-초기화-리스트member-initialization-list"><span class="me-2"><strong>1. 멤버 초기화 리스트(Member Initialization List)</strong></span><a href="#1-멤버-초기화-리스트member-initialization-list" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ul>
+  <li>생성자 정의에서 콜론(<code class="language-plaintext highlighter-rouge">:</code>) 뒤에 <strong>멤버 초기화 리스트</strong>를 사용하여 객체를 초기화</li>
+  <li><strong>멤버 변수의 초기화</strong>가 생성자의 본체가 실행되기 전에 수행되므로 효율적</li>
+  <li><strong>const 멤버, 참조자 멤버</strong>는 생성 시 초기화 되어야 하므로 초기화 리스트가 필수</li>
+</ul>
+
+<div class="language-cpp highlighter-rouge"><div class="code-header">
+        <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+<span class="nl">private:</span>
+    <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">constValue</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">&amp;</span> <span class="n">refValue</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="n">MyClass</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">,</span> <span class="kt">int</span> <span class="n">constVal</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">ref</span><span class="p">)</span> 
+        <span class="o">:</span> <span class="n">value</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">constValue</span><span class="p">(</span><span class="n">constVal</span><span class="p">),</span> <span class="n">refValue</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">};</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<hr />
+
+<h3 id="2-생성자-본문에서-초기화"><span class="me-2"><strong>2. 생성자 본문에서 초기화</strong></span><a href="#2-생성자-본문에서-초기화" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ul>
+  <li>생성자 본문에서 직접 멤버 변수에 값을 할당하여 초기화.</li>
+  <li>임시 객체 생성 가능성이 있다.</li>
+</ul>
+
+<div class="language-cpp highlighter-rouge"><div class="code-header">
+        <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+<span class="nl">private:</span>
+    <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="n">MyClass</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<hr />
+
+<h3 id="3-디폴트-멤버-초기화default-member-initializer"><span class="me-2"><strong>3. 디폴트 멤버 초기화(Default Member Initializer)</strong></span><a href="#3-디폴트-멤버-초기화default-member-initializer" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ul>
+  <li>C++11부터 클래스 정의에서 멤버 변수를 초기화할 수 있는 <strong>디폴트 초기화 구문</strong>이 도입</li>
+  <li>멤버 변수 선언 시 초기값을 지정하며, 모든 생성자에서 동일한 초기값을 사용하려는 경우 유용함</li>
+  <li>초기화 리스트보다 우선 적용되지만, 명시적 초기화가 있으면 덮어쓴다.</li>
+</ul>
+
+<div class="language-cpp highlighter-rouge"><div class="code-header">
+        <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+<span class="nl">private:</span>
+    <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">rate</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="n">MyClass</span><span class="p">()</span> <span class="p">{}</span> <span class="c1">// 별도 초기화 없이 기본값 사용</span>
+<span class="p">};</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<hr />
+
+<h3 id="4-위임-생성자delegating-constructor"><span class="me-2"><strong>4. 위임 생성자(Delegating Constructor)</strong></span><a href="#4-위임-생성자delegating-constructor" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ul>
+  <li>C++11에서 추가된 기능으로, <strong>생성자에서 다른 생성자를 호출</strong>하여 멤버를 초기화</li>
+  <li>비슷한 초기화 로직을 여러 생성자에서 반복하지 않고 공유할 수 있다.</li>
+  <li>코드 중복을 줄이고, 유지보수성을 높임</li>
+</ul>
+
+<div class="language-cpp highlighter-rouge"><div class="code-header">
+        <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+<span class="nl">private:</span>
+    <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="c1">// 기본 생성자</span>
+    <span class="n">MyClass</span><span class="p">()</span> <span class="o">:</span> <span class="n">MyClass</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// 위임 생성자 사용</span>
+
+    <span class="c1">// 파라미터를 받는 생성자</span>
+    <span class="n">MyClass</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="o">:</span> <span class="n">value</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">};</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="l-value-r-value-move-semantics"><span class="me-2">L-Value, R-Value, Move Semantics</span><a href="#l-value-r-value-move-semantics" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<ul>
+  <li>L-Value: 메모리에 존재하며 참조할 수 있는 값</li>
+  <li>R-Value: 임시적인 값으로 참조할 수 없는 값</li>
+  <li>Move semantics: 복사 대신 리소스의 소유권을 이동하는 개념
+    <ul>
+      <li>R-Value 참조(&amp;&amp;): R-Value를 참조할 수 있는 참조자</li>
+      <li>std::move: L-Value를 R-Value 캐스팅해주는 함수</li>
+    </ul>
+
+    <p>이동 생성자와 이동 대입 연산자를 구현하여 사용</p>
+
+    <p>복사 대신 소유권을 이전하여 기존 객체의 리소스를 재활용<br />
+원본 객체는 비어있는 상태가 됨</p>
+
+    <p>불필요한 메모리 할당과 해제를 줄여 복사 오버헤드를 줄이고 효율적인 메모리 사용을 가능하게 한다.</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="code-header">
+        <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+</pre></td><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+<span class="nl">private:</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">data</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="n">MyClass</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">)</span> <span class="o">:</span> <span class="n">size</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">data</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">s</span><span class="p">])</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="c1">// 이동 생성자</span>
+    <span class="n">MyClass</span><span class="p">(</span><span class="n">MyClass</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span> <span class="n">size</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">size</span><span class="p">),</span> <span class="n">data</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">other</span><span class="p">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">other</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>  <span class="c1">// 소유권 이전</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 이동 대입 연산자</span>
+    <span class="n">MyClass</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">MyClass</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">delete</span><span class="p">[]</span> <span class="n">data</span><span class="p">;</span>  <span class="c1">// 기존 리소스 해제</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">data</span><span class="p">;</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">size</span><span class="p">;</span>
+            <span class="n">other</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
+            <span class="n">other</span><span class="p">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="o">~</span><span class="n">MyClass</span><span class="p">()</span> <span class="p">{</span> <span class="k">delete</span><span class="p">[]</span> <span class="n">data</span><span class="p">;</span> <span class="p">}</span>
+  <span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">MyClass</span> <span class="n">obj1</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+    <span class="n">MyClass</span> <span class="n">obj2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">obj1</span><span class="p">);</span>  <span class="c1">// 이동 생성자 호출</span>
+
+    <span class="n">MyClass</span> <span class="n">obj3</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+    <span class="n">obj3</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">obj2</span><span class="p">);</span>  <span class="c1">// 이동 대입 연산자 호출</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+</ul>
+
 <p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/study/c%2B%2B.md" target="_blank">원본 파일 보기</a></p>
 
   </div>
@@ -1302,6 +2211,12 @@
 
 
 
+
+  <div class="toc-border-cover z-3"></div>
+  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
+    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
+    <nav id="toc"></nav>
+  </section>
 
  
           </aside>

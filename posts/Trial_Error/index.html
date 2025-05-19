@@ -31,8 +31,8 @@
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Jekyll 시행 착오들 정리" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="🔗 원본 파일 보기" />
-<meta property="og:description" content="🔗 원본 파일 보기" />
+<meta name="description" content="Github Pages 시행착오들 링크는 https:// 로 시작해야 htmlproofer 검사에서 오류가 나지 않음 markdown 문서에서 상대경로로 포함된 리소스는 절대 경로로 변환해줘야 함. 1 2 3 4 5 6 7 8 9 10 {% assign remote_url = &quot;https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/lecture.md&quot; %} {% assign img_url = remote_url | remove: &quot;lecture.md&quot; | append: &quot;capture/&quot; %} {% capture remote_content %} &lt;!--remote_content 변수에 remote resource 저장 --&gt; {% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/lecture.md %} {% endcapture %} {{ remote_content &lt;!--remote_content에서 상대경로로 포함된 리소스를 절대 경로로 변환 --&gt; | replace: &#39;./capture/&#39;, img_url }} 🔗 원본 파일 보기" />
+<meta property="og:description" content="Github Pages 시행착오들 링크는 https:// 로 시작해야 htmlproofer 검사에서 오류가 나지 않음 markdown 문서에서 상대경로로 포함된 리소스는 절대 경로로 변환해줘야 함. 1 2 3 4 5 6 7 8 9 10 {% assign remote_url = &quot;https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/lecture.md&quot; %} {% assign img_url = remote_url | remove: &quot;lecture.md&quot; | append: &quot;capture/&quot; %} {% capture remote_content %} &lt;!--remote_content 변수에 remote resource 저장 --&gt; {% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/lecture.md %} {% endcapture %} {{ remote_content &lt;!--remote_content에서 상대경로로 포함된 리소스를 절대 경로로 변환 --&gt; | replace: &#39;./capture/&#39;, img_url }} 🔗 원본 파일 보기" />
 <link rel="canonical" href="https://forte-naop.github.io/posts/Trial_Error/" />
 <meta property="og:url" content="https://forte-naop.github.io/posts/Trial_Error/" />
 <meta property="og:site_name" content="Forte’s Notes" />
@@ -42,7 +42,7 @@
 <meta property="twitter:title" content="Jekyll 시행 착오들 정리" />
 <meta name="twitter:site" content="@kirameki_ing" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-01-30T14:57:40+09:00","datePublished":"2025-01-30T14:57:40+09:00","description":"🔗 원본 파일 보기","headline":"Jekyll 시행 착오들 정리","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Trial_Error/"},"url":"https://forte-naop.github.io/posts/Trial_Error/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-01-30T14:57:40+09:00","datePublished":"2025-01-30T14:57:40+09:00","description":"Github Pages 시행착오들 링크는 https:// 로 시작해야 htmlproofer 검사에서 오류가 나지 않음 markdown 문서에서 상대경로로 포함된 리소스는 절대 경로로 변환해줘야 함. 1 2 3 4 5 6 7 8 9 10 {% assign remote_url = &quot;https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/lecture.md&quot; %} {% assign img_url = remote_url | remove: &quot;lecture.md&quot; | append: &quot;capture/&quot; %} {% capture remote_content %} &lt;!--remote_content 변수에 remote resource 저장 --&gt; {% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/lecture.md %} {% endcapture %} {{ remote_content &lt;!--remote_content에서 상대경로로 포함된 리소스를 절대 경로로 변환 --&gt; | replace: &#39;./capture/&#39;, img_url }} 🔗 원본 파일 보기","headline":"Jekyll 시행 착오들 정리","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Trial_Error/"},"url":"https://forte-naop.github.io/posts/Trial_Error/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -626,7 +626,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="7 words"
+  title="142 words"
 >
   <em>1 min</em> read</span>
 
@@ -638,7 +638,38 @@
   
 
   <div class="content">
-    
+    <h1 id="github-pages-시행착오들">Github Pages 시행착오들</h1>
+
+<ol>
+  <li>링크는 <code class="language-plaintext highlighter-rouge">https://</code> 로 시작해야 <code class="language-plaintext highlighter-rouge">htmlproofer</code> 검사에서 오류가 나지 않음</li>
+  <li>
+    <p>markdown 문서에서 상대경로로 포함된 리소스는 절대 경로로 변환해줘야 함.</p>
+
+    <div class="language-html highlighter-rouge"><div class="code-header">
+        <span data-label-text="HTML"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre> {% assign remote_url = "https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/lecture.md" %}
+ {% assign img_url = remote_url | remove: "lecture.md" | append: "capture/" %}
+
+ {% capture remote_content %} <span class="c">&lt;!--remote_content 변수에 remote resource 저장 --&gt;</span>
+     {% remote_include https://raw.githubusercontent.com/Forte-NaoP/Note/main/study/Unreal/lecture.md %}
+ {% endcapture %}
+
+ {{ remote_content  <span class="c">&lt;!--remote_content에서 상대경로로 포함된 리소스를 절대 경로로 변환 --&gt;</span>
+ | replace: './capture/', img_url 
+ }}
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+</ol>
 <p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/blog/trial_and_error.md" target="_blank">원본 파일 보기</a></p>
 
   </div>

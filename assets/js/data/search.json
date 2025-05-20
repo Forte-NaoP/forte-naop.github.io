@@ -268,8 +268,8 @@
 
 
     
-    "snippet": "Database MEMOSQL 구문 해석 순서  FROM: 데이터 소스를 지정  ON: 조인 조건을 설정  JOIN: 필요한 테이블 결합  WHERE: 행을 필터링  GROUP BY: 데이터를 그룹화  HAVING: 그룹화된 데이터에 추가 조건 적용  SELECT: 선택한 컬럼을 가져옴  DISTINCT: 중복된 행 제거  ORDER BY: 결과를 정...",
-    "content": "Database MEMOSQL 구문 해석 순서  FROM: 데이터 소스를 지정  ON: 조인 조건을 설정  JOIN: 필요한 테이블 결합  WHERE: 행을 필터링  GROUP BY: 데이터를 그룹화  HAVING: 그룹화된 데이터에 추가 조건 적용  SELECT: 선택한 컬럼을 가져옴  DISTINCT: 중복된 행 제거  ORDER BY: 결과를 정렬  LIMIT: 결과의 개수를 제한구문 별 문법                              LIMIT B, A          LIMIT A OFFSET B: B번째 행부터 A개의 행 선택 (0-index)                    ACID🔗 원본 파일 보기"
+    "snippet": "🔗 원본 파일 보기",
+    "content": "🔗 원본 파일 보기"
   },
   
   {
@@ -455,8 +455,8 @@
 
 
     
-    "snippet": "위상정렬비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것각 노드에 선행 조건이 존재할 때 사용 가능정렬 방법  각 노드의 진입 차수 기록  진입 차수가 0인 정점을 큐에 삽입  큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소  2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복구현graph ...",
-    "content": "위상정렬비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것각 노드에 선행 조건이 존재할 때 사용 가능정렬 방법  각 노드의 진입 차수 기록  진입 차수가 0인 정점을 큐에 삽입  큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소  2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복구현graph = defaultdict(list)indegree = [0] * (n + 1)# 인접 리스트 및 진입 차수 초기화# for _ in range(k):#     a, b = map(int, input().split())#     graph[a].append(b)#     indegree[b] += 1# 진입 차수 0인 정점 큐에 추가q = deque(filter(lambda x: indegree[x] == 0, range(1, n + 1)))while q:    cur = q.popleft()    print(cur)    if cur in graph:        for nxt in graph[cur]:            indegree[nxt] -= 1            if indegree[nxt] == 0:                q.append(nxt)🔗 원본 파일 보기"
+    "snippet": "🔗 원본 파일 보기",
+    "content": "🔗 원본 파일 보기"
   },
   
   {

@@ -212,16 +212,9 @@
 
   
 
-  
-    
-
-    
-
-  
 
 
-
-  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js,npm/tocbot@4.32.2/dist/tocbot.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js"></script>
 
 
 
@@ -529,38 +522,6 @@
   
 
   
-    
-    
-
-    
-      
-        
-        
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-
-    
-  
 
   
   
@@ -591,7 +552,7 @@
 
 
 
-<article class="px-1" data-toc="true">
+<article class="px-1" data-toc="false">
   <header>
     <h1 data-toc-skip>위상 정렬</h1>
     
@@ -665,7 +626,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="249 words"
+  title="7 words"
 >
   <em>1 min</em> read</span>
 
@@ -675,93 +636,9 @@
   </header>
 
   
-    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
-      <span class="label text-truncate">위상 정렬</span>
-      <button type="button" class="toc-trigger btn me-1">
-        <i class="fa-solid fa-list-ul fa-fw"></i>
-      </button>
-    </div>
-
-    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
-      <span class="label ps-2 pe-1">Contents</span>
-      <i class="fa-solid fa-angle-right fa-fw"></i>
-    </button>
-
-    <dialog id="toc-popup" class="p-0">
-      <div class="header d-flex flex-row align-items-center justify-content-between">
-        <div class="label text-truncate py-2 ms-4">위상 정렬</div>
-        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
-          <i class="fas fa-close"></i>
-        </button>
-      </div>
-      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
-    </dialog>
-  
 
   <div class="content">
-    <h1 id="위상정렬">위상정렬</h1>
-
-<p>비순환 유향 그래프(DAG)에 대해서 정점을 선형으로 정렬하는 것</p>
-
-<p>각 노드에 선행 조건이 존재할 때 사용 가능</p>
-
-<h2 id="정렬-방법"><span class="me-2">정렬 방법</span><a href="#정렬-방법" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<ol>
-  <li>각 노드의 진입 차수 기록</li>
-  <li>진입 차수가 0인 정점을 큐에 삽입</li>
-  <li>큐에 담긴 정점에서 나가는 간선을 제거하고 해당 간선에 연결된 정점의 진입 차수를 감소</li>
-  <li>2-3과정을 큐가 비거나 모든 정점을 탐색할 때까지 반복</li>
-</ol>
-
-<h2 id="구현"><span class="me-2">구현</span><a href="#구현" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<div class="language-python highlighter-rouge"><div class="code-header">
-        <span data-label-text="Python"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-</pre></td><td class="rouge-code"><pre><span class="n">graph</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-<span class="n">indegree</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># 인접 리스트 및 진입 차수 초기화
-# for _ in range(k):
-#     a, b = map(int, input().split())
-#     graph[a].append(b)
-#     indegree[b] += 1
-</span>
-<span class="c1"># 진입 차수 0인 정점 큐에 추가
-</span><span class="n">q</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">(</span><span class="nf">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">indegree</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
-
-<span class="k">while</span> <span class="n">q</span><span class="p">:</span>
-    <span class="n">cur</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">cur</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">nxt</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">cur</span><span class="p">]:</span>
-            <span class="n">indegree</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">indegree</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">q</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">nxt</span><span class="p">)</span>
-</pre></td></tr></tbody></table></code></div></div>
-
+    
 <p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/study/topology_sort.md" target="_blank">원본 파일 보기</a></p>
 
   </div>
@@ -1425,12 +1302,6 @@
 
 
 
-
-  <div class="toc-border-cover z-3"></div>
-  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
-    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
-    <nav id="toc"></nav>
-  </section>
 
  
           </aside>

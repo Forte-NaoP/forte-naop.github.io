@@ -31,8 +31,8 @@
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="음성 관련" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="429: Too Many Requests For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)." />
-<meta property="og:description" content="429: Too Many Requests For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)." />
+<meta name="description" content="구버전에서 dca(Ogg to DCA converter)라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함. 1 2 3 4 5 6 7 8 9 10 11 Input::Lazy 의 Flow YoutubeDl::into() YoutubeDl::create_async (Compose trait 구현 사항) HttpRequest::create_async (Compose trait 구현 사항) HttpRequest::create_stream reqwest::Client::get -&gt; reqwest::Response reqwest::Response::bytes_stream -&gt; Box&lt;tokio_io::StreamReader&gt; Box&lt;tokio_io::StreamReader&gt; -&gt; songbird::HttpStream songbird::HttpStream::stream -&gt; AsyncAdapterStream songbird::HttpStream -&gt; songbird::AudioStream return songbird::AudioStream create_stream에서 resume를 이용해서 계속 파일을 받아오는 것 같음. 연속된 네트워크 스트림에서 특정 부분만 잘라내는건 어려워보이므로 yt-dlp로 원본을, ffmpeg로 잘라낸 부분을 파일로 저장 후 songbird::File을 이용해서 songbird::Input을 생성 songbird::Call과 songbird::Songbird의 메소드 차이점 songbird::Call는 한 서버 내의 음성 연결을 담당 songbird::Songbird는 내부적으로 DashMap을 사용해 디스코드 서버마다 songbird::Call을 관리 connection.rs의 다음 부분에서 1 2 3 4 5 6 7 8 9 10 11 12 13 14 1. | let manager = songbird::get(ctx).await.clone(); 2. | // ... 3. | if let Some(call) = manager.get(guild_id) { 4. | let mut call = call.lock().await; 5. | if let Some(bot_channel) = call.current_channel() { 6. | // ... 7. | } else { 8. | match call.join(user_channel).await { 9. | Ok(_) =&gt; Ok(ConnectionSuccessCode::NewConnection), 10. | Err(why) =&gt; Err(ConnectionErrorCode::JoinError(why)) 11. | } 12. | } 13. | // ... 14. | } 기존에 8번 라인의 call.join(user_channel).await 대신 manager.join(guild_id, user_channel).await 사용했었는데 이 경우 DeadLock 발생함.이유는 4번 라인에서 call에 대한 Mutex 획득 8번 라인 실행 시 해당 흐름은 block 후 manager.join이 반환될 때 까지 block manager.join에서 다시 call 에 대한 Mutex 획득 시도 후 잠겨 있으므로 block 됨 따라서 manager.join이 반환되지 못하고, 호출자도 block 되어 있게 됨 일반 채팅으로 재생중인 곡을 스킵하려면 이벤트 핸들러에서 async fn message(&amp;self, ctx: Context, msg: Message)함수로 채팅 확인 채팅이 특정 채널에서 발생했는지 확인 채팅이 재생 중인 곡의 키워드랑 일치하는지 확인 2번에서 특정 채널을 확인하기 위해 명령어로 확인할 채널을 등록하도록 함 이는 CommandDataOptionValue에 Channel(ChannelId) 필드가 존재하므로 가능할 것으로 보임 재생 중인 곡의 키워드와 채팅 채널을 확인하기 위해 TrackQueue를 수정하여 GuildQueue를 만듦" />
+<meta property="og:description" content="구버전에서 dca(Ogg to DCA converter)라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함. 1 2 3 4 5 6 7 8 9 10 11 Input::Lazy 의 Flow YoutubeDl::into() YoutubeDl::create_async (Compose trait 구현 사항) HttpRequest::create_async (Compose trait 구현 사항) HttpRequest::create_stream reqwest::Client::get -&gt; reqwest::Response reqwest::Response::bytes_stream -&gt; Box&lt;tokio_io::StreamReader&gt; Box&lt;tokio_io::StreamReader&gt; -&gt; songbird::HttpStream songbird::HttpStream::stream -&gt; AsyncAdapterStream songbird::HttpStream -&gt; songbird::AudioStream return songbird::AudioStream create_stream에서 resume를 이용해서 계속 파일을 받아오는 것 같음. 연속된 네트워크 스트림에서 특정 부분만 잘라내는건 어려워보이므로 yt-dlp로 원본을, ffmpeg로 잘라낸 부분을 파일로 저장 후 songbird::File을 이용해서 songbird::Input을 생성 songbird::Call과 songbird::Songbird의 메소드 차이점 songbird::Call는 한 서버 내의 음성 연결을 담당 songbird::Songbird는 내부적으로 DashMap을 사용해 디스코드 서버마다 songbird::Call을 관리 connection.rs의 다음 부분에서 1 2 3 4 5 6 7 8 9 10 11 12 13 14 1. | let manager = songbird::get(ctx).await.clone(); 2. | // ... 3. | if let Some(call) = manager.get(guild_id) { 4. | let mut call = call.lock().await; 5. | if let Some(bot_channel) = call.current_channel() { 6. | // ... 7. | } else { 8. | match call.join(user_channel).await { 9. | Ok(_) =&gt; Ok(ConnectionSuccessCode::NewConnection), 10. | Err(why) =&gt; Err(ConnectionErrorCode::JoinError(why)) 11. | } 12. | } 13. | // ... 14. | } 기존에 8번 라인의 call.join(user_channel).await 대신 manager.join(guild_id, user_channel).await 사용했었는데 이 경우 DeadLock 발생함.이유는 4번 라인에서 call에 대한 Mutex 획득 8번 라인 실행 시 해당 흐름은 block 후 manager.join이 반환될 때 까지 block manager.join에서 다시 call 에 대한 Mutex 획득 시도 후 잠겨 있으므로 block 됨 따라서 manager.join이 반환되지 못하고, 호출자도 block 되어 있게 됨 일반 채팅으로 재생중인 곡을 스킵하려면 이벤트 핸들러에서 async fn message(&amp;self, ctx: Context, msg: Message)함수로 채팅 확인 채팅이 특정 채널에서 발생했는지 확인 채팅이 재생 중인 곡의 키워드랑 일치하는지 확인 2번에서 특정 채널을 확인하기 위해 명령어로 확인할 채널을 등록하도록 함 이는 CommandDataOptionValue에 Channel(ChannelId) 필드가 존재하므로 가능할 것으로 보임 재생 중인 곡의 키워드와 채팅 채널을 확인하기 위해 TrackQueue를 수정하여 GuildQueue를 만듦" />
 <link rel="canonical" href="https://forte-naop.github.io/posts/Bot_note_2/" />
 <meta property="og:url" content="https://forte-naop.github.io/posts/Bot_note_2/" />
 <meta property="og:site_name" content="Forte’s Notes" />
@@ -42,7 +42,7 @@
 <meta property="twitter:title" content="음성 관련" />
 <meta name="twitter:site" content="@kirameki_ing" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-02-02T18:06:00+09:00","datePublished":"2025-02-02T18:06:00+09:00","description":"429: Too Many Requests For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).","headline":"음성 관련","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Bot_note_2/"},"url":"https://forte-naop.github.io/posts/Bot_note_2/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-02-02T18:06:00+09:00","datePublished":"2025-02-02T18:06:00+09:00","description":"구버전에서 dca(Ogg to DCA converter)라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함. 1 2 3 4 5 6 7 8 9 10 11 Input::Lazy 의 Flow YoutubeDl::into() YoutubeDl::create_async (Compose trait 구현 사항) HttpRequest::create_async (Compose trait 구현 사항) HttpRequest::create_stream reqwest::Client::get -&gt; reqwest::Response reqwest::Response::bytes_stream -&gt; Box&lt;tokio_io::StreamReader&gt; Box&lt;tokio_io::StreamReader&gt; -&gt; songbird::HttpStream songbird::HttpStream::stream -&gt; AsyncAdapterStream songbird::HttpStream -&gt; songbird::AudioStream return songbird::AudioStream create_stream에서 resume를 이용해서 계속 파일을 받아오는 것 같음. 연속된 네트워크 스트림에서 특정 부분만 잘라내는건 어려워보이므로 yt-dlp로 원본을, ffmpeg로 잘라낸 부분을 파일로 저장 후 songbird::File을 이용해서 songbird::Input을 생성 songbird::Call과 songbird::Songbird의 메소드 차이점 songbird::Call는 한 서버 내의 음성 연결을 담당 songbird::Songbird는 내부적으로 DashMap을 사용해 디스코드 서버마다 songbird::Call을 관리 connection.rs의 다음 부분에서 1 2 3 4 5 6 7 8 9 10 11 12 13 14 1. | let manager = songbird::get(ctx).await.clone(); 2. | // ... 3. | if let Some(call) = manager.get(guild_id) { 4. | let mut call = call.lock().await; 5. | if let Some(bot_channel) = call.current_channel() { 6. | // ... 7. | } else { 8. | match call.join(user_channel).await { 9. | Ok(_) =&gt; Ok(ConnectionSuccessCode::NewConnection), 10. | Err(why) =&gt; Err(ConnectionErrorCode::JoinError(why)) 11. | } 12. | } 13. | // ... 14. | } 기존에 8번 라인의 call.join(user_channel).await 대신 manager.join(guild_id, user_channel).await 사용했었는데 이 경우 DeadLock 발생함.이유는 4번 라인에서 call에 대한 Mutex 획득 8번 라인 실행 시 해당 흐름은 block 후 manager.join이 반환될 때 까지 block manager.join에서 다시 call 에 대한 Mutex 획득 시도 후 잠겨 있으므로 block 됨 따라서 manager.join이 반환되지 못하고, 호출자도 block 되어 있게 됨 일반 채팅으로 재생중인 곡을 스킵하려면 이벤트 핸들러에서 async fn message(&amp;self, ctx: Context, msg: Message)함수로 채팅 확인 채팅이 특정 채널에서 발생했는지 확인 채팅이 재생 중인 곡의 키워드랑 일치하는지 확인 2번에서 특정 채널을 확인하기 위해 명령어로 확인할 채널을 등록하도록 함 이는 CommandDataOptionValue에 Channel(ChannelId) 필드가 존재하므로 가능할 것으로 보임 재생 중인 곡의 키워드와 채팅 채널을 확인하기 위해 TrackQueue를 수정하여 GuildQueue를 만듦","headline":"음성 관련","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Bot_note_2/"},"url":"https://forte-naop.github.io/posts/Bot_note_2/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -626,9 +626,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="30 words"
+  title="593 words"
 >
-  <em>1 min</em> read</span>
+  <em>3 min</em> read</span>
 
         </div>
       </div>
@@ -638,8 +638,99 @@
   
 
   <div class="content">
-    <p>429: Too Many Requests
-For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).</p>
+    
+<p>구버전에서 dca(<a href="https://github.com/Forte-NaoP/dca-rs/blob/main/src/dca.rs"><code class="language-plaintext highlighter-rouge">Ogg to DCA converter</code></a>)라고 명명한 ogg packet을 이어붙인 자체 포맷대신 symphonia crate를 사용해 음성 바이트 스트림을 생성함.</p>
+<div class="language-rust highlighter-rouge"><div class="code-header">
+        <span data-label-text="Rust"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="nn">Input</span><span class="p">::</span><span class="n">Lazy</span> <span class="n">의</span> <span class="n">Flow</span>
+<span class="nn">YoutubeDl</span><span class="p">::</span><span class="nf">into</span><span class="p">()</span> 
+    <span class="nn">YoutubeDl</span><span class="p">::</span><span class="nf">create_async</span> <span class="p">(</span><span class="n">Compose</span> <span class="k">trait</span> <span class="n">구현</span> <span class="n">사항</span><span class="p">)</span>
+        <span class="nn">HttpRequest</span><span class="p">::</span><span class="nf">create_async</span> <span class="p">(</span><span class="n">Compose</span> <span class="k">trait</span> <span class="n">구현</span> <span class="n">사항</span><span class="p">)</span>
+            <span class="nn">HttpRequest</span><span class="p">::</span><span class="n">create_stream</span>
+                <span class="nn">reqwest</span><span class="p">::</span><span class="nn">Client</span><span class="p">::</span><span class="n">get</span> <span class="k">-&gt;</span> <span class="nn">reqwest</span><span class="p">::</span><span class="n">Response</span>
+                <span class="nn">reqwest</span><span class="p">::</span><span class="nn">Response</span><span class="p">::</span><span class="n">bytes_stream</span> <span class="k">-&gt;</span> <span class="nb">Box</span><span class="o">&lt;</span><span class="nn">tokio_io</span><span class="p">::</span><span class="n">StreamReader</span><span class="o">&gt;</span> 
+                <span class="nb">Box</span><span class="o">&lt;</span><span class="nn">tokio_io</span><span class="p">::</span><span class="n">StreamReader</span><span class="o">&gt;</span> <span class="k">-&gt;</span> <span class="nn">songbird</span><span class="p">::</span><span class="n">HttpStream</span>
+            <span class="nn">songbird</span><span class="p">::</span><span class="nn">HttpStream</span><span class="p">::</span><span class="n">stream</span> <span class="k">-&gt;</span> <span class="n">AsyncAdapterStream</span>
+        <span class="nn">songbird</span><span class="p">::</span><span class="n">HttpStream</span> <span class="k">-&gt;</span> <span class="nn">songbird</span><span class="p">::</span><span class="n">AudioStream</span>
+    <span class="k">return</span> <span class="nn">songbird</span><span class="p">::</span><span class="n">AudioStream</span> 
+</pre></td></tr></tbody></table></code></div></div>
+<p>create_stream에서 resume를 이용해서 계속 파일을 받아오는 것 같음.</p>
+
+<p>연속된 네트워크 스트림에서 특정 부분만 잘라내는건 어려워보이므로 
+yt-dlp로 원본을, ffmpeg로 잘라낸 부분을 파일로 저장 후 songbird::File을 이용해서 songbird::Input을 생성</p>
+
+<hr />
+
+<p><code class="language-plaintext highlighter-rouge">songbird::Call</code>과 <code class="language-plaintext highlighter-rouge">songbird::Songbird</code>의 메소드 차이점</p>
+
+<p><code class="language-plaintext highlighter-rouge">songbird::Call</code>는 한 서버 내의 음성 연결을 담당
+<code class="language-plaintext highlighter-rouge">songbird::Songbird</code>는 내부적으로 <code class="language-plaintext highlighter-rouge">DashMap</code>을 사용해 디스코드 서버마다 <code class="language-plaintext highlighter-rouge">songbird::Call</code>을 관리</p>
+
+<p><code class="language-plaintext highlighter-rouge">connection.rs</code>의 다음 부분에서</p>
+<div class="language-rust highlighter-rouge"><div class="code-header">
+        <span data-label-text="Rust"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre> <span class="mf">1.</span> <span class="p">|</span> <span class="k">let</span> <span class="n">manager</span> <span class="o">=</span> <span class="nn">songbird</span><span class="p">::</span><span class="nf">get</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span><span class="k">.await</span><span class="nf">.clone</span><span class="p">();</span>
+ <span class="mf">2.</span> <span class="p">|</span> <span class="c1">// ...</span>
+ <span class="mf">3.</span> <span class="p">|</span> <span class="k">if</span> <span class="k">let</span> <span class="nf">Some</span><span class="p">(</span><span class="n">call</span><span class="p">)</span> <span class="o">=</span> <span class="n">manager</span><span class="nf">.get</span><span class="p">(</span><span class="n">guild_id</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mf">4.</span> <span class="p">|</span>    <span class="k">let</span> <span class="k">mut</span> <span class="n">call</span> <span class="o">=</span> <span class="n">call</span><span class="nf">.lock</span><span class="p">()</span><span class="k">.await</span><span class="p">;</span>
+ <span class="mf">5.</span> <span class="p">|</span>    <span class="k">if</span> <span class="k">let</span> <span class="nf">Some</span><span class="p">(</span><span class="n">bot_channel</span><span class="p">)</span> <span class="o">=</span> <span class="n">call</span><span class="nf">.current_channel</span><span class="p">()</span> <span class="p">{</span>
+ <span class="mf">6.</span> <span class="p">|</span>        <span class="c1">// ...    </span>
+ <span class="mf">7.</span> <span class="p">|</span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+ <span class="mf">8.</span> <span class="p">|</span>        <span class="k">match</span> <span class="n">call</span><span class="nf">.join</span><span class="p">(</span><span class="n">user_channel</span><span class="p">)</span><span class="k">.await</span> <span class="p">{</span>
+ <span class="mf">9.</span> <span class="p">|</span>            <span class="nf">Ok</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="nf">Ok</span><span class="p">(</span><span class="nn">ConnectionSuccessCode</span><span class="p">::</span><span class="n">NewConnection</span><span class="p">),</span>
+<span class="mf">10.</span> <span class="p">|</span>            <span class="nf">Err</span><span class="p">(</span><span class="n">why</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="nf">Err</span><span class="p">(</span><span class="nn">ConnectionErrorCode</span><span class="p">::</span><span class="nf">JoinError</span><span class="p">(</span><span class="n">why</span><span class="p">))</span>
+<span class="mf">11.</span> <span class="p">|</span>        <span class="p">}</span>
+<span class="mf">12.</span> <span class="p">|</span>    <span class="p">}</span>
+<span class="mf">13.</span> <span class="p">|</span>    <span class="c1">// ...</span>
+<span class="mf">14.</span> <span class="p">|</span> <span class="p">}</span>
+</pre></td></tr></tbody></table></code></div></div>
+<p>기존에 8번 라인의 <code class="language-plaintext highlighter-rouge">call.join(user_channel).await</code> 대신 <code class="language-plaintext highlighter-rouge">manager.join(guild_id, user_channel).await</code> 사용했었는데 이 경우 DeadLock 발생함.<br />이유는</p>
+<ol>
+  <li>4번 라인에서 <code class="language-plaintext highlighter-rouge">call</code>에 대한 <code class="language-plaintext highlighter-rouge">Mutex</code> 획득</li>
+  <li>8번 라인 실행 시 해당 흐름은 block 후 <code class="language-plaintext highlighter-rouge">manager.join</code>이 반환될 때 까지 block</li>
+  <li><code class="language-plaintext highlighter-rouge">manager.join</code>에서 다시 <code class="language-plaintext highlighter-rouge">call</code> 에 대한 <code class="language-plaintext highlighter-rouge">Mutex</code> 획득 시도 후 잠겨 있으므로 block 됨</li>
+  <li>따라서 <code class="language-plaintext highlighter-rouge">manager.join</code>이 반환되지 못하고, 호출자도 block 되어 있게 됨</li>
+</ol>
+
+<hr />
+
+<p>일반 채팅으로 재생중인 곡을 스킵하려면</p>
+<ol>
+  <li>이벤트 핸들러에서 <code class="language-plaintext highlighter-rouge">async fn message(&amp;self, ctx: Context, msg: Message)</code>함수로 채팅 확인</li>
+  <li>채팅이 특정 채널에서 발생했는지 확인</li>
+  <li>채팅이 재생 중인 곡의 키워드랑 일치하는지 확인</li>
+</ol>
+
+<p>2번에서 특정 채널을 확인하기 위해 명령어로 확인할 채널을 등록하도록 함</p>
+
+<p>이는 <code class="language-plaintext highlighter-rouge">CommandDataOptionValue</code>에 <code class="language-plaintext highlighter-rouge">Channel(ChannelId)</code> 필드가 존재하므로 가능할 것으로 보임</p>
+
+<p>재생 중인 곡의 키워드와 채팅 채널을 확인하기 위해 <code class="language-plaintext highlighter-rouge">TrackQueue</code>를 수정하여 <code class="language-plaintext highlighter-rouge">GuildQueue</code>를 만듦</p>
 
 <p>🔗 <a href="https://github.com/Forte-NaoP/DiscordBot/blob/main/memo/%EC%9D%8C%EC%84%B1%20%EA%B4%80%EB%A0%A8.md" target="_blank">원본 파일 보기</a></p>
 
@@ -1594,8 +1685,22 @@ CommandObject.stdin.take().unwrap()으로 해당 파이프 디스크립터를 �
 
               <h4 class="pt-0 my-2">Multi-level Feedack Queue 구현하기</h4>
               <div class="text-muted">
-                <p>429: Too Many Requests
-For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service...</p>
+                <p>멀티 레벨 피드백 큐(MFQ) 스케줄링
+
+
+
+코드 구조
+
+
+  데이터 구조
+    
+      Process 구조체: 각 프로세스를 표현하는 구조체.
+      waitq, finishedq, global_io_q: 대기 큐, 완료 큐, 글로벌 I/O 큐.
+    
+  
+  스케줄러 클래스
+    
+      SchedulerBase (추상 클래스):...</p>
               </div>
             </div>
           </a>

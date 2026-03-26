@@ -31,8 +31,8 @@
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Multi-level Feedack Queue 구현하기" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="멀티 레벨 피드백 큐(MFQ) 스케줄링 코드 구조 데이터 구조 Process 구조체: 각 프로세스를 표현하는 구조체. waitq, finishedq, global_io_q: 대기 큐, 완료 큐, 글로벌 I/O 큐. 스케줄러 클래스 SchedulerBase (추상 클래스): 스케줄러의 기본 인터페이스 정의. Scheduler&lt;Container&gt; (템플릿 클래스): 특정 컨테이너(RR, SRTN, FCFS)를 기반으로 스케줄링을 수행. 함수 parse_process: 입력 파일을 파싱하여 프로세스를 생성하고 대기 큐에 삽입. add_process: 프로세스를 적절한 큐로 삽입. process_io_queue: I/O 큐에서 작업을 수행하고 완료된 프로세스를 다시 실행 큐에 추가. run: 전체 스케줄링 시뮬레이션 실행. print_results: 최종 결과 출력. print_queue_status: 현재 큐 상태 출력. 코드 동작 방식 1. 초기화 단계 parse_process 함수를 통해 입력 파일에서 프로세스를 읽어 waitq에 저장. 프로세스는 도착 시간(arrival_time)을 기준으로 정렬됨. 2. 실행 단계 run 함수의 반복 루프에서 다음 단계가 수행된다: 새로운 프로세스 추가 waitq에서 현재 cpu_clock과 일치하는 도착 시간이 있는 프로세스를 적절한 우선순위 큐(Q0~Q3)에 추가. CPU 스케줄링 우선순위가 높은 큐부터 실행(Q0 → Q1 → Q2 → Q3). 스케줄러의 run 함수 호출. 스케줄링 알고리즘 적용 Q0 (RR, TQ=2): 프로세스가 최대 2개의 타임 퀀텀 동안 실행. 타임 퀀텀 초과 시 Q1로 이동. CPU burst가 완료되면 I/O 수행. Q1 (RR, TQ=6): 최대 6개의 타임 퀀텀 적용, 초과 시 Q2로 이동. Q2 (SRTN): 남은 CPU burst 시간이 가장 짧은 프로세스를 우선 실행. 선점될 경우 Q3로 이동. Q3 (FCFS): 선입선출(FIFO) 방식으로 처리. I/O 처리 global_io_q에서 프로세스를 처리하며, 해당 프로세스의 I/O 시간이 감소. I/O가 완료되면 원래 큐보다 높은 우선순위 큐로 복귀. 프로세스 종료 확인 모든 CPU burst와 I/O가 완료되면 finishedq로 이동. 3. 최종 결과 출력 print_results 함수를 통해 다음 항목을 출력한다: 프로세스의 도착 시간, 종료 시간, 반환 시간(Turnaround Time), 대기 시간(Waiting Time). 평균 반환 시간 및 대기 시간. 실행 과정 예시 입력 예시 3 1 0 0 2 6 3 7 2 1 1 1 8 3 2 2 3 4 3 5 1 4 출력 예시 [Scheduling Results] --------------------------------------------------- PID | Arrival | Finish | Turnaround | Waiting --------------------------------------------------- 2 | 1 | 14 | 13 | 5 1 | 0 | 21 | 21 | 8 3 | 2 | 34 | 32 | 19 --------------------------------------------------- Average Turnaround Time: 22 Average Waiting Time: 10.6667 주요 설계 고려사항 큐 간 이동 규칙: CPU burst가 끝나면 I/O 작업을 수행한 후 적절한 큐로 이동. 타임 퀀텀이 만료되면 하위 큐로 이동. SRTN 큐에서는 새로운 프로세스가 들어올 때 선점 발생. 클럭 증가 규칙: 프로세스가 실행될 때만 cpu_clock이 증가하도록 구현. I/O 처리: I/O 큐는 별도의 글로벌 큐로 유지되며 프로세스는 일정 시간 후 실행 큐로 돌아옴. 프로세스 완료 처리: 모든 작업이 완료되면 finishedq로 이동하고 완료 시간을 기록." />
-<meta property="og:description" content="멀티 레벨 피드백 큐(MFQ) 스케줄링 코드 구조 데이터 구조 Process 구조체: 각 프로세스를 표현하는 구조체. waitq, finishedq, global_io_q: 대기 큐, 완료 큐, 글로벌 I/O 큐. 스케줄러 클래스 SchedulerBase (추상 클래스): 스케줄러의 기본 인터페이스 정의. Scheduler&lt;Container&gt; (템플릿 클래스): 특정 컨테이너(RR, SRTN, FCFS)를 기반으로 스케줄링을 수행. 함수 parse_process: 입력 파일을 파싱하여 프로세스를 생성하고 대기 큐에 삽입. add_process: 프로세스를 적절한 큐로 삽입. process_io_queue: I/O 큐에서 작업을 수행하고 완료된 프로세스를 다시 실행 큐에 추가. run: 전체 스케줄링 시뮬레이션 실행. print_results: 최종 결과 출력. print_queue_status: 현재 큐 상태 출력. 코드 동작 방식 1. 초기화 단계 parse_process 함수를 통해 입력 파일에서 프로세스를 읽어 waitq에 저장. 프로세스는 도착 시간(arrival_time)을 기준으로 정렬됨. 2. 실행 단계 run 함수의 반복 루프에서 다음 단계가 수행된다: 새로운 프로세스 추가 waitq에서 현재 cpu_clock과 일치하는 도착 시간이 있는 프로세스를 적절한 우선순위 큐(Q0~Q3)에 추가. CPU 스케줄링 우선순위가 높은 큐부터 실행(Q0 → Q1 → Q2 → Q3). 스케줄러의 run 함수 호출. 스케줄링 알고리즘 적용 Q0 (RR, TQ=2): 프로세스가 최대 2개의 타임 퀀텀 동안 실행. 타임 퀀텀 초과 시 Q1로 이동. CPU burst가 완료되면 I/O 수행. Q1 (RR, TQ=6): 최대 6개의 타임 퀀텀 적용, 초과 시 Q2로 이동. Q2 (SRTN): 남은 CPU burst 시간이 가장 짧은 프로세스를 우선 실행. 선점될 경우 Q3로 이동. Q3 (FCFS): 선입선출(FIFO) 방식으로 처리. I/O 처리 global_io_q에서 프로세스를 처리하며, 해당 프로세스의 I/O 시간이 감소. I/O가 완료되면 원래 큐보다 높은 우선순위 큐로 복귀. 프로세스 종료 확인 모든 CPU burst와 I/O가 완료되면 finishedq로 이동. 3. 최종 결과 출력 print_results 함수를 통해 다음 항목을 출력한다: 프로세스의 도착 시간, 종료 시간, 반환 시간(Turnaround Time), 대기 시간(Waiting Time). 평균 반환 시간 및 대기 시간. 실행 과정 예시 입력 예시 3 1 0 0 2 6 3 7 2 1 1 1 8 3 2 2 3 4 3 5 1 4 출력 예시 [Scheduling Results] --------------------------------------------------- PID | Arrival | Finish | Turnaround | Waiting --------------------------------------------------- 2 | 1 | 14 | 13 | 5 1 | 0 | 21 | 21 | 8 3 | 2 | 34 | 32 | 19 --------------------------------------------------- Average Turnaround Time: 22 Average Waiting Time: 10.6667 주요 설계 고려사항 큐 간 이동 규칙: CPU burst가 끝나면 I/O 작업을 수행한 후 적절한 큐로 이동. 타임 퀀텀이 만료되면 하위 큐로 이동. SRTN 큐에서는 새로운 프로세스가 들어올 때 선점 발생. 클럭 증가 규칙: 프로세스가 실행될 때만 cpu_clock이 증가하도록 구현. I/O 처리: I/O 큐는 별도의 글로벌 큐로 유지되며 프로세스는 일정 시간 후 실행 큐로 돌아옴. 프로세스 완료 처리: 모든 작업이 완료되면 finishedq로 이동하고 완료 시간을 기록." />
+<meta name="description" content="429: Too Many Requests For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)." />
+<meta property="og:description" content="429: Too Many Requests For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)." />
 <link rel="canonical" href="https://forte-naop.github.io/posts/MFQ/" />
 <meta property="og:url" content="https://forte-naop.github.io/posts/MFQ/" />
 <meta property="og:site_name" content="Forte’s Notes" />
@@ -42,7 +42,7 @@
 <meta property="twitter:title" content="Multi-level Feedack Queue 구현하기" />
 <meta name="twitter:site" content="@kirameki_ing" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-01-22T17:30:53+09:00","datePublished":"2025-01-22T17:30:53+09:00","description":"멀티 레벨 피드백 큐(MFQ) 스케줄링 코드 구조 데이터 구조 Process 구조체: 각 프로세스를 표현하는 구조체. waitq, finishedq, global_io_q: 대기 큐, 완료 큐, 글로벌 I/O 큐. 스케줄러 클래스 SchedulerBase (추상 클래스): 스케줄러의 기본 인터페이스 정의. Scheduler&lt;Container&gt; (템플릿 클래스): 특정 컨테이너(RR, SRTN, FCFS)를 기반으로 스케줄링을 수행. 함수 parse_process: 입력 파일을 파싱하여 프로세스를 생성하고 대기 큐에 삽입. add_process: 프로세스를 적절한 큐로 삽입. process_io_queue: I/O 큐에서 작업을 수행하고 완료된 프로세스를 다시 실행 큐에 추가. run: 전체 스케줄링 시뮬레이션 실행. print_results: 최종 결과 출력. print_queue_status: 현재 큐 상태 출력. 코드 동작 방식 1. 초기화 단계 parse_process 함수를 통해 입력 파일에서 프로세스를 읽어 waitq에 저장. 프로세스는 도착 시간(arrival_time)을 기준으로 정렬됨. 2. 실행 단계 run 함수의 반복 루프에서 다음 단계가 수행된다: 새로운 프로세스 추가 waitq에서 현재 cpu_clock과 일치하는 도착 시간이 있는 프로세스를 적절한 우선순위 큐(Q0~Q3)에 추가. CPU 스케줄링 우선순위가 높은 큐부터 실행(Q0 → Q1 → Q2 → Q3). 스케줄러의 run 함수 호출. 스케줄링 알고리즘 적용 Q0 (RR, TQ=2): 프로세스가 최대 2개의 타임 퀀텀 동안 실행. 타임 퀀텀 초과 시 Q1로 이동. CPU burst가 완료되면 I/O 수행. Q1 (RR, TQ=6): 최대 6개의 타임 퀀텀 적용, 초과 시 Q2로 이동. Q2 (SRTN): 남은 CPU burst 시간이 가장 짧은 프로세스를 우선 실행. 선점될 경우 Q3로 이동. Q3 (FCFS): 선입선출(FIFO) 방식으로 처리. I/O 처리 global_io_q에서 프로세스를 처리하며, 해당 프로세스의 I/O 시간이 감소. I/O가 완료되면 원래 큐보다 높은 우선순위 큐로 복귀. 프로세스 종료 확인 모든 CPU burst와 I/O가 완료되면 finishedq로 이동. 3. 최종 결과 출력 print_results 함수를 통해 다음 항목을 출력한다: 프로세스의 도착 시간, 종료 시간, 반환 시간(Turnaround Time), 대기 시간(Waiting Time). 평균 반환 시간 및 대기 시간. 실행 과정 예시 입력 예시 3 1 0 0 2 6 3 7 2 1 1 1 8 3 2 2 3 4 3 5 1 4 출력 예시 [Scheduling Results] --------------------------------------------------- PID | Arrival | Finish | Turnaround | Waiting --------------------------------------------------- 2 | 1 | 14 | 13 | 5 1 | 0 | 21 | 21 | 8 3 | 2 | 34 | 32 | 19 --------------------------------------------------- Average Turnaround Time: 22 Average Waiting Time: 10.6667 주요 설계 고려사항 큐 간 이동 규칙: CPU burst가 끝나면 I/O 작업을 수행한 후 적절한 큐로 이동. 타임 퀀텀이 만료되면 하위 큐로 이동. SRTN 큐에서는 새로운 프로세스가 들어올 때 선점 발생. 클럭 증가 규칙: 프로세스가 실행될 때만 cpu_clock이 증가하도록 구현. I/O 처리: I/O 큐는 별도의 글로벌 큐로 유지되며 프로세스는 일정 시간 후 실행 큐로 돌아옴. 프로세스 완료 처리: 모든 작업이 완료되면 finishedq로 이동하고 완료 시간을 기록.","headline":"Multi-level Feedack Queue 구현하기","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/MFQ/"},"url":"https://forte-naop.github.io/posts/MFQ/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-01-22T17:30:53+09:00","datePublished":"2025-01-22T17:30:53+09:00","description":"429: Too Many Requests For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).","headline":"Multi-level Feedack Queue 구현하기","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/MFQ/"},"url":"https://forte-naop.github.io/posts/MFQ/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -212,16 +212,9 @@
 
   
 
-  
-    
-
-    
-
-  
 
 
-
-  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.20/dayjs.min.js,npm/dayjs@1.11.20/locale/en.js,npm/dayjs@1.11.20/plugin/relativeTime.js,npm/dayjs@1.11.20/plugin/localizedFormat.js,npm/tocbot@4.36.4/dist/tocbot.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.20/dayjs.min.js,npm/dayjs@1.11.20/locale/en.js,npm/dayjs@1.11.20/plugin/relativeTime.js,npm/dayjs@1.11.20/plugin/localizedFormat.js"></script>
 
 
 
@@ -529,129 +522,10 @@
   
 
   
-    
-    
-
-    
-      
-        
-        
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-
-    
-  
 
   
   
 
-  
-    
-    
-
-    
-      
-        
-        
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-    
-
-    
   
 
   
@@ -678,7 +552,7 @@
 
 
 
-<article class="px-1" data-toc="true">
+<article class="px-1" data-toc="false">
   <header>
     <h1 data-toc-skip>Multi-level Feedack Queue 구현하기</h1>
     
@@ -752,9 +626,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="908 words"
+  title="30 words"
 >
-  <em>5 min</em> read</span>
+  <em>1 min</em> read</span>
 
         </div>
       </div>
@@ -762,194 +636,10 @@
   </header>
 
   
-    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
-      <span class="label text-truncate">Multi-level Feedack Queue 구현하기</span>
-      <button type="button" class="toc-trigger btn me-1">
-        <i class="fa-solid fa-list-ul fa-fw"></i>
-      </button>
-    </div>
-
-    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
-      <span class="label ps-2 pe-1">Contents</span>
-      <i class="fa-solid fa-angle-right fa-fw"></i>
-    </button>
-
-    <dialog id="toc-popup" class="p-0">
-      <div class="header d-flex flex-row align-items-center justify-content-between">
-        <div class="label text-truncate py-2 ms-4">Multi-level Feedack Queue 구현하기</div>
-        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
-          <i class="fas fa-close"></i>
-        </button>
-      </div>
-      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
-    </dialog>
-  
 
   <div class="content">
-    <h1 id="멀티-레벨-피드백-큐mfq-스케줄링">멀티 레벨 피드백 큐(MFQ) 스케줄링</h1>
-
-<hr />
-
-<h2 id="코드-구조"><span class="me-2">코드 구조</span><a href="#코드-구조" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<ol>
-  <li><strong>데이터 구조</strong>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">Process</code> 구조체: 각 프로세스를 표현하는 구조체.</li>
-      <li><code class="language-plaintext highlighter-rouge">waitq</code>, <code class="language-plaintext highlighter-rouge">finishedq</code>, <code class="language-plaintext highlighter-rouge">global_io_q</code>: 대기 큐, 완료 큐, 글로벌 I/O 큐.</li>
-    </ul>
-  </li>
-  <li><strong>스케줄러 클래스</strong>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">SchedulerBase</code> (추상 클래스): 스케줄러의 기본 인터페이스 정의.</li>
-      <li><code class="language-plaintext highlighter-rouge">Scheduler&lt;Container&gt;</code> (템플릿 클래스): 특정 컨테이너(RR, SRTN, FCFS)를 기반으로 스케줄링을 수행.</li>
-    </ul>
-  </li>
-  <li><strong>함수</strong>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">parse_process</code>: 입력 파일을 파싱하여 프로세스를 생성하고 대기 큐에 삽입.</li>
-      <li><code class="language-plaintext highlighter-rouge">add_process</code>: 프로세스를 적절한 큐로 삽입.</li>
-      <li><code class="language-plaintext highlighter-rouge">process_io_queue</code>: I/O 큐에서 작업을 수행하고 완료된 프로세스를 다시 실행 큐에 추가.</li>
-      <li><code class="language-plaintext highlighter-rouge">run</code>: 전체 스케줄링 시뮬레이션 실행.</li>
-      <li><code class="language-plaintext highlighter-rouge">print_results</code>: 최종 결과 출력.</li>
-      <li><code class="language-plaintext highlighter-rouge">print_queue_status</code>: 현재 큐 상태 출력.</li>
-    </ul>
-  </li>
-</ol>
-
-<hr />
-
-<h2 id="코드-동작-방식"><span class="me-2">코드 동작 방식</span><a href="#코드-동작-방식" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<h3 id="1-초기화-단계"><span class="me-2">1. 초기화 단계</span><a href="#1-초기화-단계" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<ol>
-  <li><code class="language-plaintext highlighter-rouge">parse_process</code> 함수를 통해 입력 파일에서 프로세스를 읽어 <code class="language-plaintext highlighter-rouge">waitq</code>에 저장.</li>
-  <li>프로세스는 도착 시간(<code class="language-plaintext highlighter-rouge">arrival_time</code>)을 기준으로 정렬됨.</li>
-</ol>
-
-<h3 id="2-실행-단계"><span class="me-2">2. 실행 단계</span><a href="#2-실행-단계" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<p><code class="language-plaintext highlighter-rouge">run</code> 함수의 반복 루프에서 다음 단계가 수행된다:</p>
-
-<ol>
-  <li><strong>새로운 프로세스 추가</strong>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">waitq</code>에서 현재 <code class="language-plaintext highlighter-rouge">cpu_clock</code>과 일치하는 도착 시간이 있는 프로세스를 적절한 우선순위 큐(Q0~Q3)에 추가.</li>
-    </ul>
-  </li>
-  <li><strong>CPU 스케줄링</strong>
-    <ul>
-      <li>우선순위가 높은 큐부터 실행(<code class="language-plaintext highlighter-rouge">Q0 → Q1 → Q2 → Q3</code>).</li>
-      <li>스케줄러의 <code class="language-plaintext highlighter-rouge">run</code> 함수 호출.</li>
-    </ul>
-  </li>
-  <li><strong>스케줄링 알고리즘 적용</strong>
-    <ul>
-      <li><strong>Q0 (RR, TQ=2):</strong>
-        <ul>
-          <li>프로세스가 최대 2개의 타임 퀀텀 동안 실행.</li>
-          <li>타임 퀀텀 초과 시 <code class="language-plaintext highlighter-rouge">Q1</code>로 이동.</li>
-          <li>CPU burst가 완료되면 I/O 수행.</li>
-        </ul>
-      </li>
-      <li><strong>Q1 (RR, TQ=6):</strong>
-        <ul>
-          <li>최대 6개의 타임 퀀텀 적용, 초과 시 <code class="language-plaintext highlighter-rouge">Q2</code>로 이동.</li>
-        </ul>
-      </li>
-      <li><strong>Q2 (SRTN):</strong>
-        <ul>
-          <li>남은 CPU burst 시간이 가장 짧은 프로세스를 우선 실행.</li>
-          <li>선점될 경우 <code class="language-plaintext highlighter-rouge">Q3</code>로 이동.</li>
-        </ul>
-      </li>
-      <li><strong>Q3 (FCFS):</strong>
-        <ul>
-          <li>선입선출(FIFO) 방식으로 처리.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong>I/O 처리</strong>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">global_io_q</code>에서 프로세스를 처리하며, 해당 프로세스의 I/O 시간이 감소.</li>
-      <li>I/O가 완료되면 원래 큐보다 높은 우선순위 큐로 복귀.</li>
-    </ul>
-  </li>
-  <li><strong>프로세스 종료 확인</strong>
-    <ul>
-      <li>모든 CPU burst와 I/O가 완료되면 <code class="language-plaintext highlighter-rouge">finishedq</code>로 이동.</li>
-    </ul>
-  </li>
-</ol>
-
-<h3 id="3-최종-결과-출력"><span class="me-2">3. 최종 결과 출력</span><a href="#3-최종-결과-출력" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<p><code class="language-plaintext highlighter-rouge">print_results</code> 함수를 통해 다음 항목을 출력한다:</p>
-
-<ul>
-  <li>프로세스의 도착 시간, 종료 시간, 반환 시간(Turnaround Time), 대기 시간(Waiting Time).</li>
-  <li>평균 반환 시간 및 대기 시간.</li>
-</ul>
-
-<hr />
-
-<h2 id="실행-과정-예시"><span class="me-2">실행 과정 예시</span><a href="#실행-과정-예시" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<h3 id="입력-예시"><span class="me-2">입력 예시</span><a href="#입력-예시" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<pre><code class="language-txt">3
-1 0 0 2 6 3 7
-2 1 1 1 8
-3 2 2 3 4 3 5 1 4
-</code></pre>
-
-<h3 id="출력-예시"><span class="me-2">출력 예시</span><a href="#출력-예시" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<pre><code class="language-txt">[Scheduling Results]
----------------------------------------------------
-  PID |    Arrival |     Finish | Turnaround |   Waiting
----------------------------------------------------
-    2 |          1 |         14 |         13 |          5
-    1 |          0 |         21 |         21 |          8
-    3 |          2 |         34 |         32 |         19
----------------------------------------------------
-Average Turnaround Time: 22
-Average Waiting Time: 10.6667
-
-</code></pre>
-
-<hr />
-
-<h2 id="주요-설계-고려사항"><span class="me-2">주요 설계 고려사항</span><a href="#주요-설계-고려사항" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<ol>
-  <li><strong>큐 간 이동 규칙:</strong>
-    <ul>
-      <li>CPU burst가 끝나면 I/O 작업을 수행한 후 적절한 큐로 이동.</li>
-      <li>타임 퀀텀이 만료되면 하위 큐로 이동.</li>
-      <li>SRTN 큐에서는 새로운 프로세스가 들어올 때 선점 발생.</li>
-    </ul>
-  </li>
-  <li><strong>클럭 증가 규칙:</strong>
-    <ul>
-      <li>프로세스가 실행될 때만 <code class="language-plaintext highlighter-rouge">cpu_clock</code>이 증가하도록 구현.</li>
-    </ul>
-  </li>
-  <li><strong>I/O 처리:</strong>
-    <ul>
-      <li>I/O 큐는 별도의 글로벌 큐로 유지되며 프로세스는 일정 시간 후 실행 큐로 돌아옴.</li>
-    </ul>
-  </li>
-  <li><strong>프로세스 완료 처리:</strong>
-    <ul>
-      <li>모든 작업이 완료되면 <code class="language-plaintext highlighter-rouge">finishedq</code>로 이동하고 완료 시간을 기록.</li>
-    </ul>
-  </li>
-</ol>
-
-<hr />
+    <p>429: Too Many Requests
+For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).</p>
 
 <p>🔗 <a href="https://github.com/Forte-NaoP/Univ-Project/tree/main/OS/MFQ-Scheduling-Simulation" target="_blank">원본 파일 보기</a></p>
 
@@ -1620,12 +1310,6 @@ Average Waiting Time: 10.6667
 
 
 
-  <div class="toc-border-cover z-3"></div>
-  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
-    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
-    <nav id="toc"></nav>
-  </section>
-
  
           </aside>
         </div>
@@ -1865,22 +1549,8 @@ Average Waiting Time: 10.6667
 
               <h4 class="pt-0 my-2">태양계 시뮬레이션</h4>
               <div class="text-muted">
-                <p>구현
-
-
-
-데이터 초기화
-
-행성과 링의 데이터를 초기화하는 작업은 user_init() 함수에서 이루어집니다. 이 함수는 프로그램이 시작될 때 호출되어 필요한 데이터와 그래픽 리소스를 준비합니다.
-
-1. 초기 위치 설정
-
-
-  
-    init_pos 초기화:
-
-    for (int i = 0; i &amp;lt; NUM_SPHERE; i++) {
-    ...</p>
+                <p>429: Too Many Requests
+For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service...</p>
               </div>
             </div>
           </a>

@@ -627,7 +627,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="212 words"
+  title="30 words"
 >
   <em>1 min</em> read</span>
 
@@ -639,23 +639,8 @@
   
 
   <div class="content">
-    <h1 id="편집-거리">편집 거리</h1>
-
-<p>문자열 A를 문자열 B로 바꾸는데 필요한 연산(문자 추가, 삭제, 교체)의 최소 횟수</p>
-
-<p><code class="language-plaintext highlighter-rouge">DP[i][j]: A[..i]를 B[..j]로 편집하는 연산의 최소 횟수</code></p>
-
-<p><code class="language-plaintext highlighter-rouge">A[i] == B[j]</code>라면 해당 위치에 대해서는 편집할 필요가 없으므로 <code class="language-plaintext highlighter-rouge">DP[i][j] == DP[i - 1][j - 1]</code></p>
-
-<p><code class="language-plaintext highlighter-rouge">A[i] != B[j]</code>라면 편집이 필요하다.</p>
-
-<p>추가하는 경우는 <code class="language-plaintext highlighter-rouge">A[i]</code>에 문자열을 하나 추가해서 <code class="language-plaintext highlighter-rouge">B[j]</code>가 되어야 하므로 <code class="language-plaintext highlighter-rouge">DP[i][j - 1] + 1</code>, 즉 <code class="language-plaintext highlighter-rouge">A[..i]를 B[..j - 1]로 변경하는 최소 횟수</code>에 1을 더해준다.</p>
-
-<p>변경은 <code class="language-plaintext highlighter-rouge">A[i]</code>를 <code class="language-plaintext highlighter-rouge">B[j]</code>로 바꾸는 것이므로 <code class="language-plaintext highlighter-rouge">DP[i - 1][j - 1] + 1</code></p>
-
-<p>삭제는 <code class="language-plaintext highlighter-rouge">DP[i - 1][j] + 1</code>이 된다.
-(<code class="language-plaintext highlighter-rouge">A[..i - 1]</code>로 <code class="language-plaintext highlighter-rouge">B[j]</code>를 만들었으므로 <code class="language-plaintext highlighter-rouge">A[i]</code>를 삭제)</p>
-
+    <p>429: Too Many Requests
+For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).</p>
 <p>🔗 <a href="https://github.com/Forte-NaoP/Note/blob/main/study/edit_distance.md" target="_blank">원본 파일 보기</a></p>
 
   </div>

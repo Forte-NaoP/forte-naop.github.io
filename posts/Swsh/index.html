@@ -27,7 +27,7 @@
 
   
 
-  <!-- Begin Jekyll SEO tag v2.9.0 -->
+  <!-- Begin Jekyll SEO tag v2.9.1 -->
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="미니 쉘 만들기" />
 <meta property="og:locale" content="en" />
@@ -43,7 +43,7 @@
 <meta name="twitter:title" content="미니 쉘 만들기" />
 <meta name="twitter:site" content="@kirameki_ing" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-01-10T17:01:45+09:00","datePublished":"2025-01-10T17:01:45+09:00","description":"미니쉘 (swsh) 동작 과정 1. 초기 설정 1.1 환경 변수 설정 custom_binary = &quot;./commands/bin:&quot;을 기존 PATH 환경 변수와 합쳐서 새로운 PATH를 설정한다. 이를 통해 사용자가 실행 파일을 ./commands/bin/ 디렉토리에서 실행할 수 있도록 함. 1.2 시그널 핸들링 SIGINT (Ctrl+C)와 SIGTSTP (Ctrl+Z)를 무시하도록 설정. SIGCHLD 시그널을 처리하여 종료된 자식 프로세스를 정리하는 핸들러 chld_handler 등록. 2. 입력 및 파싱 2.1 사용자 입력 처리 read(0, input, 256)을 이용해 최대 256바이트까지 입력을 읽음. 입력을 split_commands(input, &amp;cmd_cnt)로 분리하여 명령어 목록을 생성. 2.2 명령어 파싱 (argparse.c) split_commands 함수: | 기호를 기준으로 명령어를 여러 개로 분리함. parse_redirection을 사용해 &gt;, &lt;, &gt;&gt; 등 입출력 리다이렉션을 처리. parse_command를 통해 명령어와…","headline":"미니 쉘 만들기","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Swsh/"},"url":"https://forte-naop.github.io/posts/Swsh/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-01-10T17:01:45+09:00","datePublished":"2025-01-10T17:01:45+09:00","description":"미니쉘 (swsh) 동작 과정 1. 초기 설정 1.1 환경 변수 설정 custom_binary = \u0026quot;./commands/bin:\u0026quot;을 기존 PATH 환경 변수와 합쳐서 새로운 PATH를 설정한다. 이를 통해 사용자가 실행 파일을 ./commands/bin/ 디렉토리에서 실행할 수 있도록 함. 1.2 시그널 핸들링 SIGINT (Ctrl+C)와 SIGTSTP (Ctrl+Z)를 무시하도록 설정. SIGCHLD 시그널을 처리하여 종료된 자식 프로세스를 정리하는 핸들러 chld_handler 등록. 2. 입력 및 파싱 2.1 사용자 입력 처리 read(0, input, 256)을 이용해 최대 256바이트까지 입력을 읽음. 입력을 split_commands(input, \u0026amp;cmd_cnt)로 분리하여 명령어 목록을 생성. 2.2 명령어 파싱 (argparse.c) split_commands 함수: | 기호를 기준으로 명령어를 여러 개로 분리함. parse_redirection을 사용해 \u0026gt;, \u0026lt;, \u0026gt;\u0026gt; 등 입출력 리다이렉션을 처리. parse_command를 통해 명령어와…","headline":"미니 쉘 만들기","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Swsh/"},"url":"https://forte-naop.github.io/posts/Swsh/"}</script>
 <!-- End Jekyll SEO tag -->
 
 

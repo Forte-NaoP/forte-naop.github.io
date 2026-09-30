@@ -27,7 +27,7 @@
 
   
 
-  <!-- Begin Jekyll SEO tag v2.9.0 -->
+  <!-- Begin Jekyll SEO tag v2.9.1 -->
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="OpenGL API 정리" />
 <meta property="og:locale" content="en" />
@@ -43,7 +43,7 @@
 <meta name="twitter:title" content="OpenGL API 정리" />
 <meta name="twitter:site" content="@kirameki_ing" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-12-28T17:49:24+09:00","datePublished":"2024-12-28T17:49:24+09:00","description":"OpenGL API OpenGL 파이프라인의 각 단계에서 데이터를 설정하거나 렌더링을 제어하는 역할을 하는 API 정리 1. 데이터 관리 및 설정 관련 API glGenBuffers 역할: 하나 이상의 버퍼 객체를 생성하고 고유한 ID를 할당. 사용 예: 1 glGenBuffers(1, &amp;vertex_buffer); 새로운 버퍼 객체를 생성하고 vertex_buffer에 ID를 저장. glBindBuffer 함수 정의 1 void glBindBuffer(GLenum target, GLuint buffer); target: 버퍼 객체가 어떤 용도로 사용될지 지정하는 버퍼 타입. buffer: 바인딩할 버퍼 객체의 ID. (glGenBuffers로 생성된 ID). 역할: 생성된 버퍼 객체를 특정 버퍼 타입(GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER 등)과 바인딩. 사용 예: 1 glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer); vertex_buffer를 현재 활성화된 GL_ARRAY_BUFFER로 설정. 주요 버퍼 타입 (target) GL_ARRAY_BUFFER 역할: 정점 데이터(Vertex Data)를 저장. 사용…","headline":"OpenGL API 정리","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/OpenGL_API/"},"url":"https://forte-naop.github.io/posts/OpenGL_API/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-12-28T17:49:24+09:00","datePublished":"2024-12-28T17:49:24+09:00","description":"OpenGL API OpenGL 파이프라인의 각 단계에서 데이터를 설정하거나 렌더링을 제어하는 역할을 하는 API 정리 1. 데이터 관리 및 설정 관련 API glGenBuffers 역할: 하나 이상의 버퍼 객체를 생성하고 고유한 ID를 할당. 사용 예: 1 glGenBuffers(1, \u0026amp;vertex_buffer); 새로운 버퍼 객체를 생성하고 vertex_buffer에 ID를 저장. glBindBuffer 함수 정의 1 void glBindBuffer(GLenum target, GLuint buffer); target: 버퍼 객체가 어떤 용도로 사용될지 지정하는 버퍼 타입. buffer: 바인딩할 버퍼 객체의 ID. (glGenBuffers로 생성된 ID). 역할: 생성된 버퍼 객체를 특정 버퍼 타입(GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER 등)과 바인딩. 사용 예: 1 glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer); vertex_buffer를 현재 활성화된 GL_ARRAY_BUFFER로 설정. 주요 버퍼 타입 (target) GL_ARRAY_BUFFER 역할: 정점 데이터(Vertex Data)를 저장. 사용…","headline":"OpenGL API 정리","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/OpenGL_API/"},"url":"https://forte-naop.github.io/posts/OpenGL_API/"}</script>
 <!-- End Jekyll SEO tag -->
 
 

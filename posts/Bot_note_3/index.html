@@ -27,7 +27,7 @@
 
   
 
-  <!-- Begin Jekyll SEO tag v2.9.0 -->
+  <!-- Begin Jekyll SEO tag v2.9.1 -->
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="게임 보드 관련 잡설" />
 <meta property="og:locale" content="en" />
@@ -43,7 +43,7 @@
 <meta name="twitter:title" content="게임 보드 관련 잡설" />
 <meta name="twitter:site" content="@kirameki_ing" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-02-02T18:09:53+09:00","datePublished":"2025-02-02T18:09:53+09:00","description":"점수판과 재생 정보는 board.rs에서 다룸 register_channel.rs에서 등록한 텍스트 채널에 스레드 생성후 점수판과 재생 정보 embed를 갱신하는 방식 고려사항 text channel 등록없이 play 하는 경우 … 24-05-22 현재 board와 guild_queue가 분리되어 있어 트랙 이벤트가 발생할 때 board에 접근하기 불편함. 두 기능은 같이 동작하므로 결합시킬 예정 GuildQueue와 Board를 합치는 과정중 1 2 3 4 5 6 7 pub async fn register_channel(&amp;self, channel: GuildChannel) { let mut inner = self.inner.lock(); let channel_id = channel.id.into(); let http = inner.http.clone(); inner.board.set(http, channel).await; inner.channel = Some(channel_id); } inner.board.set(http, channel).await; 라인에서 future is not Send as this value is used across an await 에러가 발생함. parking_lot::MutexGuard가 not…","headline":"게임 보드 관련 잡설","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Bot_note_3/"},"url":"https://forte-naop.github.io/posts/Bot_note_3/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-02-02T18:09:53+09:00","datePublished":"2025-02-02T18:09:53+09:00","description":"점수판과 재생 정보는 board.rs에서 다룸 register_channel.rs에서 등록한 텍스트 채널에 스레드 생성후 점수판과 재생 정보 embed를 갱신하는 방식 고려사항 text channel 등록없이 play 하는 경우 … 24-05-22 현재 board와 guild_queue가 분리되어 있어 트랙 이벤트가 발생할 때 board에 접근하기 불편함. 두 기능은 같이 동작하므로 결합시킬 예정 GuildQueue와 Board를 합치는 과정중 1 2 3 4 5 6 7 pub async fn register_channel(\u0026amp;self, channel: GuildChannel) { let mut inner = self.inner.lock(); let channel_id = channel.id.into(); let http = inner.http.clone(); inner.board.set(http, channel).await; inner.channel = Some(channel_id); } inner.board.set(http, channel).await; 라인에서 future is not Send as this value is used across an await 에러가 발생함. parking_lot::MutexGuard가 not…","headline":"게임 보드 관련 잡설","mainEntityOfPage":{"@type":"WebPage","@id":"https://forte-naop.github.io/posts/Bot_note_3/"},"url":"https://forte-naop.github.io/posts/Bot_note_3/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
